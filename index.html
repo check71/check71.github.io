@@ -1097,7 +1097,7 @@
             setTimeout(() => {
                 if(btn) btn.classList.remove('btn-shake');
                 let s = window.styles[idx];
-                document.getElementById('modBuyer').value = s.buyer;
+                document.getElementById('modBuyer').value = s.buyer || '';
                 document.getElementById('modStyle').value = s.styleName;
                 document.getElementById('colorSizeContainer').innerHTML = "";
                 if (s.colorSizes && s.colorSizes.length > 0) {
@@ -1119,13 +1119,13 @@
                 
                 let existingSections = window.styles.filter(st => st.styleName === s.styleName).map(st => st.bookName);
                 document.querySelectorAll('.modSection').forEach(cb => { 
-                    cb.checked = existingSections.includes(cb.value); 
+                    cb.checked = existingSections.includes(cb.value) || cb.value === window.currentAdminBook; 
                 });
                 
                 document.getElementById('modBarcodeActive').checked = s.barcodeActive === true;
                 document.getElementById('modIsHidden').checked = s.isHidden === true;
                 document.getElementById('modLimitReceiveTotal').checked = s.limitReceiveTotal === true;
-                document.getElementById('modReceiveTime').value = s.receiveTimeLimit !== undefined ? s.receiveTimeLimit : 15;
+                document.getElementById('modReceiveTime').value = (s.receiveTimeLimit !== undefined && s.receiveTimeLimit !== null && s.receiveTimeLimit !== '') ? s.receiveTimeLimit : 15;
                 document.getElementById('modBlankRowsActive').checked = false;
                 window.toggleBlankRowsInputs();
                 window.updateAllColorsTotals();
@@ -1139,7 +1139,7 @@
             }, 100);
         };
         
-        window.editStyle = function(idx, event) { event.stopPropagation(); let btn = event ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); let s = window.styles[idx]; document.getElementById('modBuyer').value = s.buyer; document.getElementById('modStyle').value = s.styleName; document.getElementById('colorSizeContainer').innerHTML = ""; if (s.colorSizes && s.colorSizes.length > 0) { let colorMap = {}; let orderQtyMap = {}; s.colorSizes.forEach(cs => { if(!colorMap[cs.color]) colorMap[cs.color] = []; colorMap[cs.color].push({ size: cs.size, qty: cs.qty }); if(cs.orderQty !== undefined && cs.orderQty !== '' && !orderQtyMap[cs.color]) orderQtyMap[cs.color] = cs.orderQty; }); for(let col in colorMap) { let gId = window.addColorGroup(col, orderQtyMap[col] || ''); colorMap[col].forEach(szItem => { if(szItem.size || szItem.qty) { window.addSizeToGroup(gId, szItem.size, szItem.qty); } }); } } else if ((s.colors && s.colors.length > 0) || (s.sizes && s.sizes.length > 0)) { let cList = s.colors || []; let sList = s.sizes || []; if (cList.length === 0) cList = ['']; if (sList.length === 0) sList = ['']; cList.forEach(col => { let gId = window.addColorGroup(col, ''); sList.forEach(sz => window.addSizeToGroup(gId, sz, '')); }); } else { let fallbackGrp = window.addColorGroup(); window.addSizeToGroup(fallbackGrp); } document.getElementById('rateContainer').innerHTML = ""; if (s.rates && s.rates.length > 0) { s.rates.forEach(r => { let div = document.createElement('div'); div.className = 'rate-item'; div.innerHTML = `<input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;" value="${r.name}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" value="${r.tk}" placeholder="Tk"><span class="delete-btn" onclick="window.shakeAndRemove(this)">✖</span>`; document.getElementById('rateContainer').appendChild(div); }); } else { let defaultRate = (window.currentAdminBook === "LINKING") ? "COMPLETE" : ((window.currentAdminBook === "PACKING") ? "POLY" : window.currentAdminBook); document.getElementById('rateContainer').innerHTML = `<div class="rate-item"><input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;" value="${defaultRate}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" placeholder="Tk"></div>`; } document.querySelectorAll('.modFloor').forEach(cb => { cb.checked = s.allowedFloors && s.allowedFloors.includes(cb.value); }); 
+        window.editStyle = function(idx, event) { event.stopPropagation(); let btn = event ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); let s = window.styles[idx]; document.getElementById('modBuyer').value = s.buyer || ''; document.getElementById('modStyle').value = s.styleName; document.getElementById('colorSizeContainer').innerHTML = ""; if (s.colorSizes && s.colorSizes.length > 0) { let colorMap = {}; let orderQtyMap = {}; s.colorSizes.forEach(cs => { if(!colorMap[cs.color]) colorMap[cs.color] = []; colorMap[cs.color].push({ size: cs.size, qty: cs.qty }); if(cs.orderQty !== undefined && cs.orderQty !== '' && !orderQtyMap[cs.color]) orderQtyMap[cs.color] = cs.orderQty; }); for(let col in colorMap) { let gId = window.addColorGroup(col, orderQtyMap[col] || ''); colorMap[col].forEach(szItem => { if(szItem.size || szItem.qty) { window.addSizeToGroup(gId, szItem.size, szItem.qty); } }); } } else if ((s.colors && s.colors.length > 0) || (s.sizes && s.sizes.length > 0)) { let cList = s.colors || []; let sList = s.sizes || []; if (cList.length === 0) cList = ['']; if (sList.length === 0) sList = ['']; cList.forEach(col => { let gId = window.addColorGroup(col, ''); sList.forEach(sz => window.addSizeToGroup(gId, sz, '')); }); } else { let fallbackGrp = window.addColorGroup(); window.addSizeToGroup(fallbackGrp); } document.getElementById('rateContainer').innerHTML = ""; if (s.rates && s.rates.length > 0) { s.rates.forEach(r => { let div = document.createElement('div'); div.className = 'rate-item'; div.innerHTML = `<input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;" value="${r.name}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" value="${r.tk}" placeholder="Tk"><span class="delete-btn" onclick="window.shakeAndRemove(this)">✖</span>`; document.getElementById('rateContainer').appendChild(div); }); } else { let defaultRate = (window.currentAdminBook === "LINKING") ? "COMPLETE" : ((window.currentAdminBook === "PACKING") ? "POLY" : window.currentAdminBook); document.getElementById('rateContainer').innerHTML = `<div class="rate-item"><input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;" value="${defaultRate}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" placeholder="Tk"></div>`; } document.querySelectorAll('.modFloor').forEach(cb => { cb.checked = s.allowedFloors && s.allowedFloors.includes(cb.value); }); 
         
             let existingSections = window.styles.filter(st => st.styleName === s.styleName).map(st => st.bookName);
             document.querySelectorAll('.modSection').forEach(cb => { 
@@ -1149,7 +1149,7 @@
             document.getElementById('modBarcodeActive').checked = s.barcodeActive === true;
             document.getElementById('modIsHidden').checked = s.isHidden === true;
             document.getElementById('modLimitReceiveTotal').checked = s.limitReceiveTotal === true;
-            document.getElementById('modReceiveTime').value = s.receiveTimeLimit !== undefined ? s.receiveTimeLimit : 15;
+            document.getElementById('modReceiveTime').value = (s.receiveTimeLimit !== undefined && s.receiveTimeLimit !== null && s.receiveTimeLimit !== '') ? s.receiveTimeLimit : 15;
             document.getElementById('modBlankRowsActive').checked = false;
             window.toggleBlankRowsInputs();
             window.updateAllColorsTotals();
@@ -1181,12 +1181,12 @@
                 let startDateStr = (selectedRow.issueDate && selectedRow.issueDate.trim() !== '') ? selectedRow.issueDate.trim() : ((selectedRow.receiveDate && selectedRow.receiveDate.trim() !== '') ? selectedRow.receiveDate.trim() : document.getElementById('repStartDate').value);
                 let endDateStr = (selectedRow.receiveDate && selectedRow.receiveDate.trim() !== '') ? selectedRow.receiveDate.trim() : todayStr;
                 let allData = []; try { allData = await window.dbFetchBookData(window.currentProductionBook); } catch(err) { alert("Failed to fetch data from Database!"); return; } const parseDate = (dStr) => { if(!dStr) return null; let clean = dStr.trim(); let parts = clean.includes('/') ? clean.split('/') : clean.split('-'); if(parts.length === 3) { if(parts[0].length === 4) return new Date(parts[0], parts[1] - 1, parts[2]); return new Date(parts[2], parts[1] - 1, parts[0]); } return null; }; let sDate = parseDate(startDateStr); let eDate = parseDate(endDateStr); let minDate = (sDate && eDate) ? (sDate < eDate ? sDate : eDate) : sDate; let maxDate = (sDate && eDate) ? (sDate > eDate ? sDate : eDate) : eDate; let targetWorkerClean = window.selectedReportWorker.trim().toLowerCase(); let rawData = allData.filter(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); if(!sObj || sObj.isHidden) return false; if (!r.workerName || r.workerName.trim().toLowerCase() !== targetWorkerClean) return false; if (type === '6_OpWiseIssueDetails') { let iq = parseInt(r.issueQty) || 0; if (iq <= 0) return false; if (r.receiveDate && r.receiveDate.trim() !== '') return false; if (minDate && maxDate) { let iDate = parseDate(r.issueDate); if (iDate) { return iDate >= minDate && iDate <= maxDate; } } return true; } else { let rq = parseInt(r.receiveQty) || 0; if (rq <= 0) return false; if (minDate && maxDate) { let rDate = parseDate(r.receiveDate || r.issueDate); if (rDate) { return rDate >= minDate && rDate <= maxDate; } } return true; } }); if (rawData.length === 0) { let msgType = (type === '6_OpWiseIssueDetails') ? "issues" : "receives"; alert("No " + msgType + " found for " + window.selectedReportWorker + "!"); return; } window.processAndShowReport(rawData, type, startDateStr, endDateStr, floorInput === 'all' ? 'All Floors' : floorInput, window.currentProductionBook, false, 'quick'); return; } let rawData = window.rowsModel.filter(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); if(!sObj || sObj.isHidden) return false; if (!r.workerName || r.bookName !== window.currentProductionBook) return false; if (r.styleName !== window.activeStyleName) return false; if (type === '5_ColourWise_Report') { if (!(parseInt(r.receiveQty) > 0 || parseInt(r.issueQty) > 0)) return false; } else { if (!r.receiveQty || parseInt(r.receiveQty) <= 0) return false; } if (floorInput !== 'all' && floorInput !== '') { if (!(r.floor && r.floor.toLowerCase().includes(floorInput))) return false; } return true; }); if (rawData.length === 0) { alert("No data found for this selection on the selected floor!"); return; } let minDate = null, maxDate = null; const parseD = (dStr) => { if(!dStr) return null; let parts = dStr.split('/'); if(parts.length===3) return new Date(parts[2], parts[1]-1, parts[0]); return null; }; let repData = rawData; repData.forEach(r => { let idate = parseD(r.issueDate); let rdate = parseD(r.receiveDate); if(idate) { if(!minDate || idate < minDate) minDate = idate; } if(rdate) { if(!maxDate || rdate > maxDate) maxDate = rdate; } }); const formatD = (d) => d ? ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear() : "N/A"; let dFromStrCalc = formatD(minDate); let dToStrCalc = formatD(maxDate); window.processAndShowReport(rawData, type, dFromStrCalc, dToStrCalc, floorInput === 'all' ? 'All Floors' : floorInput, window.currentProductionBook, false, 'quick'); };
-        window.processAndShowReport = function(rawData, type, dFromStr, dToStr, floorInput, sectionName, isGlobal = false, source = 'local') { let title = "Production Report"; let theadHtml = ''; let tbodyHtml = ''; let fullContentHtml = ''; let printBtnHtml = (window.currentUser && window.currentUser.role === 'Admin') ? `<button class="btn-print" onclick="window.print()">Print Report</button>` : ''; if (type === '6_OpWiseIssueDetails' && (source === 'local' || source === 'global')) { title = "Operator Wise Issue Details"; theadHtml = `<tr><th style="width: 40px;">SL No</th><th>Name</th><th>Card No</th><th>Block</th><th>Issue Date</th><th>Style & Tc</th><th>Total Qty</th><th>Remark</th></tr>`; let issueMap = {}; rawData.forEach(r => { let iq = parseInt(r.issueQty) || 0; if(iq <= 0) return; let key = `${r.workerName}||${r.cardNo || ''}||${r.blockNo || ''}||${r.issueDate || ''}||${r.styleName || ''}||${r.idNo || ''}`; if(!issueMap[key]) { issueMap[key] = { name: r.workerName, cardNo: r.cardNo || '', block: r.blockNo || '', date: r.issueDate || '', style: r.styleName || '', tc: r.idNo || '', qty: 0 }; } issueMap[key].qty += iq; }); let sortedIssues = Object.values(issueMap).sort((a, b) => a.name.localeCompare(b.name) || a.date.localeCompare(b.date)); let sl = 1; let gTotal = 0; sortedIssues.forEach(item => { tbodyHtml += `<tr><td>${sl++}</td><td style="text-align:left; padding-left: 5px;">${item.name}</td><td>${item.cardNo}</td><td>${item.block}</td><td>${item.date}</td><td style="text-align:left; padding-left: 5px;">${item.style} - ${item.tc}</td><td style="font-weight:bold;">${item.qty}</td><td></td></tr>`; gTotal += item.qty; }); tbodyHtml += `<tr style="font-weight:bold;"><td colspan="6" style="text-align:right; padding-right: 15px;">GRAND TOTAL</td><td>${gTotal}</td><td></td></tr>`; } else if (type === '3_Operator_Wise_Production' || type === '6_OpWiseIssueDetails') { let cardTitle = (type === '6_OpWiseIssueDetails') ? "Employee's Monthly Issue Card" : "Employee's Monthly Production Card"; let qtyLabel = (type === '6_OpWiseIssueDetails') ? "Total Issue Qty:" : "Total Production:"; title = (type === '6_OpWiseIssueDetails') ? "Operator Wise Issue Details" : "Operator Wise Production Report"; let workersMap = {}; rawData.forEach(r => { if(!r.workerName) return; if(!workersMap[r.workerName]) { workersMap[r.workerName] = { cardNo: r.cardNo || '', blockNo: r.blockNo || '', floor: r.floor || '', records: [], totalProd: 0, totalTaka: 0 }; } let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let tk = 0; if(sObj && sObj.rates) { let rtObj = sObj.rates.find(rt => rt.name === r.rate); if(rtObj) tk = parseFloat(rtObj.tk) || 0; } let iQty = parseInt(r.issueQty) || 0; let rQty = parseInt(r.receiveQty) || 0; let activeQty = (type === '6_OpWiseIssueDetails') ? iQty : rQty; let amt = activeQty * tk; workersMap[r.workerName].records.push({...r, tk: tk, amt: amt, buyer: sObj ? sObj.buyer : 'Unknown'}); workersMap[r.workerName].totalProd += activeQty; workersMap[r.workerName].totalTaka += amt; }); let opIndex = 0; for (let wName in workersMap) { let wData = workersMap[wName]; let stylesMap = {}; wData.records.forEach(r => { let sKey = r.styleName + '|' + r.buyer; if(!stylesMap[sKey]) stylesMap[sKey] = []; stylesMap[sKey].push(r); }); let pageStyle = opIndex > 0 ? "page-break-before: always; margin-top: 20px;" : ""; let localHtml = `<div style="${pageStyle} font-family: 'Tahoma', sans-serif;"><div style="text-align: center; margin-bottom: 10px;"><h2 style="margin: 0; font-size: 20px;">Daily Cash Payment Production</h2><p style="margin: 2px 0; font-size: 11px;">Hajir Pukur, Choydana, Gazipur, Bangladesh</p><p style="margin: 5px 0; font-size: 13px; font-weight: bold;">${cardTitle}, DateRange: ${dFromStr} to ${dToStr}</p></div><div style="display: flex; justify-content: flex-end; margin-bottom: 5px; width: max-content; margin-left: auto; margin-right: auto; min-width: 600px;">${(opIndex === 0 && window.currentUser && window.currentUser.role === 'Admin') ? printBtnHtml : ''}</div><table style="width: max-content; min-width: 600px; margin: 0 auto 5px auto; border-collapse: collapse; background: transparent; border: 1px solid #000; font-size: 12px;"><tr><td style="border: 1px solid #000; padding: 4px;"><b>Section:</b> ${sectionName}</td><td style="border: 1px solid #000; padding: 4px;"><b>Card Number:</b> ${wData.cardNo}</td><td style="border: 1px solid #000; padding: 4px;"><b>Report Date:</b> ${dFromStr} to ${dToStr}</td><td style="border: 1px solid #000; padding: 4px;"><b>Floor:</b> ${wData.floor}</td></tr><tr><td style="border: 1px solid #000; padding: 4px;"><b>Block:</b> ${wData.blockNo}</td><td style="border: 1px solid #000; padding: 4px;"><b>Name:</b> ${wName}</td><td style="border: 1px solid #000; padding: 4px;"><b>${qtyLabel}</b> ${wData.totalProd}</td><td style="border: 1px solid #000; padding: 4px;"><b>Taka:</b> ${Math.round(wData.totalTaka)}</td></tr></table><table style="width: max-content; min-width: 600px; margin: 0 auto; border-collapse: collapse; border: 1px solid #000; font-size: 12px; text-align: center;"><thead><tr><th style="border: 1px solid #000; padding: 4px;">Issues Date</th><th style="border: 1px solid #000; padding: 4px;">ID No</th><th style="border: 1px solid #000; padding: 4px;">Color</th><th style="border: 1px solid #000; padding: 4px;">Size</th><th style="border: 1px solid #000; padding: 4px;">Lot</th><th style="border: 1px solid #000; padding: 4px;">Rate Name</th><th style="border: 1px solid #000; padding: 4px;">Issue Qty</th><th style="border: 1px solid #000; padding: 4px;">Receive Qty</th><th style="border: 1px solid #000; padding: 4px;">Amount</th><th style="border: 1px solid #000; padding: 4px;">Receive Date</th></tr></thead><tbody>`; let grandIss = 0, grandRec = 0, grandAmt = 0; for (let sKey in stylesMap) { let [sName, sBuyer] = sKey.split('|'); let sRecords = stylesMap[sKey]; let ratesWithTk = [...new Set(sRecords.map(r => `${r.rate} (${r.tk}Tk)`))].filter(Boolean).join(', '); localHtml += `<tr style="font-weight: bold; background-color: #FFFFCC;"><td colspan="10" style="border: 1px solid #000; padding: 4px; text-align: left;"><span style="margin-right: 50px;">Buyer: ${sBuyer}</span><span style="margin-right: 50px;">Style: ${sName}</span><span>Rate: ${ratesWithTk}</span></td></tr>`; let sIss = 0, sRec = 0, sAmt = 0; sRecords.forEach(r => { let iq = parseInt(r.issueQty) || 0; let rq = parseInt(r.receiveQty) || 0; sIss += iq; sRec += rq; sAmt += r.amt; grandIss += iq; grandRec += rq; grandAmt += r.amt; localHtml += `<tr><td style="border: 1px solid #000; padding: 4px;">${r.issueDate || ''}</td><td style="border: 1px solid #000; padding: 4px;">${r.idNo || ''}</td><td style="border: 1px solid #000; padding: 4px;">${r.color || ''}</td><td style="border: 1px solid #000; padding: 4px;">${r.size || ''}</td><td style="border: 1px solid #000; padding: 4px; background-color: #FFFFCC !important;">${r.lot || ''}</td><td style="border: 1px solid #000; padding: 4px;">${r.rate || ''}</td><td style="border: 1px solid #000; padding: 4px;">${iq}</td><td style="border: 1px solid #000; padding: 4px;">${rq || ''}</td><td style="border: 1px solid #000; padding: 4px;">${Math.round(r.amt)}</td><td style="border: 1px solid #000; padding: 4px;">${r.receiveDate || ''}</td></tr>`; }); localHtml += `<tr style="font-weight: bold; background-color: #E2F0D9;"><td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: right;">Style Total (Target + NonTarget)</td><td style="border: 1px solid #000; padding: 4px;">${sIss}</td><td style="border: 1px solid #000; padding: 4px;">${sRec}</td><td style="border: 1px solid #000; padding: 4px;">${Math.round(sAmt)}</td><td style="border: 1px solid #000; padding: 4px;"></td></tr>`; } localHtml += `<tr style="font-weight: bold; background-color: #E2F0D9;"><td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: right;">ALL STYLE TOTAL (Target + NonTarget)</td><td style="border: 1px solid #000; padding: 4px;">${grandIss}</td><td style="border: 1px solid #000; padding: 4px;">${grandRec}</td><td style="border: 1px solid #000; padding: 4px;">${Math.round(grandAmt)}</td><td style="border: 1px solid #000; padding: 4px;"></td></tr></tbody></table><div style="display: flex; justify-content: space-between; margin: 50px auto 0 auto; width: max-content; min-width: 600px; font-weight: bold; font-size: 12px; gap: 40px;"><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">Worker</div><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">Data Entry</div><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">In-Charge</div><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">P.M</div><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">P.D</div></div></div>`; fullContentHtml += localHtml; opIndex++; } if(!fullContentHtml) { alert("No data available for the selected parameters!"); return; } } else if (type === '1_StyleWise_Reports') { title = "All Employee Production Summery"; let uniqueStyles = []; let sumMap = {}; rawData.forEach(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let buyer = sObj ? sObj.buyer : 'Unknown'; let sKey = `${buyer}_${r.styleName}_${r.rate}`; if(!uniqueStyles.find(x => x.key === sKey)) { uniqueStyles.push({ key: sKey, buyer: buyer, name: r.styleName, rate: r.rate }); } if(!sumMap[sKey]) sumMap[sKey] = 0; sumMap[sKey] += (parseInt(r.receiveQty) || 0); }); uniqueStyles.sort((a, b) => a.buyer.localeCompare(b.buyer) || a.name.localeCompare(b.name) || a.rate.localeCompare(b.rate)); let buyerList = []; let currentBuyer = null; let buyerCount = 0; uniqueStyles.forEach(s => { if (s.buyer === currentBuyer) { buyerCount++; } else { if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); currentBuyer = s.buyer; buyerCount = 1; } }); if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); let styleList = []; let currentStyle = null; let styleCount = 0; uniqueStyles.forEach(s => { let bsKey = s.buyer + '|' + s.name; if (bsKey === currentStyle) { styleCount++; } else { if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); currentStyle = bsKey; styleCount = 1; } }); if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); theadHtml = `<tr><th rowspan="3">BUYER</th><th rowspan="3">STYLE</th><th rowspan="3">RATE NAME</th>${buyerList.map(b => `<th colspan="${b.span}">${b.name}</th>`).join('')}<th rowspan="3">TOTAL</th><th rowspan="3">REMARKS</th></tr><tr>${styleList.map(st => `<th colspan="${st.span}">${st.name}</th>`).join('')}</tr><tr>${uniqueStyles.map(s => `<th>${s.rate}</th>`).join('')}</tr>`; let gTotal = 0; let cells = uniqueStyles.map(s => { let q = sumMap[s.key] || 0; gTotal += q; return `<td style="font-weight:bold;">${q}</td>`; }).join(''); tbodyHtml = `<tr><td></td><td></td><td style="font-weight:bold; text-align:center;">Total</td>${cells}<td style="font-weight:bold;">${gTotal}</td><td></td></tr>`; } else if (type === '4_Top_Sheet') { title = "Production Top Sheet"; theadHtml = `<tr><th style="width: 40px;">SL</th><th>Buyer</th><th>Style Name</th><th>Process Name</th><th>Total Receive Qty</th><th>Rate</th><th>Amount</th></tr>`; let sumMap = {}; rawData.forEach(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let buyer = sObj ? sObj.buyer : 'Unknown'; let rObj = sObj ? sObj.rates.find(rt => rt.name === r.rate) : null; let tk = rObj ? parseFloat(rtObj.tk) || 0 : 0; let key = `${buyer}_${r.styleName}_${r.rate}`; if(!sumMap[key]) sumMap[key] = { buyer, style: r.styleName, process: r.rate, rate: tk, qty: 0 }; sumMap[key].qty += (parseInt(r.receiveQty) || 0); }); let topsheetRows = Object.values(sumMap); topsheetRows.sort((a, b) => a.buyer.localeCompare(b.buyer) || a.style.localeCompare(b.style) || a.process.localeCompare(b.process)); let styleSpan = {}; topsheetRows.forEach(r => { let bsKey = r.buyer + '|' + r.style; styleSpan[bsKey] = (styleSpan[bsKey] || 0) + 1; }); let sl = 1, tQ = 0, tA = 0; let currentStyleKey = null; topsheetRows.forEach(row => { let amt = row.qty * row.rate; tQ += row.qty; tA += amt; let bsKey = row.buyer + '|' + row.style; tbodyHtml += `<tr>`; if (bsKey !== currentStyleKey) { tbodyHtml += `<td rowspan="${styleSpan[bsKey]}">${sl++}</td>`; tbodyHtml += `<td rowspan="${styleSpan[bsKey]}" style="text-align:left; vertical-align:middle;">${row.buyer}</td>`; tbodyHtml += `<td rowspan="${styleSpan[bsKey]}" style="text-align:left; vertical-align:middle;">${row.style}</td>`; currentStyleKey = bsKey; } tbodyHtml += `<td>${row.process}</td><td>${row.qty}</td><td>${row.rate}</td><td>${amt.toFixed(0)}</td></tr>`; }); tbodyHtml += `<tr style="font-weight:bold;"><td colspan="4" style="text-align:right;">GRAND TOTAL</td><td>${tQ}</td><td></td><td>${tA.toFixed(0)}</td></tr>`; } else if (type === '5_ColourWise_Report') {
+        window.processAndShowReport = function(rawData, type, dFromStr, dToStr, floorInput, sectionName, isGlobal = false, source = 'local') { let title = "Production Report"; let theadHtml = ''; let tbodyHtml = ''; let fullContentHtml = ''; let printBtnHtml = (window.currentUser && window.currentUser.role === 'Admin') ? `<button class="btn-print" onclick="window.print()">Print Report</button>` : ''; if (type === '6_OpWiseIssueDetails' && (source === 'local' || source === 'global')) { title = "Operator Wise Issue Details"; theadHtml = `<tr><th style="width: 40px;">SL No</th><th>Name</th><th>Card No</th><th>Block</th><th>Issue Date</th><th>Style & Tc</th><th>Total Qty</th><th>Remark</th></tr>`; let issueMap = {}; rawData.forEach(r => { let iq = parseInt(r.issueQty) || 0; if(iq <= 0) return; let key = `${r.workerName}||${r.cardNo || ''}||${r.blockNo || ''}||${r.issueDate || ''}||${r.styleName || ''}||${r.idNo || ''}`; if(!issueMap[key]) { issueMap[key] = { name: r.workerName, cardNo: r.cardNo || '', block: r.blockNo || '', date: r.issueDate || '', style: r.styleName || '', tc: r.idNo || '', qty: 0 }; } issueMap[key].qty += iq; }); let sortedIssues = Object.values(issueMap).sort((a, b) => a.name.localeCompare(b.name) || a.date.localeCompare(b.date)); let sl = 1; let gTotal = 0; sortedIssues.forEach(item => { tbodyHtml += `<tr><td>${sl++}</td><td style="text-align:left; padding-left: 5px;">${item.name}</td><td>${item.cardNo}</td><td>${item.block}</td><td>${item.date}</td><td style="text-align:left; padding-left: 5px;">${item.style} - ${item.tc}</td><td style="font-weight:bold;">${item.qty}</td><td></td></tr>`; gTotal += item.qty; }); tbodyHtml += `<tr style="font-weight:bold;"><td colspan="6" style="text-align:right; padding-right: 15px;">GRAND TOTAL</td><td>${gTotal}</td><td></td></tr>`; } else if (type === '3_Operator_Wise_Production' || type === '6_OpWiseIssueDetails') { let cardTitle = (type === '6_OpWiseIssueDetails') ? "Employee's Monthly Issue Card" : "Employee's Monthly Production Card"; let qtyLabel = (type === '6_OpWiseIssueDetails') ? "Total Issue Qty:" : "Total Production:"; title = (type === '6_OpWiseIssueDetails') ? "Operator Wise Issue Details" : "Operator Wise Production Report"; let workersMap = {}; rawData.forEach(r => { if(!r.workerName) return; if(!workersMap[r.workerName]) { workersMap[r.workerName] = { cardNo: r.cardNo || '', blockNo: r.blockNo || '', floor: r.floor || '', records: [], totalProd: 0, totalTaka: 0 }; } let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let tk = 0; if(sObj && sObj.rates) { let rtObj = sObj.rates.find(rt => rt.name === r.rate); if(rtObj) tk = parseFloat(rtObj.tk) || 0; } let iQty = parseInt(r.issueQty) || 0; let rQty = parseInt(r.receiveQty) || 0; let activeQty = (type === '6_OpWiseIssueDetails') ? iQty : rQty; let amt = activeQty * tk; workersMap[r.workerName].records.push({...r, tk: tk, amt: amt, buyer: sObj ? sObj.buyer : ''}); workersMap[r.workerName].totalProd += activeQty; workersMap[r.workerName].totalTaka += amt; }); let opIndex = 0; for (let wName in workersMap) { let wData = workersMap[wName]; let stylesMap = {}; wData.records.forEach(r => { let sKey = r.styleName + '|' + r.buyer; if(!stylesMap[sKey]) stylesMap[sKey] = []; stylesMap[sKey].push(r); }); let pageStyle = opIndex > 0 ? "page-break-before: always; margin-top: 20px;" : ""; let localHtml = `<div style="${pageStyle} font-family: 'Tahoma', sans-serif;"><div style="text-align: center; margin-bottom: 10px;"><h2 style="margin: 0; font-size: 20px;">Daily Cash Payment Production</h2><p style="margin: 2px 0; font-size: 11px;">Hajir Pukur, Choydana, Gazipur, Bangladesh</p><p style="margin: 5px 0; font-size: 13px; font-weight: bold;">${cardTitle}, DateRange: ${dFromStr} to ${dToStr}</p></div><div style="display: flex; justify-content: flex-end; margin-bottom: 5px; width: max-content; margin-left: auto; margin-right: auto; min-width: 600px;">${(opIndex === 0 && window.currentUser && window.currentUser.role === 'Admin') ? printBtnHtml : ''}</div><table style="width: max-content; min-width: 600px; margin: 0 auto 5px auto; border-collapse: collapse; background: transparent; border: 1px solid #000; font-size: 12px;"><tr><td style="border: 1px solid #000; padding: 4px;"><b>Section:</b> ${sectionName}</td><td style="border: 1px solid #000; padding: 4px;"><b>Card Number:</b> ${wData.cardNo}</td><td style="border: 1px solid #000; padding: 4px;"><b>Report Date:</b> ${dFromStr} to ${dToStr}</td><td style="border: 1px solid #000; padding: 4px;"><b>Floor:</b> ${wData.floor}</td></tr><tr><td style="border: 1px solid #000; padding: 4px;"><b>Block:</b> ${wData.blockNo}</td><td style="border: 1px solid #000; padding: 4px;"><b>Name:</b> ${wName}</td><td style="border: 1px solid #000; padding: 4px;"><b>${qtyLabel}</b> ${wData.totalProd}</td><td style="border: 1px solid #000; padding: 4px;"><b>Taka:</b> ${Math.round(wData.totalTaka)}</td></tr></table><table style="width: max-content; min-width: 600px; margin: 0 auto; border-collapse: collapse; border: 1px solid #000; font-size: 12px; text-align: center;"><thead><tr><th style="border: 1px solid #000; padding: 4px;">Issues Date</th><th style="border: 1px solid #000; padding: 4px;">ID No</th><th style="border: 1px solid #000; padding: 4px;">Color</th><th style="border: 1px solid #000; padding: 4px;">Size</th><th style="border: 1px solid #000; padding: 4px;">Lot</th><th style="border: 1px solid #000; padding: 4px;">Rate Name</th><th style="border: 1px solid #000; padding: 4px;">Issue Qty</th><th style="border: 1px solid #000; padding: 4px;">Receive Qty</th><th style="border: 1px solid #000; padding: 4px;">Amount</th><th style="border: 1px solid #000; padding: 4px;">Receive Date</th></tr></thead><tbody>`; let grandIss = 0, grandRec = 0, grandAmt = 0; for (let sKey in stylesMap) { let [sName, sBuyer] = sKey.split('|'); let sRecords = stylesMap[sKey]; let ratesWithTk = [...new Set(sRecords.map(r => `${r.rate} (${r.tk}Tk)`))].filter(Boolean).join(', '); localHtml += `<tr style="font-weight: bold; background-color: #FFFFCC;"><td colspan="10" style="border: 1px solid #000; padding: 4px; text-align: left;"><span style="margin-right: 50px;">Buyer: ${sBuyer}</span><span style="margin-right: 50px;">Style: ${sName}</span><span>Rate: ${ratesWithTk}</span></td></tr>`; let sIss = 0, sRec = 0, sAmt = 0; sRecords.forEach(r => { let iq = parseInt(r.issueQty) || 0; let rq = parseInt(r.receiveQty) || 0; sIss += iq; sRec += rq; sAmt += r.amt; grandIss += iq; grandRec += rq; grandAmt += r.amt; localHtml += `<tr><td style="border: 1px solid #000; padding: 4px;">${r.issueDate || ''}</td><td style="border: 1px solid #000; padding: 4px;">${r.idNo || ''}</td><td style="border: 1px solid #000; padding: 4px;">${r.color || ''}</td><td style="border: 1px solid #000; padding: 4px;">${r.size || ''}</td><td style="border: 1px solid #000; padding: 4px; background-color: #FFFFCC !important;">${r.lot || ''}</td><td style="border: 1px solid #000; padding: 4px;">${r.rate || ''}</td><td style="border: 1px solid #000; padding: 4px;">${iq}</td><td style="border: 1px solid #000; padding: 4px;">${rq || ''}</td><td style="border: 1px solid #000; padding: 4px;">${Math.round(r.amt)}</td><td style="border: 1px solid #000; padding: 4px;">${r.receiveDate || ''}</td></tr>`; }); localHtml += `<tr style="font-weight: bold; background-color: #E2F0D9;"><td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: right;">Style Total (Target + NonTarget)</td><td style="border: 1px solid #000; padding: 4px;">${sIss}</td><td style="border: 1px solid #000; padding: 4px;">${sRec}</td><td style="border: 1px solid #000; padding: 4px;">${Math.round(sAmt)}</td><td style="border: 1px solid #000; padding: 4px;"></td></tr>`; } localHtml += `<tr style="font-weight: bold; background-color: #E2F0D9;"><td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: right;">ALL STYLE TOTAL (Target + NonTarget)</td><td style="border: 1px solid #000; padding: 4px;">${grandIss}</td><td style="border: 1px solid #000; padding: 4px;">${grandRec}</td><td style="border: 1px solid #000; padding: 4px;">${Math.round(grandAmt)}</td><td style="border: 1px solid #000; padding: 4px;"></td></tr></tbody></table><div style="display: flex; justify-content: space-between; margin: 50px auto 0 auto; width: max-content; min-width: 600px; font-weight: bold; font-size: 12px; gap: 40px;"><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">Worker</div><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">Data Entry</div><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">In-Charge</div><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">P.M</div><div style="border-top: 1px solid #000; width: 100px; text-align: center; padding-top: 5px;">P.D</div></div></div>`; fullContentHtml += localHtml; opIndex++; } if(!fullContentHtml) { alert("No data available for the selected parameters!"); return; } } else if (type === '1_StyleWise_Reports') { title = "All Employee Production Summery"; let uniqueStyles = []; let sumMap = {}; rawData.forEach(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let buyer = sObj ? sObj.buyer : ''; let sKey = `${buyer}_${r.styleName}_${r.rate}`; if(!uniqueStyles.find(x => x.key === sKey)) { uniqueStyles.push({ key: sKey, buyer: buyer, name: r.styleName, rate: r.rate }); } if(!sumMap[sKey]) sumMap[sKey] = 0; sumMap[sKey] += (parseInt(r.receiveQty) || 0); }); uniqueStyles.sort((a, b) => a.buyer.localeCompare(b.buyer) || a.name.localeCompare(b.name) || a.rate.localeCompare(b.rate)); let buyerList = []; let currentBuyer = null; let buyerCount = 0; uniqueStyles.forEach(s => { if (s.buyer === currentBuyer) { buyerCount++; } else { if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); currentBuyer = s.buyer; buyerCount = 1; } }); if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); let styleList = []; let currentStyle = null; let styleCount = 0; uniqueStyles.forEach(s => { let bsKey = s.buyer + '|' + s.name; if (bsKey === currentStyle) { styleCount++; } else { if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); currentStyle = bsKey; styleCount = 1; } }); if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); theadHtml = `<tr><th rowspan="3">BUYER</th><th rowspan="3">STYLE</th><th rowspan="3">RATE NAME</th>${buyerList.map(b => `<th colspan="${b.span}">${b.name}</th>`).join('')}<th rowspan="3">TOTAL</th><th rowspan="3">REMARKS</th></tr><tr>${styleList.map(st => `<th colspan="${st.span}">${st.name}</th>`).join('')}</tr><tr>${uniqueStyles.map(s => `<th>${s.rate}</th>`).join('')}</tr>`; let gTotal = 0; let cells = uniqueStyles.map(s => { let q = sumMap[s.key] || 0; gTotal += q; return `<td style="font-weight:bold;">${q}</td>`; }).join(''); tbodyHtml = `<tr><td></td><td></td><td style="font-weight:bold; text-align:center;">Total</td>${cells}<td style="font-weight:bold;">${gTotal}</td><td></td></tr>`; } else if (type === '4_Top_Sheet') { title = "Production Top Sheet"; theadHtml = `<tr><th style="width: 40px;">SL</th><th>Buyer</th><th>Style Name</th><th>Process Name</th><th>Total Receive Qty</th><th>Rate</th><th>Amount</th></tr>`; let sumMap = {}; rawData.forEach(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let buyer = sObj ? sObj.buyer : ''; let rObj = sObj ? sObj.rates.find(rt => rt.name === r.rate) : null; let tk = rObj ? parseFloat(rtObj.tk) || 0 : 0; let key = `${buyer}_${r.styleName}_${r.rate}`; if(!sumMap[key]) sumMap[key] = { buyer, style: r.styleName, process: r.rate, rate: tk, qty: 0 }; sumMap[key].qty += (parseInt(r.receiveQty) || 0); }); let topsheetRows = Object.values(sumMap); topsheetRows.sort((a, b) => a.buyer.localeCompare(b.buyer) || a.style.localeCompare(b.style) || a.process.localeCompare(b.process)); let styleSpan = {}; topsheetRows.forEach(r => { let bsKey = r.buyer + '|' + r.style; styleSpan[bsKey] = (styleSpan[bsKey] || 0) + 1; }); let sl = 1, tQ = 0, tA = 0; let currentStyleKey = null; topsheetRows.forEach(row => { let amt = row.qty * row.rate; tQ += row.qty; tA += amt; let bsKey = row.buyer + '|' + row.style; tbodyHtml += `<tr>`; if (bsKey !== currentStyleKey) { tbodyHtml += `<td rowspan="${styleSpan[bsKey]}">${sl++}</td>`; tbodyHtml += `<td rowspan="${styleSpan[bsKey]}" style="text-align:left; vertical-align:middle;">${row.buyer}</td>`; tbodyHtml += `<td rowspan="${styleSpan[bsKey]}" style="text-align:left; vertical-align:middle;">${row.style}</td>`; currentStyleKey = bsKey; } tbodyHtml += `<td>${row.process}</td><td>${row.qty}</td><td>${row.rate}</td><td>${amt.toFixed(0)}</td></tr>`; }); tbodyHtml += `<tr style="font-weight:bold;"><td colspan="4" style="text-align:right;">GRAND TOTAL</td><td>${tQ}</td><td></td><td>${tA.toFixed(0)}</td></tr>`; } else if (type === '5_ColourWise_Report') {
                 title = "ColourWise Report";
                 let report5Data = {};
                 rawData.forEach(r => {
                     let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName);
-                    let buyer = sObj ? sObj.buyer : 'Unknown';
+                    let buyer = sObj ? sObj.buyer : '';
                     let style = r.styleName;
                     let color = r.color || 'N/A';
                     let size = r.size || 'N/A';
@@ -1249,7 +1249,7 @@
                     }
                 }
                 tbodyHtml += `<tr style="font-weight:bold;"><td colspan="4" style="text-align:right;">GRAND TOTAL</td><td>${grandOrder}</td><td>${grandIssue}</td><td>${grandIssueBalance}</td><td>${grandReceive}</td><td>${grandReceiveBalance}</td><td></td></tr>`;
-            } else { let isAmt = (type === '3_OpWiseProdDetail_Block_Amount'); title = "Operator Wise Production Report"; if (isGlobal) { let groups = {}; rawData.forEach(r => { let sec = (r.bookName || 'Unknown').trim(); let f = (r.floor || 'Unknown').trim(); let b = (r.blockNo || 'Unknown').trim(); let key = sec + '|||' + f + '|||' + b; if(!groups[key]) groups[key] = []; groups[key].push(r); }); let sortedKeys = Object.keys(groups).sort((k1, k2) => { let [sec1, f1, b1] = k1.split('|||'); let [sec2, f2, b2] = k2.split('|||'); return sec1.localeCompare(sec2) || f1.localeCompare(f2) || b1.localeCompare(b2); }); sortedKeys.forEach((key, index) => { let [grpSec, grpFloor, grpBlock] = key.split('|||'); let grpData = groups[key]; let empMap = {}; let uniqueStyles = []; grpData.forEach(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let buyer = sObj ? sObj.buyer : 'Unknown'; let eKey = r.workerName + '|' + (r.cardNo || ''); if(!empMap[eKey]) empMap[eKey] = { name: r.workerName, cardNo: r.cardNo, block: r.blockNo, floor: r.floor, styles: {} }; let sKey = `${buyer}_${r.styleName}_${r.rate}`; if(!empMap[eKey].styles[sKey]) { empMap[eKey].styles[sKey] = { q: 0, amt: 0 }; } let rtObj = sObj ? sObj.rates.find(rt => rt.name === r.rate) : null; let tk = rtObj ? parseFloat(rtObj.tk) || 0 : 0; empMap[eKey].styles[sKey].q += (parseInt(r.receiveQty) || 0); empMap[eKey].styles[sKey].amt += ((parseInt(r.receiveQty) || 0) * tk); if(!uniqueStyles.find(x => x.key === sKey)) { uniqueStyles.push({ key: sKey, buyer: buyer, name: r.styleName, rate: r.rate }); } }); uniqueStyles.sort((a, b) => a.buyer.localeCompare(b.buyer) || a.name.localeCompare(b.name) || a.rate.localeCompare(b.rate)); let buyerList = []; let currentBuyer = null; let buyerCount = 0; uniqueStyles.forEach(s => { if (s.buyer === currentBuyer) { buyerCount++; } else { if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); currentBuyer = s.buyer; buyerCount = 1; } }); if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); let styleList = []; let currentStyle = null; let styleCount = 0; uniqueStyles.forEach(s => { let bsKey = s.buyer + '|' + s.name; if (bsKey === currentStyle) { styleCount++; } else { if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); currentStyle = bsKey; styleCount = 1; } }); if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); let localTheadHtml = `<tr><th rowspan="3">SL</th><th rowspan="3">NAME</th><th rowspan="3">CARD NO</th><th rowspan="3">BLOCK</th>${buyerList.map(b => `<th colspan="${b.span}">${b.name}</th>`).join('')}<th rowspan="3">TOTAL</th>${isAmt ? `<th rowspan="3">AMOUNT</th>` : ''}<th rowspan="3">REMARKS</th></tr><tr>${styleList.map(st => `<th colspan="${st.span}">${st.name}</th>`).join('')}</tr><tr>${uniqueStyles.map(s => `<th>${s.rate}</th>`).join('')}</tr>`; let sl = 1, gQ = 0, gA = 0; let colTotals = {}; uniqueStyles.forEach(s => colTotals[s.key] = { q: 0, amt: 0 }); let localTbodyHtml = ''; let sortedEmployees = Object.values(empMap).sort((a, b) => { return (a.name || '').localeCompare(b.name || ''); }); sortedEmployees.forEach(emp => { let rQ = 0, rA = 0; let cells = uniqueStyles.map(s => { let d = emp.styles[s.key]; if(d) { rQ += d.q; rA += d.amt; colTotals[s.key].q += d.q; return `<td>${d.q}</td>`; } return `<td>0</td>`; }).join(''); localTbodyHtml += `<tr><td>${sl++}</td><td style="text-align:left; padding-left:5px;">${emp.name}</td><td>${emp.cardNo || ''}</td><td>${emp.block || ''}</td>${cells}<td style="font-weight:bold;">${rQ}</td>${isAmt ? `<td style="font-weight:bold;">${rA.toFixed(0)}</td>` : ''}<td></td></tr>`; gQ += rQ; gA += rA; }); localTbodyHtml += `<tr style="font-weight:bold;"><td colspan="4">TOTAL</td>${uniqueStyles.map(s => `<td>${colTotals[s.key].q}</td>`).join('')}<td>${gQ}</td>${isAmt ? `<td>${gA.toFixed(0)}</td>` : ''}<td></td></tr>`; let pageStyle = index > 0 ? "page-break-before: always; margin-top: 20px;" : ""; fullContentHtml += `<div style="${pageStyle}"><div class="header-section"><div style="width: 120px;"></div><div class="header-center"><h2>Daily Cash Payment Production</h2><h3>${title}</h3><p>Section: ${grpSec.toUpperCase()} &nbsp;&nbsp;|&nbsp;&nbsp; Floor: ${grpFloor.toUpperCase()} &nbsp;&nbsp;|&nbsp;&nbsp; Block: ${grpBlock.toUpperCase()}</p><p>Date Range: ${dFromStr} to ${dToStr}</p></div><div style="width: 120px; display: flex; justify-content: flex-end;">${index === 0 ? printBtnHtml : ''}</div></div><div class="table-container"><table class="report-table"><thead>${localTheadHtml}</thead><tbody>${localTbodyHtml}</tbody></table></div></div>`; }); } else { let empMap = {}; let uniqueStyles = []; rawData.forEach(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let buyer = sObj ? sObj.buyer : 'Unknown'; let eKey = r.workerName + '|' + (r.cardNo || ''); if(!empMap[eKey]) empMap[eKey] = { name: r.workerName, cardNo: r.cardNo, block: r.blockNo, floor: r.floor, styles: {} }; let sKey = `${buyer}_${r.styleName}_${r.rate}`; if(!empMap[eKey].styles[sKey]) { empMap[eKey].styles[sKey] = { q: 0, amt: 0 }; } let rtObj = sObj ? sObj.rates.find(rt => rt.name === r.rate) : null; let tk = rtObj ? parseFloat(rtObj.tk) || 0 : 0; empMap[eKey].styles[sKey].q += (parseInt(r.receiveQty) || 0); empMap[eKey].styles[sKey].amt += ((parseInt(r.receiveQty) || 0) * tk); if(!uniqueStyles.find(x => x.key === sKey)) { uniqueStyles.push({ key: sKey, buyer: buyer, name: r.styleName, rate: r.rate }); } }); uniqueStyles.sort((a, b) => a.buyer.localeCompare(b.buyer) || a.name.localeCompare(b.name) || a.rate.localeCompare(b.rate)); let buyerList = []; let currentBuyer = null; let buyerCount = 0; uniqueStyles.forEach(s => { if (s.buyer === currentBuyer) { buyerCount++; } else { if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); currentBuyer = s.buyer; buyerCount = 1; } }); if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount });let styleList = []; let currentStyle = null; let styleCount = 0; uniqueStyles.forEach(s => { let bsKey = s.buyer + '|' + s.name; if (bsKey === currentStyle) { styleCount++; } else { if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); currentStyle = bsKey; styleCount = 1; } }); if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); theadHtml = `<tr><th rowspan="3">SL</th><th rowspan="3">NAME</th><th rowspan="3">CARD NO</th><th rowspan="3">BLOCK</th>${buyerList.map(b => `<th colspan="${b.span}">${b.name}</th>`).join('')}<th rowspan="3">TOTAL</th>${isAmt ? `<th rowspan="3">AMOUNT</th>` : ''}<th rowspan="3">REMARKS</th></tr><tr>${styleList.map(st => `<th colspan="${st.span}">${st.name}</th>`).join('')}</tr><tr>${uniqueStyles.map(s => `<th>${s.rate}</th>`).join('')}</tr>`; let sl = 1, gQ = 0, gA = 0; let colTotals = {}; uniqueStyles.forEach(s => colTotals[s.key] = { q: 0, amt: 0 }); tbodyHtml = ''; let sortedEmployees = Object.values(empMap).sort((a, b) => { let floorA = (a.floor || '').trim(); let floorB = (b.floor || '').trim(); let resF = floorA.localeCompare(floorB); if (resF !== 0) return resF; let blockA = (a.block || '').trim(); let blockB = (b.block || '').trim(); let resB = blockA.localeCompare(blockB); if (resB !== 0) return resB; return (a.name || '').localeCompare(b.name || ''); }); sortedEmployees.forEach(emp => { let rQ = 0, rA = 0; let cells = uniqueStyles.map(s => { let d = emp.styles[s.key]; if(d) { rQ += d.q; rA += d.amt; colTotals[s.key].q += d.q; return `<td>${d.q}</td>`; } return `<td>0</td>`; }).join(''); tbodyHtml += `<tr><td>${sl++}</td><td style="text-align:left; padding-left:5px;">${emp.name}</td><td>${emp.cardNo || ''}</td><td>${emp.block || ''}</td>${cells}<td style="font-weight:bold;">${rQ}</td>${isAmt ? `<td style="font-weight:bold;">${rA.toFixed(0)}</td>` : ''}<td></td></tr>`; gQ += rQ; gA += rA; }); tbodyHtml += `<tr style="font-weight:bold;"><td colspan="4" style="text-align:right;">GRAND TOTAL</td>${uniqueStyles.map(s => `<td>${colTotals[s.key].q}</td>`).join('')}<td>${gQ}</td>${isAmt ? `<td>${gA.toFixed(0)}</td>` : ''}<td></td></tr>`; } }
+            } else { let isAmt = (type === '3_OpWiseProdDetail_Block_Amount'); title = "Operator Wise Production Report"; if (isGlobal) { let groups = {}; rawData.forEach(r => { let sec = (r.bookName || 'Unknown').trim(); let f = (r.floor || 'Unknown').trim(); let b = (r.blockNo || 'Unknown').trim(); let key = sec + '|||' + f + '|||' + b; if(!groups[key]) groups[key] = []; groups[key].push(r); }); let sortedKeys = Object.keys(groups).sort((k1, k2) => { let [sec1, f1, b1] = k1.split('|||'); let [sec2, f2, b2] = k2.split('|||'); return sec1.localeCompare(sec2) || f1.localeCompare(f2) || b1.localeCompare(b2); }); sortedKeys.forEach((key, index) => { let [grpSec, grpFloor, grpBlock] = key.split('|||'); let grpData = groups[key]; let empMap = {}; let uniqueStyles = []; grpData.forEach(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let buyer = sObj ? sObj.buyer : ''; let eKey = r.workerName + '|' + (r.cardNo || ''); if(!empMap[eKey]) empMap[eKey] = { name: r.workerName, cardNo: r.cardNo, block: r.blockNo, floor: r.floor, styles: {} }; let sKey = `${buyer}_${r.styleName}_${r.rate}`; if(!empMap[eKey].styles[sKey]) { empMap[eKey].styles[sKey] = { q: 0, amt: 0 }; } let rtObj = sObj ? sObj.rates.find(rt => rt.name === r.rate) : null; let tk = rtObj ? parseFloat(rtObj.tk) || 0 : 0; empMap[eKey].styles[sKey].q += (parseInt(r.receiveQty) || 0); empMap[eKey].styles[sKey].amt += ((parseInt(r.receiveQty) || 0) * tk); if(!uniqueStyles.find(x => x.key === sKey)) { uniqueStyles.push({ key: sKey, buyer: buyer, name: r.styleName, rate: r.rate }); } }); uniqueStyles.sort((a, b) => a.buyer.localeCompare(b.buyer) || a.name.localeCompare(b.name) || a.rate.localeCompare(b.rate)); let buyerList = []; let currentBuyer = null; let buyerCount = 0; uniqueStyles.forEach(s => { if (s.buyer === currentBuyer) { buyerCount++; } else { if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); currentBuyer = s.buyer; buyerCount = 1; } }); if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); let styleList = []; let currentStyle = null; let styleCount = 0; uniqueStyles.forEach(s => { let bsKey = s.buyer + '|' + s.name; if (bsKey === currentStyle) { styleCount++; } else { if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); currentStyle = bsKey; styleCount = 1; } }); if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); let localTheadHtml = `<tr><th rowspan="3">SL</th><th rowspan="3">NAME</th><th rowspan="3">CARD NO</th><th rowspan="3">BLOCK</th>${buyerList.map(b => `<th colspan="${b.span}">${b.name}</th>`).join('')}<th rowspan="3">TOTAL</th>${isAmt ? `<th rowspan="3">AMOUNT</th>` : ''}<th rowspan="3">REMARKS</th></tr><tr>${styleList.map(st => `<th colspan="${st.span}">${st.name}</th>`).join('')}</tr><tr>${uniqueStyles.map(s => `<th>${s.rate}</th>`).join('')}</tr>`; let sl = 1, gQ = 0, gA = 0; let colTotals = {}; uniqueStyles.forEach(s => colTotals[s.key] = { q: 0, amt: 0 }); let localTbodyHtml = ''; let sortedEmployees = Object.values(empMap).sort((a, b) => { return (a.name || '').localeCompare(b.name || ''); }); sortedEmployees.forEach(emp => { let rQ = 0, rA = 0; let cells = uniqueStyles.map(s => { let d = emp.styles[s.key]; if(d) { rQ += d.q; rA += d.amt; colTotals[s.key].q += d.q; return `<td>${d.q}</td>`; } return `<td>0</td>`; }).join(''); localTbodyHtml += `<tr><td>${sl++}</td><td style="text-align:left; padding-left:5px;">${emp.name}</td><td>${emp.cardNo || ''}</td><td>${emp.block || ''}</td>${cells}<td style="font-weight:bold;">${rQ}</td>${isAmt ? `<td style="font-weight:bold;">${rA.toFixed(0)}</td>` : ''}<td></td></tr>`; gQ += rQ; gA += rA; }); localTbodyHtml += `<tr style="font-weight:bold;"><td colspan="4">TOTAL</td>${uniqueStyles.map(s => `<td>${colTotals[s.key].q}</td>`).join('')}<td>${gQ}</td>${isAmt ? `<td>${gA.toFixed(0)}</td>` : ''}<td></td></tr>`; let pageStyle = index > 0 ? "page-break-before: always; margin-top: 20px;" : ""; fullContentHtml += `<div style="${pageStyle}"><div class="header-section"><div style="width: 120px;"></div><div class="header-center"><h2>Daily Cash Payment Production</h2><h3>${title}</h3><p>Section: ${grpSec.toUpperCase()} &nbsp;&nbsp;|&nbsp;&nbsp; Floor: ${grpFloor.toUpperCase()} &nbsp;&nbsp;|&nbsp;&nbsp; Block: ${grpBlock.toUpperCase()}</p><p>Date Range: ${dFromStr} to ${dToStr}</p></div><div style="width: 120px; display: flex; justify-content: flex-end;">${index === 0 ? printBtnHtml : ''}</div></div><div class="table-container"><table class="report-table"><thead>${localTheadHtml}</thead><tbody>${localTbodyHtml}</tbody></table></div></div>`; }); } else { let empMap = {}; let uniqueStyles = []; rawData.forEach(r => { let sObj = window.styles.find(s => s.styleName === r.styleName && s.bookName === r.bookName); let buyer = sObj ? sObj.buyer : ''; let eKey = r.workerName + '|' + (r.cardNo || ''); if(!empMap[eKey]) empMap[eKey] = { name: r.workerName, cardNo: r.cardNo, block: r.blockNo, floor: r.floor, styles: {} }; let sKey = `${buyer}_${r.styleName}_${r.rate}`; if(!empMap[eKey].styles[sKey]) { empMap[eKey].styles[sKey] = { q: 0, amt: 0 }; } let rtObj = sObj ? sObj.rates.find(rt => rt.name === r.rate) : null; let tk = rtObj ? parseFloat(rtObj.tk) || 0 : 0; empMap[eKey].styles[sKey].q += (parseInt(r.receiveQty) || 0); empMap[eKey].styles[sKey].amt += ((parseInt(r.receiveQty) || 0) * tk); if(!uniqueStyles.find(x => x.key === sKey)) { uniqueStyles.push({ key: sKey, buyer: buyer, name: r.styleName, rate: r.rate }); } }); uniqueStyles.sort((a, b) => a.buyer.localeCompare(b.buyer) || a.name.localeCompare(b.name) || a.rate.localeCompare(b.rate)); let buyerList = []; let currentBuyer = null; let buyerCount = 0; uniqueStyles.forEach(s => { if (s.buyer === currentBuyer) { buyerCount++; } else { if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount }); currentBuyer = s.buyer; buyerCount = 1; } }); if (currentBuyer !== null) buyerList.push({ name: currentBuyer, span: buyerCount });let styleList = []; let currentStyle = null; let styleCount = 0; uniqueStyles.forEach(s => { let bsKey = s.buyer + '|' + s.name; if (bsKey === currentStyle) { styleCount++; } else { if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); currentStyle = bsKey; styleCount = 1; } }); if (currentStyle !== null) styleList.push({ name: currentStyle.split('|')[1], span: styleCount }); theadHtml = `<tr><th rowspan="3">SL</th><th rowspan="3">NAME</th><th rowspan="3">CARD NO</th><th rowspan="3">BLOCK</th>${buyerList.map(b => `<th colspan="${b.span}">${b.name}</th>`).join('')}<th rowspan="3">TOTAL</th>${isAmt ? `<th rowspan="3">AMOUNT</th>` : ''}<th rowspan="3">REMARKS</th></tr><tr>${styleList.map(st => `<th colspan="${st.span}">${st.name}</th>`).join('')}</tr><tr>${uniqueStyles.map(s => `<th>${s.rate}</th>`).join('')}</tr>`; let sl = 1, gQ = 0, gA = 0; let colTotals = {}; uniqueStyles.forEach(s => colTotals[s.key] = { q: 0, amt: 0 }); tbodyHtml = ''; let sortedEmployees = Object.values(empMap).sort((a, b) => { let floorA = (a.floor || '').trim(); let floorB = (b.floor || '').trim(); let resF = floorA.localeCompare(floorB); if (resF !== 0) return resF; let blockA = (a.block || '').trim(); let blockB = (b.block || '').trim(); let resB = blockA.localeCompare(blockB); if (resB !== 0) return resB; return (a.name || '').localeCompare(b.name || ''); }); sortedEmployees.forEach(emp => { let rQ = 0, rA = 0; let cells = uniqueStyles.map(s => { let d = emp.styles[s.key]; if(d) { rQ += d.q; rA += d.amt; colTotals[s.key].q += d.q; return `<td>${d.q}</td>`; } return `<td>0</td>`; }).join(''); tbodyHtml += `<tr><td>${sl++}</td><td style="text-align:left; padding-left:5px;">${emp.name}</td><td>${emp.cardNo || ''}</td><td>${emp.block || ''}</td>${cells}<td style="font-weight:bold;">${rQ}</td>${isAmt ? `<td style="font-weight:bold;">${rA.toFixed(0)}</td>` : ''}<td></td></tr>`; gQ += rQ; gA += rA; }); tbodyHtml += `<tr style="font-weight:bold;"><td colspan="4" style="text-align:right;">GRAND TOTAL</td>${uniqueStyles.map(s => `<td>${colTotals[s.key].q}</td>`).join('')}<td>${gQ}</td>${isAmt ? `<td>${gA.toFixed(0)}</td>` : ''}<td></td></tr>`; } }
             if (!fullContentHtml && type !== '3_Operator_Wise_Production' && !(type === '6_OpWiseIssueDetails' && source === 'quick')) { fullContentHtml = `<div class="header-section"><div style="width: 120px;"></div><div class="header-center"><h2>Daily Cash Payment Production</h2><h3>${title}</h3><p>Floor : ${floorInput === 'all' || !floorInput ? 'All Floors' : floorInput.toUpperCase()} &nbsp;&nbsp; Section: ${sectionName === 'All' ? 'All Sections' : sectionName}</p><p>Date Range: ${dFromStr} to ${dToStr}</p></div><div style="width: 120px; display: flex; justify-content: flex-end;">${printBtnHtml}</div></div><div class="table-container"><table class="report-table"><thead>${theadHtml}</thead><tbody>${tbodyHtml}</tbody></table></div>`; }
             let html = `<html><head><title>${title}</title><style>@page { size: A4 portrait; margin: 8mm; } body { font-family: 'Arial', 'Tahoma', sans-serif; padding: 20px; color: #000; background: #fff; font-size: 12px; margin: 0; } .header-section { display: flex; justify-content: space-between; align-items: flex-start; max-width: 1000px; margin: 0 auto 20px auto; } .header-center { flex-grow: 1; text-align: center; } .header-center h2 { margin: 0; font-size: 20px; } .header-center h3 { margin: 4px 0; font-size: 16px; font-weight: bold; } .header-center p { margin: 2px 0; font-size: 12px; font-weight: bold; } .btn-print { background: #0078D7; color: white; border: none; padding: 8px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 13px; } .btn-print:hover { background: #005A9E; } .table-container { display: flex; justify-content: center; width: 100%; overflow-x: auto; } .report-table { border-collapse: collapse; width: max-content; background: transparent; margin: 0 auto; } .report-table th, .report-table td { border: 1px solid #888 !important; padding: 5px 15px; font-size: 12px; text-align: center; white-space: nowrap; background: transparent !important; } .report-table thead tr:first-child th { border-top: 10px solid #888 !important; } .report-table th { font-weight: bold; background: transparent !important; } tr { page-break-inside: avoid; } @media print { @page { size: A4 portrait; margin: 8mm; } html, body { width: 100% !important; margin: 0 !important; padding: 0 !important; background: #fff !important; } .btn-print { display: none !important; } .header-section { width: 100% !important; max-width: 100% !important; margin-bottom: 10px !important; } .table-container { width: 100% !important; overflow: visible !important; display: block !important; } .report-table, table { width: 100% !important; max-width: 100% !important; min-width: 0 !important; table-layout: auto !important; } .report-table th, .report-table td, table th, table td { padding: 4px !important; font-size: 12px !important; white-space: normal !important; word-break: break-word !important; } div[style*="min-width"], table[style*="min-width"] { min-width: 0 !important; width: 100% !important; max-width: 100% !important; } }</style></head><body>${fullContentHtml}</body></html>`;
             let blob = new Blob([html], { type: 'text/html' }); let url = URL.createObjectURL(blob); let win = window.open(url, '_blank');
@@ -1342,8 +1342,9 @@
                 return;
             }
 
-            let styleObj = window.styles.find(s => s.styleName === row.styleName && s.bookName === row.bookName);
-            let buyer = styleObj ? styleObj.buyer : "GAP"; 
+            let styleObj = window.styles.find(s => s.styleName === row.styleName && s.bookName === row.bookName)
+                        || window.styles.find(s => s.styleName === row.styleName && s.buyer);
+            let buyer = (styleObj && styleObj.buyer) ? styleObj.buyer : ""; 
 
             let iframe = document.getElementById('barcodePrintIframe');
             if (iframe) { iframe.remove(); }
@@ -1405,17 +1406,22 @@
             }
         };
 
-        window.populateBarcodeTabUI = function(row, sourceRow) {
-            let styleObj = window.styles.find(s => s.styleName === row.styleName && s.bookName === row.bookName);
-            let buyerName = styleObj ? styleObj.buyer : "Unknown";
+        window.populateBarcodeTabUI = function(row, sourceRow, styleObjOverride) {
+            let styleObj = styleObjOverride || window.styles.find(s => s.styleName === row.styleName && s.bookName === row.bookName);
+            let buyerStyleObj = (styleObj && styleObj.buyer) ? styleObj : (
+                window.styles.find(s => s.styleName === row.styleName && s.bookName === (sourceRow && sourceRow.bookName) && s.buyer)
+                || window.styles.find(s => s.styleName === row.styleName && s.buyer)
+            );
+            let buyerName = (buyerStyleObj && buyerStyleObj.buyer) ? buyerStyleObj.buyer : "";
             let firstIssueDate = (sourceRow && sourceRow.issueDate) ? sourceRow.issueDate : (row.issueDate || '');
             let issueCard = row.cardNo || '';
             
             document.getElementById('bc_info_text').innerText = `Buyer: ${buyerName}, Style: ${row.styleName}, Color: ${row.color || ''}, Size: ${row.size || ''}, First Issue: ${firstIssueDate}, Issue Card: ${issueCard}`;
 
+            let rateSourceObj = styleObj || buyerStyleObj;
             let ratesHtml = '';
-            if(styleObj && styleObj.rates) {
-                styleObj.rates.forEach((r) => {
+            if(rateSourceObj && rateSourceObj.rates) {
+                rateSourceObj.rates.forEach((r) => {
                     let checked = (row.rate === r.name) ? 'checked' : '';
                     ratesHtml += `<label style="font-size: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="radio" name="bc_rate_static" value="${r.name}" ${checked} style="margin:0;" onchange="document.getElementById('bottomBarcodeInput').focus()"> ${r.name}</label>`;
                 });
@@ -1499,11 +1505,11 @@
         window.isScanningCode = false;
         window.currentReceiveRowOriginalCard = "";
         window.handleBottomBarcodeScan = function(event, input) {
+            if (event && event.key === 'Enter') event.preventDefault();
             setTimeout(async () => {
                 let code = input.value.trim().toUpperCase();
                 
                 if (code.length === 8 || (event && event.key === 'Enter')) {
-                    if (event && event.key === 'Enter') event.preventDefault();
                     if(!code || window.isScanningCode) return;
                     
                     window.isScanningCode = true;
@@ -1520,104 +1526,252 @@
                             if(dbResult) sourceRow = dbResult.data;
                         }
 
-                        if(sourceRow) {
-                            let currentBook = window.currentProductionBook;
-                            let targetStyleObj = window.styles.find(s => s.styleName === sourceRow.styleName && s.bookName === currentBook);
-                            if (targetStyleObj && targetStyleObj.barcodeActive !== true) {
-                                alert("Barcode is not active for Style [" + sourceRow.styleName + "] in " + currentBook + " section. Please activate it from Admin > Add Style Data.");
-                                window.isScanningCode = false;
-                                return;
+                        if(!sourceRow) {
+                            alert(`Barcode (${code}) not found!`);
+                            return;
+                        }
+
+                        let currentBook = window.currentProductionBook;
+                        let targetStyleObj = null;
+                        try {
+                            let freshStyleSnap = await window.getDoc(window.doc(window.db, "styles", `${currentBook}_${sourceRow.styleName}`));
+                            if (freshStyleSnap.exists()) {
+                                targetStyleObj = freshStyleSnap.data();
+                                let sIdx = window.styles.findIndex(s => s.styleName === sourceRow.styleName && s.bookName === currentBook);
+                                if (sIdx > -1) window.styles[sIdx] = targetStyleObj;
+                                else window.styles.push(targetStyleObj);
                             }
+                        } catch(err) {
+                            targetStyleObj = window.styles.find(s => s.styleName === sourceRow.styleName && s.bookName === currentBook);
+                        }
 
-                            if(window.activeStyleName !== sourceRow.styleName) {
-                                await window.setActiveStyle(sourceRow.styleName, true);
-                            }
-                            switchTab('Barcode');
-                            
-                            let cardNoInput = document.getElementById('bc_cardNo').value.trim();
-                            let isNative = (sourceRow.bookName === currentBook);
-                            let d = new Date();
-                            let dmy = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear();
+                        if (!targetStyleObj) {
+                            alert(`Style [${sourceRow.styleName}] is not configured in ${currentBook} section!`);
+                            return;
+                        }
+                        if (targetStyleObj.barcodeActive !== true) {
+                            alert(`Barcode is OFF (Inactive) for Style [${sourceRow.styleName}] in ${currentBook} section. Please activate it from Admin > Create Style.`);
+                            return;
+                        }
 
-                            let localRows = window.rowsModel.filter(r => r.idNo === sourceRow.idNo && r.bookName === currentBook && r.styleName === sourceRow.styleName);
-                            let alreadyReceivedRow = localRows.find(r => r.receivedBarcodes && r.receivedBarcodes.includes(code));
-                            let nativeRow = isNative ? (localRows.find(r => r.generatedBarcodes && r.generatedBarcodes.includes(code)) || localRows[0]) : null;
-                            let issuedRow = !isNative ? localRows.find(r => r.issuedBarcodes && r.issuedBarcodes.includes(code)) : null;
+                        if(window.activeStyleName !== sourceRow.styleName) {
+                            await window.setActiveStyle(sourceRow.styleName, true);
+                        }
 
-                            let localRow = null;
-                            if (isNative) {
-                                if (alreadyReceivedRow) { localRow = alreadyReceivedRow; }
-                                else if (nativeRow && nativeRow.receiveDate && nativeRow.receiveDate !== dmy && (parseInt(nativeRow.receiveQty) || 0) > 0) {
+                        // Sync live rows for this ID from Firestore to prevent duplicate Issue/Receive across tabs/PCs
+                        try {
+                            const qLiveId = window.query(
+                                window.collection(window.db, "production"),
+                                window.where("bookName", "==", currentBook),
+                                window.where("styleName", "==", sourceRow.styleName),
+                                window.where("idNo", "==", sourceRow.idNo)
+                            );
+                            const liveSnap = await window.getDocs(qLiveId);
+                            liveSnap.docs.forEach(dSnap => {
+                                let dData = dSnap.data();
+                                dData._docId = dSnap.id;
+                                dData._uid = dSnap.id;
+                                let existingIdx = window.rowsModel.findIndex(r => r._docId === dSnap.id);
+                                if (existingIdx > -1) window.rowsModel[existingIdx] = dData;
+                                else window.rowsModel.push(dData);
+                            });
+                            window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
+                        } catch(syncErr) {
+                            console.error("Live row sync error:", syncErr);
+                        }
+                        
+                        let cardNoInput = document.getElementById('bc_cardNo').value.trim();
+                        let isNative = (sourceRow.bookName === currentBook);
+                        let d = new Date();
+                        let dmy = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear();
+
+                        let localRows = window.rowsModel.filter(r => r.idNo === sourceRow.idNo && r.bookName === currentBook && r.styleName === sourceRow.styleName);
+                        let alreadyReceivedRow = localRows.find(r => r.receivedBarcodes && r.receivedBarcodes.includes(code));
+                        if (alreadyReceivedRow) {
+                            alert(`This barcode (${code}) is already received on Card No: ${alreadyReceivedRow.cardNo || 'N/A'}!`);
+                            return;
+                        }
+
+                        let nativeRow = isNative ? (localRows.find(r => r.generatedBarcodes && r.generatedBarcodes.includes(code)) || localRows[0]) : null;
+                        let issuedRow = !isNative ? localRows.find(r => r.issuedBarcodes && r.issuedBarcodes.includes(code)) : null;
+
+                        let localRow = null;
+                        if (isNative) {
+                            if (nativeRow && nativeRow.receiveDate && nativeRow.receiveDate !== dmy && (parseInt(nativeRow.receiveQty) || 0) > 0) {
+                                if (window.currentReceiveRow && window.currentReceiveRow.idNo === sourceRow.idNo && window.currentReceiveRow.bookName === currentBook && window.currentReceiveRow.styleName === sourceRow.styleName && window.currentReceiveRow.receiveDate === dmy) {
+                                    localRow = window.currentReceiveRow;
+                                } else {
+                                    localRow = localRows.find(r => r.receiveDate === dmy && (!cardNoInput || r.cardNo === cardNoInput || r.cardNo === nativeRow.cardNo)) || nativeRow;
+                                }
+                            } else { localRow = nativeRow; }
+                        } else {
+                            if (issuedRow) {
+                                if (issuedRow.receiveDate && issuedRow.receiveDate !== dmy && (parseInt(issuedRow.receiveQty) || 0) > 0) {
                                     if (window.currentReceiveRow && window.currentReceiveRow.idNo === sourceRow.idNo && window.currentReceiveRow.bookName === currentBook && window.currentReceiveRow.styleName === sourceRow.styleName && window.currentReceiveRow.receiveDate === dmy) {
                                         localRow = window.currentReceiveRow;
                                     } else {
-                                        localRow = localRows.find(r => r.receiveDate === dmy && (!cardNoInput || r.cardNo === cardNoInput || r.cardNo === nativeRow.cardNo)) || nativeRow;
+                                        localRow = localRows.find(r => r.receiveDate === dmy && (!cardNoInput || r.cardNo === cardNoInput || r.cardNo === issuedRow.cardNo)) || issuedRow;
                                     }
-                                } else { localRow = nativeRow; }
+                                } else { localRow = issuedRow; }
                             } else {
-                                if (alreadyReceivedRow) { localRow = alreadyReceivedRow; }
-                                else if (issuedRow) {
-                                    if (issuedRow.receiveDate && issuedRow.receiveDate !== dmy && (parseInt(issuedRow.receiveQty) || 0) > 0) {
-                                        if (window.currentReceiveRow && window.currentReceiveRow.idNo === sourceRow.idNo && window.currentReceiveRow.bookName === currentBook && window.currentReceiveRow.styleName === sourceRow.styleName && window.currentReceiveRow.receiveDate === dmy) {
-                                            localRow = window.currentReceiveRow;
-                                        } else {
-                                            localRow = localRows.find(r => r.receiveDate === dmy && (!cardNoInput || r.cardNo === cardNoInput || r.cardNo === issuedRow.cardNo)) || issuedRow;
-                                        }
-                                    } else { localRow = issuedRow; }
-                                } else {
-                                    if (cardNoInput) localRow = localRows.find(r => r.cardNo === cardNoInput);
-                                    if (!localRow) localRow = localRows.find(r => !r.cardNo);
-                                    if (!localRow) {
-                                        localRow = {
-                                            bookName: currentBook, idNo: sourceRow.idNo, styleName: sourceRow.styleName,
-                                            issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", 
-                                            color: sourceRow.color || "", size: sourceRow.size || "", lot: sourceRow.lot || "", 
-                                            issueQty: "", rate: "", receiveQty: "", receiveDate: "", floor: "",
-                                            _isDuplicated: true, _uid: `${currentBook}_${sourceRow.styleName}_${sourceRow.idNo}_${Date.now()}`
-                                        };
-                                        localRow._docId = localRow._uid; 
-                                        window.rowsModel.push(localRow);
-                                        window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
-                                    }
+                                if (cardNoInput) localRow = localRows.find(r => r.cardNo === cardNoInput);
+                                if (!localRow) localRow = localRows.find(r => !r.cardNo);
+                                if (!localRow) {
+                                    localRow = {
+                                        bookName: currentBook, idNo: sourceRow.idNo, styleName: sourceRow.styleName,
+                                        issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", 
+                                        color: sourceRow.color || "", size: sourceRow.size || "", lot: sourceRow.lot || "", 
+                                        issueQty: "", rate: "", receiveQty: "", receiveDate: "", floor: "",
+                                        _isDuplicated: true, _uid: `${currentBook}_${sourceRow.styleName}_${sourceRow.idNo}_${Date.now()}`
+                                    };
+                                    localRow._docId = localRow._uid; 
+                                    window.rowsModel.push(localRow);
+                                    window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
                                 }
                             }
+                        }
 
-                            if(!window.currentReceiveRow || window.currentReceiveRow._uid !== localRow._uid) {
-                                window.currentReceiveRow = localRow;
-                                window.currentReceiveRowOriginalCard = localRow.cardNo || '';
-                                window.populateBarcodeTabUI(localRow, sourceRow);
-                                renderTable();
-                                shouldRefocusBarcode = true;
-                                setTimeout(() => {
-                                    let tr = document.getElementById('row-' + localRow._uid);
-                                    if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }, 50);
-                                return; 
-                            }
+                        if(!window.currentReceiveRow || window.currentReceiveRow._uid !== localRow._uid) {
+                            window.currentReceiveRow = localRow;
+                            window.currentReceiveRowOriginalCard = localRow.cardNo || '';
+                            switchTab('Barcode');
+                            window.populateBarcodeTabUI(localRow, sourceRow, targetStyleObj);
+                            renderTable();
+                            shouldRefocusBarcode = false;
+                            setTimeout(() => {
+                                let cardEl = document.getElementById('bc_cardNo');
+                                if(cardEl) { cardEl.focus(); cardEl.select(); }
+                                let tr = document.getElementById('row-' + localRow._uid);
+                                if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 30);
+                            return; 
+                        }
 
-                            let cardNo = document.getElementById('bc_cardNo').value.trim();
-                            if(!cardNo) { alert("Please enter Card No!"); shouldRefocusBarcode = true; return; }
+                        let cardNo = document.getElementById('bc_cardNo').value.trim();
+                        if(!cardNo) {
+                            switchTab('Barcode');
+                            alert("Please enter Card No!");
+                            shouldRefocusBarcode = false;
+                            setTimeout(() => document.getElementById('bc_cardNo')?.focus(), 30);
+                            return;
+                        }
 
-                            let lockedIssuedCard = isNative ? ((nativeRow && nativeRow.cardNo) || window.currentReceiveRowOriginalCard) : ((issuedRow && issuedRow.cardNo) || window.currentReceiveRowOriginalCard);
-                            if (lockedIssuedCard && cardNo !== lockedIssuedCard) {
-                                alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard}!`);
+                        let lockedIssuedCard = isNative ? ((nativeRow && nativeRow.cardNo) || window.currentReceiveRowOriginalCard) : ((issuedRow && issuedRow.cardNo) || window.currentReceiveRowOriginalCard);
+                        if (lockedIssuedCard && cardNo !== lockedIssuedCard) {
+                            alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard}!`);
+                            shouldRefocusBarcode = true;
+                            return;
+                        }
+
+                        let rateChecked = document.querySelector('input[name="bc_rate_static"]:checked');
+                        let rateName = rateChecked ? rateChecked.value : "";
+                        let op = window.operators.find(o => o.cardNo === cardNo);
+                        let wName = op ? op.name : ""; let bNo = op ? op.block : ""; let floor = op ? op.floor : "";
+                        let docId = localRow._docId || `${currentBook}_${localRow.styleName}_${localRow.idNo}`;
+
+                        let rawLimit = (targetStyleObj && targetStyleObj.receiveTimeLimit !== undefined && targetStyleObj.receiveTimeLimit !== null && targetStyleObj.receiveTimeLimit !== '') ? Number(targetStyleObj.receiveTimeLimit) : 15;
+                        let limitMins = isNaN(rawLimit) ? 15 : rawLimit;
+                        let limitMs = limitMins * 60 * 1000;
+
+                        if (isNative) {
+                            if(!rateName) {
+                                switchTab('Barcode');
+                                alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard || cardNo}!\nPlease select a Rate Name to Receive.`);
                                 shouldRefocusBarcode = true;
                                 return;
                             }
 
-                            let rateChecked = document.querySelector('input[name="bc_rate_static"]:checked');
-                            let rateName = rateChecked ? rateChecked.value : "";
-                            let op = window.operators.find(o => o.cardNo === cardNo);
-                            let wName = op ? op.name : ""; let bNo = op ? op.block : ""; let floor = op ? op.floor : "";
-                            let docId = localRow._docId || `${currentBook}_${localRow.styleName}_${localRow.idNo}`;
+                            if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
+                                let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
+                                let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseInt(r.receiveQty) || 0), 0);
+                                if (styleTotalQty > 0 && (currentStyleRecTotal + 1) > styleTotalQty) {
+                                    alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
+                                    shouldRefocusBarcode = true;
+                                    return;
+                                }
+                            }
 
-                            if (isNative) {
-                                if(alreadyReceivedRow) { alert("This barcode is already received!"); shouldRefocusBarcode = true; return; }
-                                if(!rateName) { alert("Please select a Rate!"); shouldRefocusBarcode = true; return; }
+                            if (limitMs > 0) {
+                                let issueTime = (sourceRow.generatedAtMap && sourceRow.generatedAtMap[code]) ? sourceRow.generatedAtMap[code] : (sourceRow.generatedAt || 0);
+                                if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
+                                    let remainMs = limitMs - (Date.now() - issueTime);
+                                    let remMin = Math.floor(remainMs / 60000);
+                                    let remSec = Math.ceil((remainMs % 60000) / 1000);
+                                    if (remSec === 60) { remMin += 1; remSec = 0; }
+                                    let issuedCard = sourceRow.cardNo || (nativeRow ? nativeRow.cardNo : '') || localRow.cardNo || cardNo || 'N/A';
+                                    let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
+                                    alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
+                                    shouldRefocusBarcode = true;
+                                    return;
+                                }
+                            }
 
-                                let currentStyleObj = window.styles.find(s => s.styleName === localRow.styleName && s.bookName === currentBook);
-                                if (currentStyleObj && currentStyleObj.limitReceiveTotal === true) {
-                                    let styleTotalQty = window.getStyleTotalQty(currentStyleObj);
+                            if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseInt(localRow.receiveQty) || 0) > 0) {
+                                let splitSource = nativeRow || localRow;
+                                let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
+                                let newRow = {
+                                    bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
+                                    issueDate: splitSource.issueDate || "", machineNo: splitSource.machineNo || "",
+                                    workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
+                                    color: splitSource.color || "", size: splitSource.size || "", lot: splitSource.lot || "",
+                                    issueQty: 0, rate: rateName, receiveQty: 1, receiveDate: dmy,
+                                    receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
+                                };
+                                window.rowsModel.push(newRow);
+                                window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
+                                window.currentReceiveRow = newRow;
+                                window.currentReceiveRowOriginalCard = newRow.cardNo || '';
+                                localRow = newRow;
+                                await window.setDoc(window.doc(window.db, "production", splitDocId), newRow);
+                                window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
+                            } else {
+                                localRow.receivedBarcodes = localRow.receivedBarcodes || [];
+                                localRow.receivedBarcodes.push(code);
+                                localRow.receiveQty = (parseInt(localRow.receiveQty) || 0) + 1;
+                                localRow.rate = rateName; localRow.cardNo = cardNo; localRow.workerName = wName;
+                                localRow.blockNo = bNo; localRow.floor = floor; localRow.receiveDate = dmy;
+                                window.currentReceiveRowOriginalCard = localRow.cardNo || '';
+
+                                const rowRef = window.doc(window.db, "production", docId);
+                                await window.setDoc(rowRef, {
+                                    receivedBarcodes: localRow.receivedBarcodes, receiveQty: localRow.receiveQty,
+                                    rate: localRow.rate, receiveDate: localRow.receiveDate, cardNo: localRow.cardNo,
+                                    workerName: localRow.workerName, blockNo: localRow.blockNo, floor: localRow.floor
+                                }, {merge: true});
+                                window.saveLastBarcodeInfo(currentBook, localRow, docId);
+                            }
+                        } else {
+                            localRow.issuedBarcodes = localRow.issuedBarcodes || [];
+                            localRow.receivedBarcodes = localRow.receivedBarcodes || [];
+
+                            if (!issuedRow) {
+                                localRow.issuedBarcodes.push(code);
+                                localRow.issueQty = (parseInt(localRow.issueQty) || 0) + 1;
+                                localRow.color = sourceRow.color || ''; localRow.size = sourceRow.size || ''; localRow.lot = sourceRow.lot || '';
+                                localRow.issueDate = dmy; localRow.cardNo = cardNo; localRow.workerName = wName;
+                                localRow.blockNo = bNo; localRow.floor = floor;
+                                localRow.issuedAtMap = localRow.issuedAtMap || {}; localRow.issuedAtMap[code] = Date.now();
+                                window.currentReceiveRowOriginalCard = localRow.cardNo || '';
+
+                                const rowRef = window.doc(window.db, "production", docId);
+                                await window.setDoc(rowRef, {
+                                    idNo: localRow.idNo, bookName: localRow.bookName, styleName: localRow.styleName,
+                                    issuedBarcodes: localRow.issuedBarcodes, issueQty: localRow.issueQty,
+                                    color: localRow.color, size: localRow.size, lot: localRow.lot,
+                                    issueDate: localRow.issueDate, cardNo: localRow.cardNo, workerName: localRow.workerName,
+                                    blockNo: localRow.blockNo, floor: localRow.floor, issuedAtMap: localRow.issuedAtMap, _docId: docId
+                                }, {merge: true});
+                                window.saveLastBarcodeInfo(currentBook, localRow, docId);
+                            } else {
+                                if(!rateName) {
+                                    switchTab('Barcode');
+                                    alert(`This barcode (${code}) is already issued to Card No: ${issuedRow.cardNo || cardNo}!\nPlease select a Rate Name to Receive.`);
+                                    shouldRefocusBarcode = true;
+                                    return;
+                                }
+
+                                if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
+                                    let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
                                     let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseInt(r.receiveQty) || 0), 0);
                                     if (styleTotalQty > 0 && (currentStyleRecTotal + 1) > styleTotalQty) {
                                         alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
@@ -1626,29 +1780,29 @@
                                     }
                                 }
 
-                                let limitMins = currentStyleObj && currentStyleObj.receiveTimeLimit !== undefined ? currentStyleObj.receiveTimeLimit : 15;
-                                let limitMs = limitMins * 60 * 1000;
                                 if (limitMs > 0) {
-                                    let issueTime = (sourceRow.generatedAtMap && sourceRow.generatedAtMap[code]) ? sourceRow.generatedAtMap[code] : (sourceRow.generatedAt || 0);
+                                    let issueTime = (issuedRow.issuedAtMap && issuedRow.issuedAtMap[code]) ? issuedRow.issuedAtMap[code] : 0;
                                     if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
-                                        let remainMins = Math.ceil((limitMs - (Date.now() - issueTime)) / 60000);
-                                        let issuedCard = sourceRow.cardNo || (nativeRow ? nativeRow.cardNo : '') || localRow.cardNo || cardNo || 'N/A';
-                                        alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${remainMins} minute(s).`);
+                                        let remainMs = limitMs - (Date.now() - issueTime);
+                                        let remMin = Math.floor(remainMs / 60000);
+                                        let remSec = Math.ceil((remainMs % 60000) / 1000);
+                                        if (remSec === 60) { remMin += 1; remSec = 0; }
+                                        let issuedCard = issuedRow.cardNo || cardNo || 'N/A';
+                                        let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
+                                        alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
                                         shouldRefocusBarcode = true;
                                         return;
                                     }
                                 }
 
                                 if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseInt(localRow.receiveQty) || 0) > 0) {
-                                    let splitSource = nativeRow || localRow;
                                     let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
                                     let newRow = {
                                         bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
-                                        issueDate: splitSource.issueDate || "", machineNo: splitSource.machineNo || "",
+                                        issueDate: issuedRow.issueDate || "", machineNo: issuedRow.machineNo || "",
                                         workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
-                                        color: splitSource.color || "", size: splitSource.size || "", lot: splitSource.lot || "",
-                                        issueQty: 0, rate: rateName, receiveQty: 1, receiveDate: dmy,
-                                        receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
+                                        color: issuedRow.color || sourceRow.color || "", size: issuedRow.size || sourceRow.size || "", lot: issuedRow.lot || sourceRow.lot || "", issueQty: 0, rate: rateName,
+                                        receiveQty: 1, receiveDate: dmy, receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
                                     };
                                     window.rowsModel.push(newRow);
                                     window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
@@ -1658,11 +1812,10 @@
                                     await window.setDoc(window.doc(window.db, "production", splitDocId), newRow);
                                     window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
                                 } else {
-                                    localRow.receivedBarcodes = localRow.receivedBarcodes || [];
                                     localRow.receivedBarcodes.push(code);
                                     localRow.receiveQty = (parseInt(localRow.receiveQty) || 0) + 1;
-                                    localRow.rate = rateName; localRow.cardNo = cardNo; localRow.workerName = wName;
-                                    localRow.blockNo = bNo; localRow.floor = floor; localRow.receiveDate = dmy;
+                                    localRow.rate = rateName; localRow.receiveDate = dmy; localRow.cardNo = cardNo;
+                                    localRow.workerName = wName; localRow.blockNo = bNo; localRow.floor = floor;
                                     window.currentReceiveRowOriginalCard = localRow.cardNo || '';
 
                                     const rowRef = window.doc(window.db, "production", docId);
@@ -1673,99 +1826,17 @@
                                     }, {merge: true});
                                     window.saveLastBarcodeInfo(currentBook, localRow, docId);
                                 }
-                            } else {
-                                localRow.issuedBarcodes = localRow.issuedBarcodes || [];
-                                localRow.receivedBarcodes = localRow.receivedBarcodes || [];
-
-                                if (!issuedRow) {
-                                    localRow.issuedBarcodes.push(code);
-                                    localRow.issueQty = (parseInt(localRow.issueQty) || 0) + 1;
-                                    localRow.color = sourceRow.color || ''; localRow.size = sourceRow.size || ''; localRow.lot = sourceRow.lot || '';
-                                    localRow.issueDate = dmy; localRow.cardNo = cardNo; localRow.workerName = wName;
-                                    localRow.blockNo = bNo; localRow.floor = floor;
-                                    localRow.issuedAtMap = localRow.issuedAtMap || {}; localRow.issuedAtMap[code] = Date.now();
-                                    window.currentReceiveRowOriginalCard = localRow.cardNo || '';
-
-                                    const rowRef = window.doc(window.db, "production", docId);
-                                    await window.setDoc(rowRef, {
-                                        idNo: localRow.idNo, bookName: localRow.bookName, styleName: localRow.styleName,
-                                        issuedBarcodes: localRow.issuedBarcodes, issueQty: localRow.issueQty,
-                                        color: localRow.color, size: localRow.size, lot: localRow.lot,
-                                        issueDate: localRow.issueDate, cardNo: localRow.cardNo, workerName: localRow.workerName,
-                                        blockNo: localRow.blockNo, floor: localRow.floor, issuedAtMap: localRow.issuedAtMap, _docId: docId
-                                    }, {merge: true});
-                                    window.saveLastBarcodeInfo(currentBook, localRow, docId);
-                                } else {
-                                    if(alreadyReceivedRow) { alert("This barcode is already received!"); shouldRefocusBarcode = true; return; }
-                                    if(!rateName) { alert("Please select a Rate!"); shouldRefocusBarcode = true; return; }
-
-                                    let currentStyleObj = window.styles.find(s => s.styleName === localRow.styleName && s.bookName === currentBook);
-                                    if (currentStyleObj && currentStyleObj.limitReceiveTotal === true) {
-                                        let styleTotalQty = window.getStyleTotalQty(currentStyleObj);
-                                        let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseInt(r.receiveQty) || 0), 0);
-                                        if (styleTotalQty > 0 && (currentStyleRecTotal + 1) > styleTotalQty) {
-                                            alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
-                                            shouldRefocusBarcode = true;
-                                            return;
-                                        }
-                                    }
-
-                                    let limitMins = currentStyleObj && currentStyleObj.receiveTimeLimit !== undefined ? currentStyleObj.receiveTimeLimit : 15;
-                                    let limitMs = limitMins * 60 * 1000;
-                                    if (limitMs > 0) {
-                                        let issueTime = (issuedRow.issuedAtMap && issuedRow.issuedAtMap[code]) ? issuedRow.issuedAtMap[code] : 0;
-                                        if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
-                                            let remainMins = Math.ceil((limitMs - (Date.now() - issueTime)) / 60000);
-                                            let issuedCard = issuedRow.cardNo || cardNo || 'N/A';
-                                            alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${remainMins} minute(s).`);
-                                            shouldRefocusBarcode = true;
-                                            return;
-                                        }
-                                    }
-
-                                    if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseInt(localRow.receiveQty) || 0) > 0) {
-                                        let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
-                                        let newRow = {
-                                            bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
-                                            issueDate: issuedRow.issueDate || "", machineNo: issuedRow.machineNo || "",
-                                            workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
-                                            color: issuedRow.color || sourceRow.color || "", size: issuedRow.size || sourceRow.size || "",lot: issuedRow.lot || sourceRow.lot || "", issueQty: 0, rate: rateName,
-                                            receiveQty: 1, receiveDate: dmy, receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
-                                        };
-                                        window.rowsModel.push(newRow);
-                                        window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
-                                        window.currentReceiveRow = newRow;
-                                        window.currentReceiveRowOriginalCard = newRow.cardNo || '';
-                                        localRow = newRow;
-                                        await window.setDoc(window.doc(window.db, "production", splitDocId), newRow);
-                                        window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
-                                    } else {
-                                        localRow.receivedBarcodes.push(code);
-                                        localRow.receiveQty = (parseInt(localRow.receiveQty) || 0) + 1;
-                                        localRow.rate = rateName; localRow.receiveDate = dmy; localRow.cardNo = cardNo;
-                                        localRow.workerName = wName; localRow.blockNo = bNo; localRow.floor = floor;
-                                        window.currentReceiveRowOriginalCard = localRow.cardNo || '';
-
-                                        const rowRef = window.doc(window.db, "production", docId);
-                                        await window.setDoc(rowRef, {
-                                            receivedBarcodes: localRow.receivedBarcodes, receiveQty: localRow.receiveQty,
-                                            rate: localRow.rate, receiveDate: localRow.receiveDate, cardNo: localRow.cardNo,
-                                            workerName: localRow.workerName, blockNo: localRow.blockNo, floor: localRow.floor
-                                        }, {merge: true});
-                                        window.saveLastBarcodeInfo(currentBook, localRow, docId);
-                                    }
-                                }
                             }
+                        }
 
-                            let countSpan = document.getElementById('bottomBarcodeCount');
-                            if(countSpan) countSpan.innerText = parseInt(countSpan.innerText) + 1;
-                            renderTable();
-                            switchTab('Book');
-                            setTimeout(() => {
-                                let tr = document.getElementById('row-' + localRow._uid);
-                                if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }, 50);
-                        } 
+                        let countSpan = document.getElementById('bottomBarcodeCount');
+                        if(countSpan) countSpan.innerText = parseInt(countSpan.innerText) + 1;
+                        renderTable();
+                        switchTab('Book');
+                        setTimeout(() => {
+                            let tr = document.getElementById('row-' + localRow._uid);
+                            if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 50);
                     } catch(e) {
                         console.error(e);
                     } finally {
@@ -1893,6 +1964,8 @@
                 return;
             }
             let targetArrayName = (oldRow.issuedBarcodes && oldRow.issuedBarcodes.includes(barcode)) ? "issuedBarcodes" : "generatedBarcodes";
+            let timeMapName = (targetArrayName === "issuedBarcodes") ? "issuedAtMap" : "generatedAtMap";
+            let oldTime = (oldRow[timeMapName] && oldRow[timeMapName][barcode]) ? oldRow[timeMapName][barcode] : Date.now();
             let oldArr = (oldRow[targetArrayName] || []).filter(b => b !== barcode);
             let oldQty = Math.max(0, (parseInt(oldRow.issueQty) || 0) - 1);
             await window.setDoc(oldRef, { [targetArrayName]: oldArr, issueQty: oldQty }, {merge:true});
@@ -1907,13 +1980,14 @@
             if(newDocSnap) {
                 let newDocId = newDocSnap.id; let newRow = newDocSnap.data();
                 let newArr = newRow[targetArrayName] || []; if(!newArr.includes(barcode)) newArr.push(barcode);
+                let newTimeMap = newRow[timeMapName] || {}; newTimeMap[barcode] = oldTime;
                 let newQty = (parseInt(newRow.issueQty) || 0) + 1;
-                await window.setDoc(window.doc(window.db, "production", newDocId), { [targetArrayName]: newArr, issueQty: newQty }, {merge:true});
+                await window.setDoc(window.doc(window.db, "production", newDocId), { [targetArrayName]: newArr, [timeMapName]: newTimeMap, issueQty: newQty }, {merge:true});
                 let localNewRow = window.rowsModel.find(r => r._docId === newDocId);
-                if(localNewRow) { localNewRow[targetArrayName] = newArr; localNewRow.issueQty = newQty; }
+                if(localNewRow) { localNewRow[targetArrayName] = newArr; localNewRow[timeMapName] = newTimeMap; localNewRow.issueQty = newQty; }
             } else {
                 let newDocId = `${window.icCurrentBook}_${style}_${idNo}_${Date.now()}`;
-                let newRow = { bookName: window.icCurrentBook, idNo: parseInt(idNo), styleName: style, issueDate: dmy, machineNo: oldRow.machineNo || "", workerName: wName, cardNo: newCard, blockNo: bNo, floor: floor, color: oldRow.color || "", size: oldRow.size || "", lot: oldRow.lot || "", issueQty: 1, rate: "", receiveQty: "", receiveDate: "", [targetArrayName]: [barcode], _docId: newDocId, _uid: newDocId };
+                let newRow = { bookName: window.icCurrentBook, idNo: parseInt(idNo), styleName: style, issueDate: dmy, machineNo: oldRow.machineNo || "", workerName: wName, cardNo: newCard, blockNo: bNo, floor: floor, color: oldRow.color || "", size: oldRow.size || "", lot: oldRow.lot || "", issueQty: 1, rate: "", receiveQty: "", receiveDate: "", [targetArrayName]: [barcode], [timeMapName]: { [barcode]: oldTime }, _docId: newDocId, _uid: newDocId };
                 await window.setDoc(window.doc(window.db, "production", newDocId), newRow);
                 window.rowsModel.push(newRow); 
             }
@@ -1978,49 +2052,64 @@
 
             const today = new Date().toLocaleDateString('en-GB'); 
             const oldStyle = window.currentEditingStyleIndex > -1 ? window.styles[window.currentEditingStyleIndex] : null; 
+
+            let oldSecStylesByBook = {};
+            let lookupStyleName = (oldStyle && oldStyle.styleName) ? oldStyle.styleName : styleName;
+            window.styles.filter(s => s.styleName === lookupStyleName).forEach(os => {
+                oldSecStylesByBook[os.bookName] = os;
+            });
+
             if (oldStyle && oldStyle.styleName) {
                 let oldStyleRecords = window.styles.filter(s => s.styleName === oldStyle.styleName);
                 let delPromises = oldStyleRecords.map(os => deleteDoc(window.doc(db, "styles", `${os.bookName}_${os.styleName}`)));
                 await Promise.all(delPromises);
                 window.styles = window.styles.filter(s => s.styleName !== oldStyle.styleName);
+            } else {
+                window.styles = window.styles.filter(s => !(s.styleName === styleName && selectedSections.includes(s.bookName)));
             }
 
             let blankRowsActive = document.getElementById('modBlankRowsActive').checked;
             let start = parseInt(document.getElementById('tcStart').value); let end = parseInt(document.getElementById('tcEnd').value); 
-            let receiveTimeLimit = parseInt(document.getElementById('modReceiveTime').value) || 0;
+            let rawTimeVal = document.getElementById('modReceiveTime').value.trim();
+            let receiveTimeLimit = rawTimeVal === '' ? 15 : Math.max(0, parseInt(rawTimeVal) || 0);
             let limitReceiveTotal = document.getElementById('modLimitReceiveTotal').checked;
+            let uiBarcodeActive = document.getElementById('modBarcodeActive').checked;
+            let uiIsHidden = document.getElementById('modIsHidden').checked;
 
             let stylePromises = [];
             const batch = writeBatch(db); 
             let batchCount = 0; 
 
             for(let sec of selectedSections) {
+                let prevSecStyle = oldSecStylesByBook[sec];
                 let sectionRates = [...rates];
                 if (sec !== window.currentAdminBook) {
-                     let defaultRateName = "";
-                     if(sec === "LINKING") defaultRateName = "COMPLETE";
-                     else if(sec === "KNITTING")defaultRateName = "KNIT";
-                     else if(sec === "PACKING") defaultRateName = "POLY";
-                     else defaultRateName = sec;
-                     sectionRates = [{name: defaultRateName, tk: ""}];
+                    if (prevSecStyle && prevSecStyle.rates && prevSecStyle.rates.length > 0) {
+                        sectionRates = prevSecStyle.rates;
+                    } else {
+                        let defaultRateName = "";
+                        if(sec === "LINKING") defaultRateName = "COMPLETE";
+                        else if(sec === "KNITTING") defaultRateName = "KNIT";
+                        else if(sec === "PACKING") defaultRateName = "POLY";
+                        else defaultRateName = sec;
+                        sectionRates = [{name: defaultRateName, tk: ""}];
+                    }
                 }
                 
-                let barcodeActive = false; let isHidden = false;
+                let barcodeActive = uiBarcodeActive;
+                let isHidden = uiIsHidden;
                 if (sec === window.currentAdminBook) {
-                    barcodeActive = document.getElementById('modBarcodeActive').checked;
-                    isHidden = document.getElementById('modIsHidden').checked;
-                } else {
-                    let existingSecStyle = window.styles.find(s => s.styleName === styleName && s.bookName === sec);
-                    if (existingSecStyle) {
-                        if (existingSecStyle.barcodeActive !== undefined) barcodeActive = existingSecStyle.barcodeActive;
-                        if (existingSecStyle.isHidden !== undefined) isHidden = existingSecStyle.isHidden;
-                    }
+                    barcodeActive = uiBarcodeActive;
+                    isHidden = uiIsHidden;
+                } else if (prevSecStyle) {
+                    barcodeActive = prevSecStyle.barcodeActive === true;
+                    isHidden = prevSecStyle.isHidden === true;
                 }
 
                 const styleObj = { 
                     bookName: sec, buyer, styleName, colorSizes, colors, sizes, 
                     totalOrderQty, totalQty, limitReceiveTotal,
-                    rates: sectionRates, allowedFloors, createDate: today, 
+                    rates: sectionRates, allowedFloors, createDate: (prevSecStyle && prevSecStyle.createDate) ? prevSecStyle.createDate : today, 
                     barcodeActive: barcodeActive, isHidden: isHidden, receiveTimeLimit: receiveTimeLimit 
                 }; 
                 stylePromises.push(window.setDoc(window.doc(db, "styles", `${sec}_${styleName}`), styleObj)); 

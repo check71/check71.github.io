@@ -62,18 +62,20 @@
         th { background: #F0F0F0; border-right: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; font-weight: normal; position: sticky; top: 0; box-shadow: 0 1px 0 #999; z-index: 10; padding: 4px 5px; }
         tr:nth-child(even) { background-color: #F9F9F9; }
         .grid-input { width: 100%; height: 100%; border: none !important; outline: none !important; background: transparent !important; text-align: center; font-family: 'Tahoma'; font-size: 12px; padding: 0; margin: 0; color: inherit; }
-        .grid-input:focus { background-color: rgba(0, 120, 215, 0.1) !important; }
         .locked-row input, .locked-row select { pointer-events: none; color: #333; }
         .clickable-cell { cursor: pointer; color: #000; font-weight: bold; }
         .clickable-cell:hover { background-color: rgba(0, 120, 215, 0.1); }
         #dataTable tr:nth-child(even) { background-color: #FFF; }
         #dataTable tr { background-color: #FFF; transition: background 0.2s; scroll-margin-top: 28px; }
-        #dataTable td:nth-child(1), #dataTable td:nth-child(13) { background-color: #EAF2F8; } 
-        #dataTable td:nth-child(11), #dataTable td:nth-child(12) { background-color: #E8F5E9; } 
-        #dataTable td:nth-child(7), #dataTable td:nth-child(8) { background-color: #E3F2FD; } 
-        #dataTable td:nth-child(5) { background-color: #F3E5F5; } 
-        #dataTable td:nth-child(9) { background-color: #FFFFCC !important; } 
-        #dataTable tr.selected-report-row td { background-color: #E5F1FB !important; box-shadow: inset 0 0 1px #0078D7; }
+        #dataTable td:nth-child(1) { background-color: #FFF; cursor: pointer; padding: 0; text-align: center; }
+        #dataTable td:nth-child(2), #dataTable td:nth-child(14) { background-color: #EAF2F8; } 
+        #dataTable td:nth-child(12), #dataTable td:nth-child(13) { background-color: #E8F5E9; } 
+        #dataTable td:nth-child(8), #dataTable td:nth-child(9) { background-color: #E3F2FD; } 
+        #dataTable td:nth-child(6) { background-color: #F3E5F5; } 
+        #dataTable td:nth-child(10) { background-color: #FFFFCC !important; } 
+        #dataTable tr.selected-report-row td { background-color: gray !important; color: white !important; box-shadow: inset 0 0 1px #555; }
+        #dataTable tr.selected-report-row td input.grid-input { color: white !important; }
+        #dataTable tr.selected-report-row td:first-child::after { content: "▶"; font-size: 9px; color: white; }
         #dataTable td.clickable-cell:hover { background-color: rgba(0, 120, 215, 0.1) !important; }
         #dataTable tr.active-receive-row td { background-color: gray !important; color: white !important; }
         #dataTable tr.active-receive-row td input.grid-input { color: white !important; }
@@ -128,8 +130,28 @@
         .btn-admin-mini { background: #EEF4FA; color: #005A9E; border: 1px solid #B6D4EE; border-radius: 4px; padding: 2px 10px; height: 24px; font-weight: bold; font-size: 11.5px; cursor: pointer; }
         .btn-admin-mini:hover { background: #DCEBFB; }
 
+        /* Modern Password Dashboard Buttons */
+        .btn-pass-add { min-width: 112px; height: 28px; cursor: pointer; background: linear-gradient(135deg, #28a745, #218838); border: 1px solid #1e7e34; border-radius: 5px; font-weight: bold; color: #FFFFFF; font-size: 12px; box-shadow: 0 2px 6px rgba(40,167,69,0.28); transition: all 0.18s ease; letter-spacing: 0.2px; }
+        .btn-pass-add:hover { filter: brightness(1.07); box-shadow: 0 3px 9px rgba(40,167,69,0.38); transform: translateY(-1px); }
+        .btn-pass-add:active { transform: translateY(0); }
+        .btn-pass-update { min-width: 122px; height: 28px; cursor: pointer; background: linear-gradient(135deg, #0078D7, #005A9E); border: 1px solid #004578; border-radius: 5px; font-weight: bold; color: #FFFFFF; font-size: 12px; box-shadow: 0 2px 6px rgba(0,120,215,0.32); transition: all 0.18s ease; letter-spacing: 0.2px; }
+        .btn-pass-update:hover { filter: brightness(1.08); box-shadow: 0 3px 9px rgba(0,120,215,0.42); transform: translateY(-1px); }
+        .btn-pass-update:active { transform: translateY(0); }
+        .btn-pass-cancel { height: 28px; padding: 0 12px; background: #FFFFFF; color: #DC2626; border: 1px solid #FCA5A5; border-radius: 5px; font-weight: bold; font-size: 12px; cursor: pointer; display: none; transition: 0.15s; line-height: 26px; }
+        .btn-pass-cancel:hover { background: #FEF2F2; border-color: #EF4444; }
+
+        /* Receive Status Sub-tabs & Filter Bar */
+        .rs-tabs-bar { display: flex; gap: 8px; margin-bottom: 12px; }
+        .rs-tab-btn { padding: 7px 18px; height: 32px; background: #E2E8F0; color: #334155; border: 1px solid #CBD5E1; border-radius: 6px; font-weight: bold; font-size: 12.5px; cursor: pointer; transition: 0.15s; }
+        .rs-tab-btn:hover { background: #CBD5E1; }
+        .rs-tab-btn.active { background: linear-gradient(135deg, #1e395b, #0078D7); color: #FFFFFF; border-color: #004578; box-shadow: 0 2px 6px rgba(0,120,215,0.25); }
+        .rs-search-btn { height: 28px; padding: 0 18px; background: linear-gradient(135deg, #0078D7, #005A9E); color: #FFFFFF; border: 1px solid #004578; border-radius: 5px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,120,215,0.25); transition: 0.15s; }
+        .rs-search-btn:hover { filter: brightness(1.08); }
+        .rs-reset-btn { height: 28px; padding: 0 14px; background: #FFFFFF; color: #475569; border: 1px solid #CBD5E1; border-radius: 5px; font-weight: bold; font-size: 12px; cursor: pointer; transition: 0.15s; }
+        .rs-reset-btn:hover { background: #F1F5F9; }
+
         /* Modern System Alert & Confirm Dialogs */
-        .sys-dialog-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 10005; display: none; justify-content: center; align-items: center; }
+        .sys-dialog-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.45); z-index: 10005; display: none; justify-content: center; align-items: center; }
         .sys-dialog-card { width: 360px; max-width: 92vw; background: #FFFFFF; border-radius: 10px; overflow: hidden; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28); border: 1px solid #CBD5E1; animation: sysPopIn 0.16s ease-out; }
         @keyframes sysPopIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
         .sys-dialog-header { background: linear-gradient(135deg, #1e395b 0%, #0078D7 100%); color: #FFFFFF; padding: 11px 16px; display: flex; align-items: center; justify-content: space-between; font-weight: bold; font-size: 13.5px; letter-spacing: 0.2px; }
@@ -307,7 +329,7 @@
                         <div class="dropdown-item sub-submenu-container"><div style="display:flex; justify-content:space-between; align-items:center;"><span>6th Floor</span><span style="font-size: 10px;">▶</span></div><div class="sub-submenu-content"><div class="dropdown-item" onclick="window.openOpAddModal('6th', event)">Operator Add</div><div class="dropdown-item" onclick="window.openOpListModal('6th', event)">Operator List</div></div></div>
                     </div>
                 </div>
-                
+                <div class="dropdown-item" onclick="window.openReceiveStatusModal(event)">Receive Status</div>
                 <div class="dropdown-item dropdown-submenu">
                     <div style="display:flex; justify-content:space-between; align-items:center;"><span>Issue Change</span><span style="font-size: 10px;">▶</span></div>
                     <div class="submenu-content">
@@ -414,6 +436,7 @@
                     <table id="dataTable">
                         <thead>
                             <tr>
+                                <th style="width: 20px;"></th>
                                 <th style="width: 100px;">Issue Date</th>
                                 <th style="width: 80px;">Machine No</th>
                                 <th style="width: 90px;">Card No</th>
@@ -502,7 +525,7 @@
                         <div style="display: flex; flex-direction: column; gap: 4px;"><label style="font-weight: bold;">Section</label><select id="u_section" style="width: 120px;"><option value="Knitting">Knitting</option><option value="Linking">Linking</option><option value="Trimming">Trimming</option><option value="Mending">Mending</option><option value="Sewing">Sewing</option><option value="Overlock">Overlock</option><option value="Iron">Iron</option><option value="Packing">Packing</option><option value="All">All</option></select></div>
                         <div style="display: flex; flex-direction: column; gap: 4px;"><label style="font-weight: bold;">Floor</label><select id="u_floor" style="width: 100px;"><option value="2nd">2nd Floor</option><option value="3rd">3rd Floor</option><option value="4th">4th Floor</option><option value="5th">5th Floor</option><option value="6th">6th Floor</option><option value="All">All</option></select></div>
                         <div style="display: flex; flex-direction: column; gap: 4px;"><label style="font-weight: bold;">Role</label><select id="u_role" style="width: 100px;" onchange="window.handlePasswordRoleChange()"><option value="User">User</option><option value="Admin">Admin</option></select></div>
-                        <div style="display: flex; align-items: center; gap: 8px;"><button id="btn_add_user" onclick="window.addPasswordUser(event)" style="width: 100px; height: 26px; cursor: pointer; background: #C1EB7B; border: 1px solid #8BBF36; border-radius: 2px; font-weight: bold; color: #000;">Add User</button><span id="btn_cancel_edit" style="display:none; color:red; cursor:pointer; font-size:12px; font-weight:bold; padding: 0 5px;" onclick="cancelEdit()">Cancel</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><button id="btn_add_user" onclick="window.addPasswordUser(event)" class="btn-pass-add">Add User</button><button id="btn_cancel_edit" class="btn-pass-cancel" onclick="cancelEdit()">Cancel</button></div>
                     </div>
                 </fieldset>
                 <div class="grid-container" style="flex-grow: 1; border: 1px solid #A0A0A0; background: #FFF; overflow-y: scroll; display: block; height: 100px;"><table style="width: 100%; border-collapse: collapse; table-layout: fixed;"><thead><tr><th style="width: 15%;">Username</th><th style="width: 15%;">Password</th><th style="width: 15%;">Section</th><th style="width: 10%;">Floor</th><th style="width: 10%;">Role</th><th style="width: 20%;">Action</th></tr></thead><tbody id="userTableBody"></tbody></table></div>
@@ -514,9 +537,9 @@
             </div>
 
             <div style="display: flex; justify-content: flex-end; align-items: center; padding: 4px 10px; gap: 6px; flex-shrink: 0;">
-                <button onclick="window.loadLastBarcode(event)" style="height: 24px; padding: 1px 10px; font-size: 11.5px; font-weight: bold; cursor: pointer; margin-right: 6px; border-radius: 3px;">Load Last Barcode</button>
+                <button onclick="window.loadLastBarcode(event)" style="height: 28px; padding: 1px 10px; font-size: 11.5px; font-weight: bold; cursor: pointer; margin-right: 6px; border-radius: 3px;">Load Last Barcode</button>
                 <label style="font-weight: bold; color: #000; font-size: 13px;">Barcode</label>
-                <input type="text" id="bottomBarcodeInput" name="disable_history_bc_scan" autocomplete="new-password" spellcheck="false" style="width: 145px; height: 23px; text-align: left; padding: 0 6px; font-weight:bold; font-size: 12.5px; color:#000; border: 1px solid #7A9EA5; border-radius: 3px;" onkeydown="window.handleBottomBarcodeScan(event, this)">
+                <input type="text" id="bottomBarcodeInput" name="disable_history_bc_scan" autocomplete="new-password" spellcheck="false" style="width: 145px; height: 28px; text-align: left; padding: 0 6px; font-weight:bold; font-size: 12.5px; color:#000; border: 1px solid #7A9EA5; border-radius: 3px;" onkeydown="window.handleBottomBarcodeScan(event, this)">
                 <span style="font-weight: bold; font-size: 13px; margin-left: 4px; min-width: 18px; text-align: right;" id="bottomBarcodeCount">0</span>
             </div>
 
@@ -743,6 +766,116 @@
                 <button onclick="closeOpViewModal()" style="height: 20px; width: 24px; padding: 0; font-weight: bold; font-family: Tahoma; font-size: 12px; cursor: pointer; color: black; background:#D4D0C8; border:1px solid #FFF; border-bottom-color:#888; border-right-color:#888;">X</button>
             </div>
             <div class="modal-content" style="padding: 30px; height: 100%; background: #F6F8FB; overflow-y: auto;" id="opViewContent"></div>
+        </div>
+    </div>
+
+    <!-- Receive Status Modal -->
+    <div class="modal-overlay" id="receiveStatusModal" onclick="window.closeReceiveStatusModal(event)">
+        <div class="modal-window modal-full-page" onclick="event.stopPropagation()">
+            <div class="window-title-bar">
+                <div class="title" style="font-size: 14px;"><button class="back-btn-win" onclick="window.closeReceiveStatusModal()"><span style="font-size:16px; margin-top:-2px;">←</span> Back</button>Receive Status</div>
+                <button onclick="window.closeReceiveStatusModal()" style="height: 20px; width: 24px; padding: 0; font-weight: bold; font-family: Tahoma; font-size: 12px; cursor: pointer; color: black; background:#D4D0C8; border:1px solid #FFF; border-bottom-color:#888; border-right-color:#888;">X</button>
+            </div>
+            <div class="modal-content" style="padding: 18px 24px; height: calc(100vh - 32px); display: flex; flex-direction: column; background: #F6F8FB; overflow: hidden;">
+                <div class="rs-tabs-bar">
+                    <button id="rsTabBtnDetail" class="rs-tab-btn active" onclick="window.switchReceiveStatusTab('detail')">🔍 Style / ID / Card Search</button>
+                    <button id="rsTabBtnSummary" class="rs-tab-btn" onclick="window.switchReceiveStatusTab('summary')">📊 Date / Floor / Section Report</button>
+                </div>
+
+                <!-- Detail Search Panel -->
+                <div id="rsPanelDetail" style="display: flex; flex-direction: column; flex-grow: 1; overflow: hidden;">
+                    <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; background: #FFF; padding: 14px 18px; border: 1px solid #CBD5E1; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.04);">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <label style="font-weight:bold; color:#1e395b;">Style:</label>
+                            <input type="text" id="rsStyleInput" list="rsStyleList" autocomplete="nope" spellcheck="false" placeholder="All / Enter Style" style="width: 170px; height: 28px; border-radius: 4px;" onkeydown="if(event.key==='Enter') window.searchReceiveStatusDetail()">
+                            <datalist id="rsStyleList"></datalist>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <label style="font-weight:bold; color:#1e395b;">ID / TC No:</label>
+                            <input type="number" id="rsIdInput" autocomplete="nope" placeholder="ID / TC No" style="width: 110px; height: 28px; text-align: center; border-radius: 4px;" onkeydown="if(event.key==='Enter') window.searchReceiveStatusDetail()">
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <label style="font-weight:bold; color:#1e395b;">Card No:</label>
+                            <input type="text" id="rsCardInput" autocomplete="nope" spellcheck="false" placeholder="Card No" style="width: 130px; height: 28px; text-align: center; border-radius: 4px;" onkeydown="if(event.key==='Enter') window.searchReceiveStatusDetail()">
+                        </div>
+                        <button onclick="window.searchReceiveStatusDetail(event)" class="rs-search-btn">Search</button>
+                        <button onclick="window.resetReceiveStatusDetail()" class="rs-reset-btn">Reset</button>
+                    </div>
+                    <div class="grid-container" style="width: 100%; border: 1px solid #CBD5E1; background: #FFF; overflow: auto; display: block; flex-grow: 1; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                        <table style="width: 100%; min-width: 980px; border-collapse: collapse; table-layout: fixed;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 45px;">SL</th>
+                                    <th style="width: 95px;">Issue Date</th>
+                                    <th style="width: 85px;">Card No</th>
+                                    <th style="width: 135px;">Name</th>
+                                    <th style="width: 70px;">Block</th>
+                                    <th style="width: 65px;">ID No</th>
+                                    <th style="width: 85px;">Receive Qty</th>
+                                    <th style="width: 95px;">Receive Date</th>
+                                    <th style="width: 90px;">Time</th>
+                                    <th style="width: 100px;">User Name</th>
+                                    <th style="width: 80px;">Floor</th>
+                                    <th style="width: 95px;">Section</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rsDetailTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Summary Search Panel -->
+                <div id="rsPanelSummary" style="display: none; flex-direction: column; flex-grow: 1; overflow: hidden;">
+                    <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; background: #FFF; padding: 14px 18px; border: 1px solid #CBD5E1; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.04);">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <label style="font-weight:bold; color:#1e395b;">Date:</label>
+                            <input type="text" id="rsSumDate" autocomplete="nope" spellcheck="false" placeholder="All Dates" style="width: 115px; height: 28px; text-align: center; border-radius: 4px;" onclick="openCalendar(event, this, 0, 'rsSumDate')" onkeydown="if(event.key==='Enter') window.searchReceiveStatusSummary()">
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <label style="font-weight:bold; color:#1e395b;">Floor:</label>
+                            <select id="rsSumFloor" style="width: 115px; height: 28px; border-radius: 4px;">
+                                <option value="All">All Floors</option>
+                                <option value="2nd">2nd Floor</option>
+                                <option value="3rd">3rd Floor</option>
+                                <option value="4th">4th Floor</option>
+                                <option value="5th">5th Floor</option>
+                                <option value="6th">6th Floor</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <label style="font-weight:bold; color:#1e395b;">Section:</label>
+                            <select id="rsSumSection" style="width: 130px; height: 28px; border-radius: 4px;">
+                                <option value="All">All Sections</option>
+                                <option value="KNITTING">Knitting</option>
+                                <option value="LINKING">Linking</option>
+                                <option value="TRIMMING">Trimming</option>
+                                <option value="MENDING">Mending</option>
+                                <option value="SEWING">Sewing</option>
+                                <option value="OVERLOCK">Overlock</option>
+                                <option value="IRON">Iron</option>
+                                <option value="PACKING">Packing</option>
+                            </select>
+                        </div>
+                        <button onclick="window.searchReceiveStatusSummary(event)" class="rs-search-btn">Search</button>
+                        <button onclick="window.resetReceiveStatusSummary()" class="rs-reset-btn">Reset</button>
+                    </div>
+                    <div class="grid-container" style="width: 100%; border: 1px solid #CBD5E1; background: #FFF; overflow: auto; display: block; flex-grow: 1; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                        <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 60px;">SL</th>
+                                    <th style="width: 18%;">Date</th>
+                                    <th style="width: 18%;">Floor</th>
+                                    <th style="width: 20%;">Section</th>
+                                    <th style="width: 18%;">Total Receive</th>
+                                    <th style="width: 20%;">User Name</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rsSummaryTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -984,14 +1117,17 @@
                 let tr = document.createElement("tr"); 
                 tr.id = 'row-' + row._uid; 
                 if(!!row.receiveQty && window.currentUser.role !== 'Admin') tr.classList.add('locked-row'); 
+                if(window.selectedReportRowUid === row._uid) { tr.classList.add('selected-report-row'); }
                 if(window.currentReceiveRow && window.currentReceiveRow._uid === row._uid) { tr.classList.add('active-receive-row'); } 
-                tr.onclick = function() { window.selectWorkerRow(row.workerName, row._uid, tr); };
                 let displayReceiveQty = (row.receiveQty === '0' || row.receiveQty === 0 || !row.receiveQty) ? '' : row.receiveQty; let displayRate = (displayReceiveQty !== '') ? (row.rate || '') : '';
                 let displayIssueQty = (row.issueQty !== undefined && row.issueQty !== null && row.issueQty !== '') ? row.issueQty : '';
-                tr.innerHTML = `<td style="padding:0;"><input type="text" class="grid-input issue-date-input" autocomplete="nope" spellcheck="false" value="${row.issueDate || ''}" onchange="window.updateModel('${row._uid}', 'issueDate', this.value)" onkeydown="handleDateKey(event, this, 'machine-input', '${row._uid}', 'issueDate')"></td><td style="padding:0;"><input type="text" class="grid-input machine-input" autocomplete="nope" spellcheck="false" value="${row.machineNo || ''}" onchange="window.updateModel('${row._uid}', 'machineNo', this.value)" onkeydown="handleGenericEnter(event, this, 'cardno-input')"></td><td style="padding:0;"><input type="text" class="grid-input cardno-input" autocomplete="nope" spellcheck="false" value="${row.cardNo || ''}" oninput="handleCardNoInput('${row._uid}', this)" onkeydown="handleGenericEnter(event, this, 'color-input')"></td><td style="padding:0;"><input type="text" class="grid-input name-input" autocomplete="nope" spellcheck="false" value="${row.workerName || ''}" readonly style="color:#555;"></td><td style="padding:0;"><input type="text" class="grid-input block-input" autocomplete="nope" spellcheck="false" value="${row.blockNo || ''}" readonly style="color:#555;"></td><td style="background:#F9F9F9; font-weight:bold; color:#555; font-size:12px;">${row.idNo}</td><td style="padding:0;" class="clickable-cell" onclick="openColorSizePopup('${row._uid}', this.querySelector('input'), event)"><input type="text" class="grid-input color-input" autocomplete="nope" spellcheck="false" readonly value="${row.color || ''}" onkeydown="handleColorKey(event, '${row._uid}', this)" style="color: #000;"></td><td style="padding:0;" class="clickable-cell" onclick="openColorSizePopup('${row._uid}', this.querySelector('input'), event)"><input type="text" class="grid-input size-input" autocomplete="nope" spellcheck="false" readonly value="${row.size || ''}" onkeydown="handleSizeKey(event, '${row._uid}', this)" style="color: #000;"></td><td style="padding:0;"><input type="text" class="grid-input lot-input" autocomplete="nope" spellcheck="false" value="${row.lot || ''}" onchange="window.updateModel('${row._uid}', 'lot', this.value)" onkeydown="handleGenericEnter(event, this, 'issue-qty-input')"></td><td style="padding:0;"><input type="text" class="grid-input issue-qty-input" autocomplete="nope" spellcheck="false" value="${displayIssueQty}" onchange="window.updateModel('${row._uid}', 'issueQty', this.value)" onkeydown="handleGenericEnterToRate(event, '${row._uid}', this)"></td><td style="padding:0;" class="clickable-cell" onclick="openRateQtyPopup('${row._uid}', this.querySelector('input'), event)"><input type="text" class="grid-input rate-input" autocomplete="nope" spellcheck="false" readonly value="${displayRate}" onkeydown="handleRateKey(event, '${row._uid}', this)" style="color: #000;"></td><td style="padding:0;" class="clickable-cell" onclick="openRateQtyPopup('${row._uid}', this.querySelector('input'), event)"><input type="text" class="grid-input receive-qty-input" autocomplete="nope" spellcheck="false" readonly value="${displayReceiveQty}" onkeydown="handleReceiveQtyKey(event, '${row._uid}', this)" style="color: #000;"></td><td style="padding:0;"><input type="text" class="grid-input receive-date-input" autocomplete="nope" spellcheck="false" value="${row.receiveDate || ''}" onchange="window.updateModel('${row._uid}', 'receiveDate', this.value)" onkeydown="handleDateKey(event, this, 'next-row', '${row._uid}', 'receiveDate')"></td>`; tbody.appendChild(tr);
+                if(!!displayReceiveQty) { tr.ondblclick = function() { window.selectWorkerRow(row.workerName, row._uid, tr); }; }
+                tr.innerHTML = `<td class="row-select-cell" title="Select Row"></td><td style="padding:0;"><input type="text" class="grid-input issue-date-input" autocomplete="nope" spellcheck="false" value="${row.issueDate || ''}" onchange="window.updateModel('${row._uid}', 'issueDate', this.value)" onkeydown="handleDateKey(event, this, 'machine-input', '${row._uid}', 'issueDate')"></td><td style="padding:0;"><input type="text" class="grid-input machine-input" autocomplete="nope" spellcheck="false" value="${row.machineNo || ''}" onchange="window.updateModel('${row._uid}', 'machineNo', this.value)" onkeydown="handleGenericEnter(event, this, 'cardno-input')"></td><td style="padding:0;"><input type="text" class="grid-input cardno-input" autocomplete="nope" spellcheck="false" value="${row.cardNo || ''}" oninput="handleCardNoInput('${row._uid}', this)" onkeydown="handleGenericEnter(event, this, 'color-input')"></td><td style="padding:0;"><input type="text" class="grid-input name-input" autocomplete="nope" spellcheck="false" value="${row.workerName || ''}" readonly style="color:#555;"></td><td style="padding:0;"><input type="text" class="grid-input block-input" autocomplete="nope" spellcheck="false" value="${row.blockNo || ''}" readonly style="color:#555;"></td><td style="background:#F9F9F9; font-weight:bold; color:#555; font-size:12px;">${row.idNo}</td><td style="padding:0;" class="clickable-cell" onclick="openColorSizePopup('${row._uid}', this.querySelector('input'), event)"><input type="text" class="grid-input color-input" autocomplete="nope" spellcheck="false" readonly value="${row.color || ''}" onkeydown="handleColorKey(event, '${row._uid}', this)" style="color: #000;"></td><td style="padding:0;" class="clickable-cell" onclick="openColorSizePopup('${row._uid}', this.querySelector('input'), event)"><input type="text" class="grid-input size-input" autocomplete="nope" spellcheck="false" readonly value="${row.size || ''}" onkeydown="handleSizeKey(event, '${row._uid}', this)" style="color: #000;"></td><td style="padding:0;"><input type="text" class="grid-input lot-input" autocomplete="nope" spellcheck="false" value="${row.lot || ''}" onchange="window.updateModel('${row._uid}', 'lot', this.value)" onkeydown="handleGenericEnter(event, this, 'issue-qty-input')"></td><td style="padding:0;"><input type="text" class="grid-input issue-qty-input" autocomplete="nope" spellcheck="false" value="${displayIssueQty}" onchange="window.updateModel('${row._uid}', 'issueQty', this.value)" onkeydown="handleGenericEnterToRate(event, '${row._uid}', this)"></td><td style="padding:0;" class="clickable-cell" onclick="openRateQtyPopup('${row._uid}', this.querySelector('input'), event)"><input type="text" class="grid-input rate-input" autocomplete="nope" spellcheck="false" readonly value="${displayRate}" onkeydown="handleRateKey(event, '${row._uid}', this)" style="color: #000;"></td><td style="padding:0;" class="clickable-cell" onclick="openRateQtyPopup('${row._uid}', this.querySelector('input'), event)"><input type="text" class="grid-input receive-qty-input" autocomplete="nope" spellcheck="false" readonly value="${displayReceiveQty}" onkeydown="handleReceiveQtyKey(event, '${row._uid}', this)" style="color: #000;"></td><td style="padding:0;"><input type="text" class="grid-input receive-date-input" autocomplete="nope" spellcheck="false" value="${row.receiveDate || ''}" onchange="window.updateModel('${row._uid}', 'receiveDate', this.value)" onkeydown="handleDateKey(event, this, 'next-row', '${row._uid}', 'receiveDate')"></td>`;
+                tr.firstElementChild.onclick = function() { window.selectWorkerRow(row.workerName, row._uid, tr); };
+                tbody.appendChild(tr);
             });
         }
-        window.handleCardNoInput = function(uid, inputEl) { let val = inputEl.value.trim(); window.updateModel(uid, 'cardNo', val); let tr = inputEl.closest('tr'); if(val) { let op = window.operators.find(o => o.cardNo === val); if(op) { window.updateModel(uid, 'workerName', op.name); window.updateModel(uid, 'blockNo', op.block); tr.querySelector('.name-input').value = op.name; tr.querySelector('.block-input').value = op.block; } else { window.updateModel(uid, 'workerName', ''); window.updateModel(uid, 'blockNo', ''); tr.querySelector('.name-input').value = ''; tr.querySelector('.block-input').value = ''; } } else { window.updateModel(uid, 'workerName', ''); window.updateModel(uid, 'blockNo', ''); tr.querySelector('.name-input').value = ''; tr.querySelector('.block-input').value = ''; } };
+        window.handleCardNoInput = function(uid, inputEl) { let val = inputEl.value.trim(); window.updateModel(uid, 'cardNo', val); let tr = inputEl.closest('tr'); if(val) { let op = window.operators.find(o => o.cardNo === val); if(op) { window.updateModel(uid, 'workerName', op.name); window.updateModel(uid, 'blockNo', op.block); tr.querySelector('.name-input').value = op.name; tr.querySelector('.block-input').value = op.block; if(window.selectedReportRowUid === uid) window.selectedReportWorker = op.name; } else { window.updateModel(uid, 'workerName', ''); window.updateModel(uid, 'blockNo', ''); tr.querySelector('.name-input').value = ''; tr.querySelector('.block-input').value = ''; if(window.selectedReportRowUid === uid) window.selectedReportWorker = ''; } } else { window.updateModel(uid, 'workerName', ''); window.updateModel(uid, 'blockNo', ''); tr.querySelector('.name-input').value = ''; tr.querySelector('.block-input').value = ''; if(window.selectedReportRowUid === uid) window.selectedReportWorker = ''; } };
 
         window.getStyleOrderQty = function(styleObj) {
             if(!styleObj) return 0;
@@ -1019,6 +1155,7 @@
         function openRateQtyPopup(uid, inputField, event) { 
             event.stopPropagation(); 
             if(inputField.closest('tr').classList.contains('locked-row')) return; 
+            if(window.selectedReportRowUid) window.clearSelectedWorkerRow();
             activePopupRowUid = uid; 
             activeRowForPopup = inputField.closest('tr'); 
             let popup = document.getElementById('rateQtyPopup'); 
@@ -1063,26 +1200,29 @@
             if(btn) btn.classList.add('btn-shake');
             setTimeout(() => {
                 if(btn) btn.classList.remove('btn-shake');
+                let nowTimeStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+                let activeUserName = (window.currentUser && window.currentUser.username) ? window.currentUser.username : '';
                 for(let input of inputs) {
                     let val = input.value.trim();
                     if(val !== '') {
                         let receiveQty = parseFloat(val) || 0;
-                        if (receiveQty === 0) { window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveQty', ''); }
-                        else { window.updateModel(activePopupRowUid, 'rate', input.getAttribute('data-ratename')); window.updateModel(activePopupRowUid, 'receiveQty', val); }
+                        if (receiveQty === 0) { window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'receiveTime', ''); window.updateModel(activePopupRowUid, 'receiveUser', ''); window.updateModel(activePopupRowUid, 'receiveUserQty', {}); }
+                        else { window.updateModel(activePopupRowUid, 'rate', input.getAttribute('data-ratename')); window.updateModel(activePopupRowUid, 'receiveQty', val); window.updateModel(activePopupRowUid, 'receiveTime', nowTimeStr); window.updateModel(activePopupRowUid, 'receiveUser', activeUserName); let uq = {}; if(activeUserName) uq[activeUserName] = receiveQty; window.updateModel(activePopupRowUid, 'receiveUserQty', uq); }
                         hasSaved = true; break;
                     }
                 }
-                if(!hasSaved) { window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveQty', ''); }
+                if(!hasSaved) { window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'receiveTime', ''); window.updateModel(activePopupRowUid, 'receiveUser', ''); window.updateModel(activePopupRowUid, 'receiveUserQty', {}); }
                 closeRateQtyPopup(); renderTable();
                 let targetTr = document.getElementById('row-' + activePopupRowUid);
                 if(targetTr) targetTr.querySelector('.receive-date-input').focus();
             }, 100);
         }
-        window.deleteRateQty = function(event) { let btn = (event && event.target) ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'rate', ''); closeRateQtyPopup(); renderTable(); }, 100); }
+        window.deleteRateQty = function(event) { let btn = (event && event.target) ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveTime', ''); window.updateModel(activePopupRowUid, 'receiveUser', ''); window.updateModel(activePopupRowUid, 'receiveUserQty', {}); closeRateQtyPopup(); renderTable(); }, 100); }
         function closeRateQtyPopup() { document.getElementById('rateQtyPopup').style.display = 'none'; }  let activeColorSizePopupRowUid = null;
         function openColorSizePopup(uid, inputField, event) { 
             event.stopPropagation(); 
             if(inputField.closest('tr').classList.contains('locked-row')) return; 
+            if(window.selectedReportRowUid) window.clearSelectedWorkerRow();
             activeColorSizePopupRowUid = uid; 
             let popup = document.getElementById('colorSizePopup'); 
             let tbody = document.getElementById('popupColorSizeTableBody'); 
@@ -1360,8 +1500,8 @@
                 if(floorEl.value === 'All') floorEl.selectedIndex = 0;
             }
         };
-        window.editUser = function(idx, event) { let btn = event ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); const u = window.usersModel[idx]; document.getElementById('u_name').value = u.username; document.getElementById('u_pass').value = u.password; document.getElementById('u_role').value = u.role; window.handlePasswordRoleChange(); if(u.role !== 'Admin') { document.getElementById('u_section').value = u.section; document.getElementById('u_floor').value = u.floor; } window.editingUser = u.username; let btnUpdate = document.getElementById('btn_add_user'); btnUpdate.innerText = "Update User"; btnUpdate.style.background = "linear-gradient(135deg, #FFD700, #E6C200)"; btnUpdate.style.border = "1px solid #CCA300"; document.getElementById('btn_cancel_edit').style.display = 'inline-block'; }, 100); };
-        window.cancelEdit = function() { window.editingUser = null; let btn = document.getElementById('btn_add_user'); btn.innerText = "Add User"; btn.style.background = "#C1EB7B"; btn.style.border = "1px solid #8BBF36"; document.getElementById('btn_cancel_edit').style.display = 'none'; document.getElementById('u_name').value = ''; document.getElementById('u_pass').value = ''; document.getElementById('u_role').value = 'User'; window.handlePasswordRoleChange(); };
+        window.editUser = function(idx, event) { let btn = event ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); const u = window.usersModel[idx]; document.getElementById('u_name').value = u.username; document.getElementById('u_pass').value = u.password; document.getElementById('u_role').value = u.role; window.handlePasswordRoleChange(); if(u.role !== 'Admin') { document.getElementById('u_section').value = u.section; document.getElementById('u_floor').value = u.floor; } window.editingUser = u.username; let btnUpdate = document.getElementById('btn_add_user'); btnUpdate.innerText = "Update User"; btnUpdate.className = "btn-pass-update"; document.getElementById('btn_cancel_edit').style.display = 'inline-block'; }, 100); };
+        window.cancelEdit = function() { window.editingUser = null; let btn = document.getElementById('btn_add_user'); btn.innerText = "Add User"; btn.className = "btn-pass-add"; document.getElementById('btn_cancel_edit').style.display = 'none'; document.getElementById('u_name').value = ''; document.getElementById('u_pass').value = ''; document.getElementById('u_role').value = 'User'; window.handlePasswordRoleChange(); };
         function renderUsersTable() { const tbody = document.getElementById('userTableBody'); tbody.innerHTML = ''; window.usersModel.forEach((u, i) => { const tr = document.createElement('tr'); tr.innerHTML = `<td>${u.username}</td><td>${u.password}</td><td>${u.section}</td><td>${u.floor}</td><td>${u.role}</td><td style="font-weight:bold;"><span style="color:#0078D7; cursor:pointer; margin-right:6px;" onclick="window.editUser(${i}, event)">Edit</span> | <span style="color:red; cursor:pointer; margin-left:6px;" onclick="window.deleteUser(${i}, event)">Delete</span></td>`; tbody.appendChild(tr); }); }
         
         window.openCodeVault = function(e) { if(e) e.stopPropagation(); closeAllMenus(); document.getElementById('home-screen').style.display = 'none'; document.getElementById('workspace-area').style.display = 'flex'; document.getElementById('infoRowSearch').style.display = 'none'; document.getElementById('infoRowStyles').style.display = 'none'; document.getElementById('quickReportWrapper').style.display = 'none'; document.getElementById('tabsHeaderContainer').style.display = 'none'; document.getElementById('tab-book').style.display = 'none'; document.getElementById('tab-reports').style.display = 'none'; document.getElementById('tab-password').style.display = 'none'; document.getElementById('tab-global-reports').style.display = 'none'; let codeTab = document.getElementById('tab-code-vault'); codeTab.style.display = 'flex'; document.getElementById('windowTitleText').innerHTML = `📊 Only For Checking | Check My First Online Software - [Code Vault]`; window.renderCodeNotesList(); };
@@ -1574,7 +1714,26 @@
                             fragment.appendChild(div);
                         }
                         document.body.appendChild(fragment);
-                        for(let k = i; k < end; k++) { JsBarcode("#bc-" + k, codes[k], { width: 1.5, height: 40, fontSize: 12, margin: 0 }); }
+                        for(let k = i; k < end; k++) {
+                            JsBarcode("#bc-" + k, codes[k], { width: 1.5, height: 40, fontSize: 11, margin: 0, text: '*' + codes[k] + '*', textMargin: 4 });
+                            let svgEl = document.getElementById("bc-" + k);
+                            let gEl = svgEl ? svgEl.querySelector("g") : null;
+                            let txtEl = svgEl ? svgEl.querySelector("text") : null;
+                            if (gEl && txtEl) {
+                                let rects = gEl.querySelectorAll("rect");
+                                if (rects.length > 0) {
+                                    let firstR = rects[0];
+                                    let lastR = rects[rects.length - 1];
+                                    let barStart = parseFloat(firstR.getAttribute("x")) || 0;
+                                    let barEnd = (parseFloat(lastR.getAttribute("x")) || 0) + (parseFloat(lastR.getAttribute("width")) || 0);
+                                    let barWidth = barEnd - barStart;
+                                    txtEl.setAttribute("x", barStart + 2);
+                                    txtEl.setAttribute("text-anchor", "start");
+                                    txtEl.setAttribute("textLength", Math.max(barWidth - 4, 10));
+                                    txtEl.setAttribute("lengthAdjust", "spacing");
+                                }
+                            }
+                        }
                         i = end;
                         if (i < codes.length) { requestAnimationFrame(processChunk); } else { setTimeout(() => { window.print(); }, 500); }
                     }
@@ -1698,370 +1857,424 @@
             }, 50);
         };
 
+        window.barcodeSourceCache = window.barcodeSourceCache || {};
+        window.pendingBarcodeWrites = window.pendingBarcodeWrites || {};
         window.isScanningCode = false;
         window.currentReceiveRowOriginalCard = "";
-        window.handleBottomBarcodeScan = function(event, input) {
-            if (event && event.key === 'Enter') event.preventDefault();
-            setTimeout(async () => {
-                let code = input.value.trim().toUpperCase();
-                
-                if (code.length === 8 || (event && event.key === 'Enter')) {
-                    if(!code || window.isScanningCode) return;
-                    
-                    window.isScanningCode = true;
-                    input.value = '';
-                    let shouldRefocusBarcode = true;
-                    
-                    try {
-                        let sourceRow = null;
-                        for(let r of window.rowsModel) {
-                            if(r.generatedBarcodes && r.generatedBarcodes.includes(code)) { sourceRow = r; break; }
-                        }
-                        if(!sourceRow && window.searchBarcodeInDb) {
-                            let dbResult = await window.searchBarcodeInDb(code);
-                            if(dbResult) sourceRow = dbResult.data;
-                        }
+        window.processBottomBarcodeScan = async function(code, input) {
+            if(!code || window.isScanningCode) return;
+            window.isScanningCode = true;
+            input.value = '';
+            let shouldRefocusBarcode = true;
 
-                        if(!sourceRow) {
-                            alert(`Barcode (${code}) not found!`);
-                            return;
-                        }
+            try {
+                let sourceRow = null;
+                for(let r of window.rowsModel) {
+                    if(r.generatedBarcodes && r.generatedBarcodes.includes(code)) { sourceRow = r; break; }
+                }
+                if(!sourceRow && window.barcodeSourceCache[code]) {
+                    sourceRow = window.barcodeSourceCache[code];
+                }
+                if(!sourceRow && window.searchBarcodeInDb) {
+                    let dbResult = await window.searchBarcodeInDb(code);
+                    if(dbResult) sourceRow = dbResult.data;
+                }
 
-                        let currentBook = window.currentProductionBook;
-                        let targetStyleObj = null;
-                        try {
-                            let freshStyleSnap = await window.getDoc(window.doc(window.db, "styles", `${currentBook}_${sourceRow.styleName}`));
-                            if (freshStyleSnap.exists()) {
-                                targetStyleObj = freshStyleSnap.data();
-                                let sIdx = window.styles.findIndex(s => s.styleName === sourceRow.styleName && s.bookName === currentBook);
-                                if (sIdx > -1) window.styles[sIdx] = targetStyleObj;
-                                else window.styles.push(targetStyleObj);
-                            }
-                        } catch(err) {
-                            targetStyleObj = window.styles.find(s => s.styleName === sourceRow.styleName && s.bookName === currentBook);
-                        }
+                if(!sourceRow) {
+                    alert(`Barcode (${code}) not found!`);
+                    return;
+                }
 
-                        if (!targetStyleObj) {
-                            alert(`Style [${sourceRow.styleName}] is not configured in ${currentBook} section!`);
-                            return;
-                        }
-                        if (targetStyleObj.barcodeActive !== true) {
-                            alert(`Barcode is OFF (Inactive) for Style [${sourceRow.styleName}] in ${currentBook} section. Please activate it from Admin > Create Style.`);
-                            return;
-                        }
+                if(sourceRow.generatedBarcodes && sourceRow.generatedBarcodes.length > 0) {
+                    sourceRow.generatedBarcodes.forEach(c => { window.barcodeSourceCache[c] = sourceRow; });
+                }
 
-                        let scanQtyIncrement = 1;
-                        if (targetStyleObj.sssActive === true) {
-                            scanQtyIncrement = 2;
-                        } else if (targetStyleObj.smsActive === true) {
-                            scanQtyIncrement = 1.5;
-                        }
+                let currentBook = window.currentProductionBook;
+                let idKey = `${currentBook}_${sourceRow.styleName}_${sourceRow.idNo}`;
+                if (window.pendingBarcodeWrites[idKey]) {
+                    await window.pendingBarcodeWrites[idKey];
+                }
 
-                        if(window.activeStyleName !== sourceRow.styleName) {
-                            await window.setActiveStyle(sourceRow.styleName, true);
-                        }
+                let styleRef = window.doc(window.db, "styles", `${currentBook}_${sourceRow.styleName}`);
+                let qLiveId = window.query(
+                    window.collection(window.db, "production"),
+                    window.where("bookName", "==", currentBook),
+                    window.where("styleName", "==", sourceRow.styleName),
+                    window.where("idNo", "==", sourceRow.idNo)
+                );
 
-                        // Sync live rows for this ID from Firestore to prevent duplicate Issue/Receive across tabs/PCs
-                        try {
-                            const qLiveId = window.query(
-                                window.collection(window.db, "production"),
-                                window.where("bookName", "==", currentBook),
-                                window.where("styleName", "==", sourceRow.styleName),
-                                window.where("idNo", "==", sourceRow.idNo)
-                            );
-                            const liveSnap = await window.getDocs(qLiveId);
-                            liveSnap.docs.forEach(dSnap => {
-                                let dData = dSnap.data();
-                                dData._docId = dSnap.id;
-                                dData._uid = dSnap.id;
-                                let existingIdx = window.rowsModel.findIndex(r => r._docId === dSnap.id);
-                                if (existingIdx > -1) window.rowsModel[existingIdx] = dData;
-                                else window.rowsModel.push(dData);
-                            });
-                            window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
-                        } catch(syncErr) {
-                            console.error("Live row sync error:", syncErr);
-                        }
-                        
-                        let cardNoInput = document.getElementById('bc_cardNo').value.trim();
-                        let isNative = (sourceRow.bookName === currentBook);
-                        let d = new Date();
-                        let dmy = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear();
+                let stylePromise = window.getDoc(styleRef).then(freshStyleSnap => {
+                    if (freshStyleSnap.exists()) {
+                        let stData = freshStyleSnap.data();
+                        let sIdx = window.styles.findIndex(s => s.styleName === sourceRow.styleName && s.bookName === currentBook);
+                        if (sIdx > -1) window.styles[sIdx] = stData;
+                        else window.styles.push(stData);
+                        return stData;
+                    }
+                    return null;
+                }).catch(() => window.styles.find(s => s.styleName === sourceRow.styleName && s.bookName === currentBook) || null);
 
-                        let localRows = window.rowsModel.filter(r => r.idNo === sourceRow.idNo && r.bookName === currentBook && r.styleName === sourceRow.styleName);
-                        let alreadyReceivedRow = localRows.find(r => r.receivedBarcodes && r.receivedBarcodes.includes(code));
-                        if (alreadyReceivedRow) {
-                            alert(`This barcode (${code}) is already received on Card No: ${alreadyReceivedRow.cardNo || 'N/A'}!`);
-                            return;
-                        }
+                let isSameActiveStyle = (window.activeStyleName === sourceRow.styleName);
+                let livePromise = isSameActiveStyle
+                    ? window.getDocs(qLiveId).then(liveSnap => {
+                        liveSnap.docs.forEach(dSnap => {
+                            let dData = dSnap.data();
+                            dData._docId = dSnap.id;
+                            dData._uid = dSnap.id;
+                            let existingIdx = window.rowsModel.findIndex(r => r._docId === dSnap.id);
+                            if (existingIdx > -1) window.rowsModel[existingIdx] = dData;
+                            else window.rowsModel.push(dData);
+                        });
+                        window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
+                    }).catch(syncErr => console.error("Live row sync error:", syncErr))
+                    : Promise.resolve();
 
-                        let nativeRow = isNative ? (localRows.find(r => r.generatedBarcodes && r.generatedBarcodes.includes(code)) || localRows[0]) : null;
-                        let issuedRow = !isNative ? localRows.find(r => r.issuedBarcodes && r.issuedBarcodes.includes(code)) : null;
+                let [targetStyleObj] = await Promise.all([stylePromise, livePromise]);
 
-                        let localRow = null;
-                        if (isNative) {
-                            if (nativeRow && nativeRow.receiveDate && nativeRow.receiveDate !== dmy && (parseFloat(nativeRow.receiveQty) || 0) > 0) {
-                                if (window.currentReceiveRow && window.currentReceiveRow.idNo === sourceRow.idNo && window.currentReceiveRow.bookName === currentBook && window.currentReceiveRow.styleName === sourceRow.styleName && window.currentReceiveRow.receiveDate === dmy) {
-                                    localRow = window.currentReceiveRow;
-                                } else {
-                                    localRow = localRows.find(r => r.receiveDate === dmy && (!cardNoInput || r.cardNo === cardNoInput || r.cardNo === nativeRow.cardNo)) || nativeRow;
-                                }
-                            } else { localRow = nativeRow; }
+                if (!targetStyleObj) {
+                    alert(`Style [${sourceRow.styleName}] is not configured in ${currentBook} section!`);
+                    return;
+                }
+                if (targetStyleObj.barcodeActive !== true) {
+                    alert(`Barcode is OFF (Inactive) for Style [${sourceRow.styleName}] in ${currentBook} section. Please activate it from Admin > Create Style.`);
+                    return;
+                }
+
+                let scanQtyIncrement = 1;
+                if (targetStyleObj.sssActive === true) {
+                    scanQtyIncrement = 2;
+                } else if (targetStyleObj.smsActive === true) {
+                    scanQtyIncrement = 1.5;
+                }
+
+                if (!isSameActiveStyle) {
+                    await window.setActiveStyle(sourceRow.styleName, true);
+                }
+
+                let cardNoInput = document.getElementById('bc_cardNo').value.trim();
+                let isNative = (sourceRow.bookName === currentBook);
+                let d = new Date();
+                let dmy = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear();
+                let nowTimeStr = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+                let activeUserName = (window.currentUser && window.currentUser.username) ? window.currentUser.username : '';
+
+                let localRows = window.rowsModel.filter(r => r.idNo === sourceRow.idNo && r.bookName === currentBook && r.styleName === sourceRow.styleName);
+                let alreadyReceivedRow = localRows.find(r => r.receivedBarcodes && r.receivedBarcodes.includes(code));
+                if (alreadyReceivedRow) {
+                    alert(`This barcode (${code}) is already received on Card No: ${alreadyReceivedRow.cardNo || 'N/A'}!`);
+                    return;
+                }
+
+                let nativeRow = isNative ? (localRows.find(r => r.generatedBarcodes && r.generatedBarcodes.includes(code)) || localRows[0]) : null;
+                let issuedRow = !isNative ? localRows.find(r => r.issuedBarcodes && r.issuedBarcodes.includes(code)) : null;
+
+                let localRow = null;
+                if (isNative) {
+                    if (nativeRow && nativeRow.receiveDate && nativeRow.receiveDate !== dmy && (parseFloat(nativeRow.receiveQty) || 0) > 0) {
+                        if (window.currentReceiveRow && window.currentReceiveRow.idNo === sourceRow.idNo && window.currentReceiveRow.bookName === currentBook && window.currentReceiveRow.styleName === sourceRow.styleName && window.currentReceiveRow.receiveDate === dmy) {
+                            localRow = window.currentReceiveRow;
                         } else {
-                            if (issuedRow) {
-                                if (issuedRow.receiveDate && issuedRow.receiveDate !== dmy && (parseFloat(issuedRow.receiveQty) || 0) > 0) {
-                                    if (window.currentReceiveRow && window.currentReceiveRow.idNo === sourceRow.idNo && window.currentReceiveRow.bookName === currentBook && window.currentReceiveRow.styleName === sourceRow.styleName && window.currentReceiveRow.receiveDate === dmy) {
-                                        localRow = window.currentReceiveRow;
-                                    } else {
-                                        localRow = localRows.find(r => r.receiveDate === dmy && (!cardNoInput || r.cardNo === cardNoInput || r.cardNo === issuedRow.cardNo)) || issuedRow;
-                                    }
-                                } else { localRow = issuedRow; }
+                            localRow = localRows.find(r => r.receiveDate === dmy && (!cardNoInput || r.cardNo === cardNoInput || r.cardNo === nativeRow.cardNo)) || nativeRow;
+                        }
+                    } else { localRow = nativeRow; }
+                } else {
+                    if (issuedRow) {
+                        if (issuedRow.receiveDate && issuedRow.receiveDate !== dmy && (parseFloat(issuedRow.receiveQty) || 0) > 0) {
+                            if (window.currentReceiveRow && window.currentReceiveRow.idNo === sourceRow.idNo && window.currentReceiveRow.bookName === currentBook && window.currentReceiveRow.styleName === sourceRow.styleName && window.currentReceiveRow.receiveDate === dmy) {
+                                localRow = window.currentReceiveRow;
                             } else {
-                                if (cardNoInput) localRow = localRows.find(r => r.cardNo === cardNoInput);
-                                if (!localRow) localRow = localRows.find(r => !r.cardNo);
-                                if (!localRow) {
-                                    localRow = {
-                                        bookName: currentBook, idNo: sourceRow.idNo, styleName: sourceRow.styleName,
-                                        issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", 
-                                        color: sourceRow.color || "", size: sourceRow.size || "", lot: sourceRow.lot || "", 
-                                        issueQty: "", rate: "", receiveQty: "", receiveDate: "", floor: "",
-                                        _isDuplicated: true, _uid: `${currentBook}_${sourceRow.styleName}_${sourceRow.idNo}_${Date.now()}`
-                                    };
-                                    localRow._docId = localRow._uid; 
-                                    window.rowsModel.push(localRow);
-                                    window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
-                                }
+                                localRow = localRows.find(r => r.receiveDate === dmy && (!cardNoInput || r.cardNo === cardNoInput || r.cardNo === issuedRow.cardNo)) || issuedRow;
                             }
+                        } else { localRow = issuedRow; }
+                    } else {
+                        if (cardNoInput) localRow = localRows.find(r => r.cardNo === cardNoInput);
+                        if (!localRow) localRow = localRows.find(r => !r.cardNo);
+                        if (!localRow) {
+                            localRow = {
+                                bookName: currentBook, idNo: sourceRow.idNo, styleName: sourceRow.styleName,
+                                issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", 
+                                color: sourceRow.color || "", size: sourceRow.size || "", lot: sourceRow.lot || "", 
+                                issueQty: "", rate: "", receiveQty: "", receiveDate: "", floor: "",
+                                _isDuplicated: true, _uid: `${currentBook}_${sourceRow.styleName}_${sourceRow.idNo}_${Date.now()}`
+                            };
+                            localRow._docId = localRow._uid; 
+                            window.rowsModel.push(localRow);
+                            window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
                         }
+                    }
+                }
 
-                        if(!window.currentReceiveRow || window.currentReceiveRow._uid !== localRow._uid) {
-                            window.currentReceiveRow = localRow;
-                            window.currentReceiveRowOriginalCard = localRow.cardNo || '';
-                            switchTab('Barcode');
-                            window.populateBarcodeTabUI(localRow, sourceRow, targetStyleObj);
-                            renderTable();
-                            shouldRefocusBarcode = false;
-                            setTimeout(() => {
-                                let cardEl = document.getElementById('bc_cardNo');
-                                if(cardEl) {
-                                    if(!cardEl.value) cardEl.name = 'bc_card_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
-                                    cardEl.setAttribute('readonly', 'readonly');
-                                    cardEl.focus();
-                                }
-                                let tr = document.getElementById('row-' + localRow._uid);
-                                if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }, 30);
-                            return; 
+                if(!window.currentReceiveRow || window.currentReceiveRow._uid !== localRow._uid) {
+                    window.currentReceiveRow = localRow;
+                    window.currentReceiveRowOriginalCard = localRow.cardNo || '';
+                    switchTab('Barcode');
+                    window.populateBarcodeTabUI(localRow, sourceRow, targetStyleObj);
+                    renderTable();
+                    shouldRefocusBarcode = false;
+                    setTimeout(() => {
+                        let cardEl = document.getElementById('bc_cardNo');
+                        if(cardEl) {
+                            if(!cardEl.value) cardEl.name = 'bc_card_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+                            cardEl.setAttribute('readonly', 'readonly');
+                            cardEl.focus();
                         }
+                        let tr = document.getElementById('row-' + localRow._uid);
+                        if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 30);
+                    return; 
+                }
 
-                        let cardNo = document.getElementById('bc_cardNo').value.trim();
-                        if(!cardNo) {
-                            switchTab('Barcode');
-                            alert("Please enter Card No!");
-                            shouldRefocusBarcode = false;
-                            setTimeout(() => {
-                                let cardEl = document.getElementById('bc_cardNo');
-                                if(cardEl) {
-                                    cardEl.name = 'bc_card_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
-                                    cardEl.setAttribute('readonly', 'readonly');
-                                    cardEl.focus();
-                                }
-                            }, 30);
+                let cardNo = document.getElementById('bc_cardNo').value.trim();
+                if(!cardNo) {
+                    switchTab('Barcode');
+                    alert("Please enter Card No!");
+                    shouldRefocusBarcode = false;
+                    setTimeout(() => {
+                        let cardEl = document.getElementById('bc_cardNo');
+                        if(cardEl) {
+                            cardEl.name = 'bc_card_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+                            cardEl.setAttribute('readonly', 'readonly');
+                            cardEl.focus();
+                        }
+                    }, 30);
+                    return;
+                }
+
+                let lockedIssuedCard = isNative ? ((nativeRow && nativeRow.cardNo) || window.currentReceiveRowOriginalCard) : ((issuedRow && issuedRow.cardNo) || window.currentReceiveRowOriginalCard);
+                if (lockedIssuedCard && cardNo !== lockedIssuedCard) {
+                    alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard}!`);
+                    shouldRefocusBarcode = true;
+                    return;
+                }
+
+                let rateChecked = document.querySelector('input[name="bc_rate_static"]:checked');
+                let rateName = rateChecked ? rateChecked.value : "";
+                let op = window.operators.find(o => o.cardNo === cardNo);
+                let wName = op ? op.name : ""; let bNo = op ? op.block : ""; let floor = op ? op.floor : "";
+                let docId = localRow._docId || `${currentBook}_${localRow.styleName}_${localRow.idNo}`;
+
+                let rawLimit = (targetStyleObj && targetStyleObj.receiveTimeLimit !== undefined && targetStyleObj.receiveTimeLimit !== null && targetStyleObj.receiveTimeLimit !== '') ? Number(targetStyleObj.receiveTimeLimit) : 15;
+                let limitMins = isNaN(rawLimit) ? 15 : rawLimit;
+                let limitMs = limitMins * 60 * 1000;
+
+                const trackWrite = (writePromise) => {
+                    const wrapped = writePromise.catch(err => console.error("Barcode Write Error:", err)).finally(() => {
+                        if (window.pendingBarcodeWrites[idKey] === wrapped) delete window.pendingBarcodeWrites[idKey];
+                    });
+                    window.pendingBarcodeWrites[idKey] = wrapped;
+                };
+
+                if (isNative) {
+                    if(!rateName) {
+                        switchTab('Barcode');
+                        alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard || cardNo}!\nPlease select a Rate Name to Receive.`);
+                        shouldRefocusBarcode = true;
+                        return;
+                    }
+
+                    if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
+                        let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
+                        let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
+                        if (styleTotalQty > 0 && (currentStyleRecTotal + scanQtyIncrement) > styleTotalQty) {
+                            alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
+                            shouldRefocusBarcode = true;
                             return;
                         }
+                    }
 
-                        let lockedIssuedCard = isNative ? ((nativeRow && nativeRow.cardNo) || window.currentReceiveRowOriginalCard) : ((issuedRow && issuedRow.cardNo) || window.currentReceiveRowOriginalCard);
-                        if (lockedIssuedCard && cardNo !== lockedIssuedCard) {
-                            alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard}!`);
+                    if (limitMs > 0) {
+                        let issueTime = (sourceRow.generatedAtMap && sourceRow.generatedAtMap[code]) ? sourceRow.generatedAtMap[code] : (sourceRow.generatedAt || 0);
+                        if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
+                            let remainMs = limitMs - (Date.now() - issueTime);
+                            let remMin = Math.floor(remainMs / 60000);
+                            let remSec = Math.ceil((remainMs % 60000) / 1000);
+                            if (remSec === 60) { remMin += 1; remSec = 0; }
+                            let issuedCard = sourceRow.cardNo || (nativeRow ? nativeRow.cardNo : '') || localRow.cardNo || cardNo || 'N/A';
+                            let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
+                            alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
+                            shouldRefocusBarcode = true;
+                            return;
+                        }
+                    }
+
+                    if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseFloat(localRow.receiveQty) || 0) > 0) {
+                        let splitSource = nativeRow || localRow;
+                        let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
+                        let newUserQty = {}; if(activeUserName) newUserQty[activeUserName] = scanQtyIncrement;
+                        let newRow = {
+                            bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
+                            issueDate: splitSource.issueDate || "", machineNo: splitSource.machineNo || "",
+                            workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
+                            color: splitSource.color || "", size: splitSource.size || "", lot: splitSource.lot || "",
+                            issueQty: 0, rate: rateName, receiveQty: scanQtyIncrement, receiveDate: dmy,
+                            receiveTime: nowTimeStr, receiveUser: activeUserName, receiveUserQty: newUserQty,
+                            receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
+                        };
+                        window.rowsModel.push(newRow);
+                        window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
+                        window.currentReceiveRow = newRow;
+                        window.currentReceiveRowOriginalCard = newRow.cardNo || '';
+                        localRow = newRow;
+                        trackWrite(window.setDoc(window.doc(window.db, "production", splitDocId), newRow));
+                        window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
+                    } else {
+                        localRow.receivedBarcodes = localRow.receivedBarcodes || [];
+                        localRow.receivedBarcodes.push(code);
+                        localRow.receiveQty = Math.round(((parseFloat(localRow.receiveQty) || 0) + scanQtyIncrement) * 100) / 100;
+                        localRow.rate = rateName; localRow.cardNo = cardNo; localRow.workerName = wName;
+                        localRow.blockNo = bNo; localRow.floor = floor; localRow.receiveDate = dmy;
+                        localRow.receiveTime = nowTimeStr; localRow.receiveUser = activeUserName;
+                        localRow.receiveUserQty = localRow.receiveUserQty || {};
+                        if(activeUserName) localRow.receiveUserQty[activeUserName] = Math.round(((parseFloat(localRow.receiveUserQty[activeUserName]) || 0) + scanQtyIncrement) * 100) / 100;
+                        window.currentReceiveRowOriginalCard = localRow.cardNo || '';
+
+                        const rowRef = window.doc(window.db, "production", docId);
+                        trackWrite(window.setDoc(rowRef, {
+                            receivedBarcodes: localRow.receivedBarcodes, receiveQty: localRow.receiveQty,
+                            rate: localRow.rate, receiveDate: localRow.receiveDate, cardNo: localRow.cardNo,
+                            workerName: localRow.workerName, blockNo: localRow.blockNo, floor: localRow.floor,
+                            receiveTime: localRow.receiveTime, receiveUser: localRow.receiveUser, receiveUserQty: localRow.receiveUserQty
+                        }, {merge: true}));
+                        window.saveLastBarcodeInfo(currentBook, localRow, docId);
+                    }
+                } else {
+                    localRow.issuedBarcodes = localRow.issuedBarcodes || [];
+                    localRow.receivedBarcodes = localRow.receivedBarcodes || [];
+
+                    if (!issuedRow) {
+                        localRow.issuedBarcodes.push(code);
+                        localRow.issueQty = (parseInt(localRow.issueQty) || 0) + 1;
+                        localRow.color = sourceRow.color || ''; localRow.size = sourceRow.size || ''; localRow.lot = sourceRow.lot || '';
+                        localRow.issueDate = dmy; localRow.cardNo = cardNo; localRow.workerName = wName;
+                        localRow.blockNo = bNo; localRow.floor = floor;
+                        localRow.issuedAtMap = localRow.issuedAtMap || {}; localRow.issuedAtMap[code] = Date.now();
+                        window.currentReceiveRowOriginalCard = localRow.cardNo || '';
+
+                        const rowRef = window.doc(window.db, "production", docId);
+                        trackWrite(window.setDoc(rowRef, {
+                            idNo: localRow.idNo, bookName: localRow.bookName, styleName: localRow.styleName,
+                            issuedBarcodes: localRow.issuedBarcodes, issueQty: localRow.issueQty,
+                            color: localRow.color, size: localRow.size, lot: localRow.lot,
+                            issueDate: localRow.issueDate, cardNo: localRow.cardNo, workerName: localRow.workerName,
+                            blockNo: localRow.blockNo, floor: localRow.floor, issuedAtMap: localRow.issuedAtMap, _docId: docId
+                        }, {merge: true}));
+                        window.saveLastBarcodeInfo(currentBook, localRow, docId);
+                    } else {
+                        if(!rateName) {
+                            switchTab('Barcode');
+                            alert(`This barcode (${code}) is already issued to Card No: ${issuedRow.cardNo || cardNo}!\nPlease select a Rate Name to Receive.`);
                             shouldRefocusBarcode = true;
                             return;
                         }
 
-                        let rateChecked = document.querySelector('input[name="bc_rate_static"]:checked');
-                        let rateName = rateChecked ? rateChecked.value : "";
-                        let op = window.operators.find(o => o.cardNo === cardNo);
-                        let wName = op ? op.name : ""; let bNo = op ? op.block : ""; let floor = op ? op.floor : "";
-                        let docId = localRow._docId || `${currentBook}_${localRow.styleName}_${localRow.idNo}`;
-
-                        let rawLimit = (targetStyleObj && targetStyleObj.receiveTimeLimit !== undefined && targetStyleObj.receiveTimeLimit !== null && targetStyleObj.receiveTimeLimit !== '') ? Number(targetStyleObj.receiveTimeLimit) : 15;
-                        let limitMins = isNaN(rawLimit) ? 15 : rawLimit;
-                        let limitMs = limitMins * 60 * 1000;
-
-                        if (isNative) {
-                            if(!rateName) {
-                                switchTab('Barcode');
-                                alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard || cardNo}!\nPlease select a Rate Name to Receive.`);
+                        if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
+                            let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
+                            let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
+                            if (styleTotalQty > 0 && (currentStyleRecTotal + scanQtyIncrement) > styleTotalQty) {
+                                alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
                                 shouldRefocusBarcode = true;
                                 return;
                             }
+                        }
 
-                            if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
-                                let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
-                                let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
-                                if (styleTotalQty > 0 && (currentStyleRecTotal + scanQtyIncrement) > styleTotalQty) {
-                                    alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
-                                    shouldRefocusBarcode = true;
-                                    return;
-                                }
-                            }
-
-                            if (limitMs > 0) {
-                                let issueTime = (sourceRow.generatedAtMap && sourceRow.generatedAtMap[code]) ? sourceRow.generatedAtMap[code] : (sourceRow.generatedAt || 0);
-                                if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
-                                    let remainMs = limitMs - (Date.now() - issueTime);
-                                    let remMin = Math.floor(remainMs / 60000);
-                                    let remSec = Math.ceil((remainMs % 60000) / 1000);
-                                    if (remSec === 60) { remMin += 1; remSec = 0; }
-                                    let issuedCard = sourceRow.cardNo || (nativeRow ? nativeRow.cardNo : '') || localRow.cardNo || cardNo || 'N/A';
-                                    let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
-                                    alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
-                                    shouldRefocusBarcode = true;
-                                    return;
-                                }
-                            }
-
-                            if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseFloat(localRow.receiveQty) || 0) > 0) {
-                                let splitSource = nativeRow || localRow;
-                                let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
-                                let newRow = {
-                                    bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
-                                    issueDate: splitSource.issueDate || "", machineNo: splitSource.machineNo || "",
-                                    workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
-                                    color: splitSource.color || "", size: splitSource.size || "", lot: splitSource.lot || "",
-                                    issueQty: 0, rate: rateName, receiveQty: scanQtyIncrement, receiveDate: dmy,
-                                    receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
-                                };
-                                window.rowsModel.push(newRow);
-                                window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
-                                window.currentReceiveRow = newRow;
-                                window.currentReceiveRowOriginalCard = newRow.cardNo || '';
-                                localRow = newRow;
-                                await window.setDoc(window.doc(window.db, "production", splitDocId), newRow);
-                                window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
-                            } else {
-                                localRow.receivedBarcodes = localRow.receivedBarcodes || [];
-                                localRow.receivedBarcodes.push(code);
-                                localRow.receiveQty = Math.round(((parseFloat(localRow.receiveQty) || 0) + scanQtyIncrement) * 100) / 100;
-                                localRow.rate = rateName; localRow.cardNo = cardNo; localRow.workerName = wName;
-                                localRow.blockNo = bNo; localRow.floor = floor; localRow.receiveDate = dmy;
-                                window.currentReceiveRowOriginalCard = localRow.cardNo || '';
-
-                                const rowRef = window.doc(window.db, "production", docId);
-                                await window.setDoc(rowRef, {
-                                    receivedBarcodes: localRow.receivedBarcodes, receiveQty: localRow.receiveQty,
-                                    rate: localRow.rate, receiveDate: localRow.receiveDate, cardNo: localRow.cardNo,
-                                    workerName: localRow.workerName, blockNo: localRow.blockNo, floor: localRow.floor
-                                }, {merge: true});
-                                window.saveLastBarcodeInfo(currentBook, localRow, docId);
-                            }
-                        } else {
-                            localRow.issuedBarcodes = localRow.issuedBarcodes || [];
-                            localRow.receivedBarcodes = localRow.receivedBarcodes || [];
-
-                            if (!issuedRow) {
-                                localRow.issuedBarcodes.push(code);
-                                localRow.issueQty = (parseInt(localRow.issueQty) || 0) + 1;
-                                localRow.color = sourceRow.color || ''; localRow.size = sourceRow.size || ''; localRow.lot = sourceRow.lot || '';
-                                localRow.issueDate = dmy; localRow.cardNo = cardNo; localRow.workerName = wName;
-                                localRow.blockNo = bNo; localRow.floor = floor;
-                                localRow.issuedAtMap = localRow.issuedAtMap || {}; localRow.issuedAtMap[code] = Date.now();
-                                window.currentReceiveRowOriginalCard = localRow.cardNo || '';
-
-                                const rowRef = window.doc(window.db, "production", docId);
-                                await window.setDoc(rowRef, {
-                                    idNo: localRow.idNo, bookName: localRow.bookName, styleName: localRow.styleName,
-                                    issuedBarcodes: localRow.issuedBarcodes, issueQty: localRow.issueQty,
-                                    color: localRow.color, size: localRow.size, lot: localRow.lot,
-                                    issueDate: localRow.issueDate, cardNo: localRow.cardNo, workerName: localRow.workerName,
-                                    blockNo: localRow.blockNo, floor: localRow.floor, issuedAtMap: localRow.issuedAtMap, _docId: docId
-                                }, {merge: true});
-                                window.saveLastBarcodeInfo(currentBook, localRow, docId);
-                            } else {
-                                if(!rateName) {
-                                    switchTab('Barcode');
-                                    alert(`This barcode (${code}) is already issued to Card No: ${issuedRow.cardNo || cardNo}!\nPlease select a Rate Name to Receive.`);
-                                    shouldRefocusBarcode = true;
-                                    return;
-                                }
-
-                                if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
-                                    let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
-                                    let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
-                                    if (styleTotalQty > 0 && (currentStyleRecTotal + scanQtyIncrement) > styleTotalQty) {
-                                        alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
-                                        shouldRefocusBarcode = true;
-                                        return;
-                                    }
-                                }
-
-                                if (limitMs > 0) {
-                                    let issueTime = (issuedRow.issuedAtMap && issuedRow.issuedAtMap[code]) ? issuedRow.issuedAtMap[code] : 0;
-                                    if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
-                                        let remainMs = limitMs - (Date.now() - issueTime);
-                                        let remMin = Math.floor(remainMs / 60000);
-                                        let remSec = Math.ceil((remainMs % 60000) / 1000);
-                                        if (remSec === 60) { remMin += 1; remSec = 0; }
-                                        let issuedCard = issuedRow.cardNo || cardNo || 'N/A';
-                                        let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
-                                        alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
-                                        shouldRefocusBarcode = true;
-                                        return;
-                                    }
-                                }
-
-                                if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseFloat(localRow.receiveQty) || 0) > 0) {
-                                    let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
-                                    let newRow = {
-                                        bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
-                                        issueDate: issuedRow.issueDate || "", machineNo: issuedRow.machineNo || "",
-                                        workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
-                                        color: issuedRow.color || sourceRow.color || "", size: issuedRow.size || sourceRow.size || "", lot: issuedRow.lot || sourceRow.lot || "", issueQty: 0, rate: rateName,
-                                        receiveQty: scanQtyIncrement, receiveDate: dmy, receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
-                                    };
-                                    window.rowsModel.push(newRow);
-                                    window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
-                                    window.currentReceiveRow = newRow;
-                                    window.currentReceiveRowOriginalCard = newRow.cardNo || '';
-                                    localRow = newRow;
-                                    await window.setDoc(window.doc(window.db, "production", splitDocId), newRow);
-                                    window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
-                                } else {
-                                    localRow.receivedBarcodes.push(code);
-                                    localRow.receiveQty = Math.round(((parseFloat(localRow.receiveQty) || 0) + scanQtyIncrement) * 100) / 100;
-                                    localRow.rate = rateName; localRow.receiveDate = dmy; localRow.cardNo = cardNo;
-                                    localRow.workerName = wName; localRow.blockNo = bNo; localRow.floor = floor;
-                                    window.currentReceiveRowOriginalCard = localRow.cardNo || '';
-
-                                    const rowRef = window.doc(window.db, "production", docId);
-                                    await window.setDoc(rowRef, {
-                                        receivedBarcodes: localRow.receivedBarcodes, receiveQty: localRow.receiveQty,
-                                        rate: localRow.rate, receiveDate: localRow.receiveDate, cardNo: localRow.cardNo,
-                                        workerName: localRow.workerName, blockNo: localRow.blockNo, floor: localRow.floor
-                                    }, {merge: true});
-                                    window.saveLastBarcodeInfo(currentBook, localRow, docId);
-                                }
+                        if (limitMs > 0) {
+                            let issueTime = (issuedRow.issuedAtMap && issuedRow.issuedAtMap[code]) ? issuedRow.issuedAtMap[code] : 0;
+                            if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
+                                let remainMs = limitMs - (Date.now() - issueTime);
+                                let remMin = Math.floor(remainMs / 60000);
+                                let remSec = Math.ceil((remainMs % 60000) / 1000);
+                                if (remSec === 60) { remMin += 1; remSec = 0; }
+                                let issuedCard = issuedRow.cardNo || cardNo || 'N/A';
+                                let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
+                                alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
+                                shouldRefocusBarcode = true;
+                                return;
                             }
                         }
 
-                        let countSpan = document.getElementById('bottomBarcodeCount');
-                        if(countSpan) countSpan.innerText = parseInt(countSpan.innerText) + 1;
-                        renderTable();
-                        switchTab('Book');
-                        setTimeout(() => {
-                            let tr = document.getElementById('row-' + localRow._uid);
-                            if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 50);
-                    } catch(e) {
-                        console.error(e);
-                    } finally {
-                        window.isScanningCode = false;
-                        if(shouldRefocusBarcode) setTimeout(() => input.focus(), 10);
+                        if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseFloat(localRow.receiveQty) || 0) > 0) {
+                            let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
+                            let newUserQty = {}; if(activeUserName) newUserQty[activeUserName] = scanQtyIncrement;
+                            let newRow = {
+                                bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
+                                issueDate: issuedRow.issueDate || "", machineNo: issuedRow.machineNo || "",
+                                workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
+                                color: issuedRow.color || sourceRow.color || "", size: issuedRow.size || sourceRow.size || "", lot: issuedRow.lot || sourceRow.lot || "", issueQty: 0, rate: rateName,
+                                receiveQty: scanQtyIncrement, receiveDate: dmy,
+                                receiveTime: nowTimeStr, receiveUser: activeUserName, receiveUserQty: newUserQty,
+                                receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
+                            };
+                            window.rowsModel.push(newRow);
+                            window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
+                            window.currentReceiveRow = newRow;
+                            window.currentReceiveRowOriginalCard = newRow.cardNo || '';
+                            localRow = newRow;
+                            trackWrite(window.setDoc(window.doc(window.db, "production", splitDocId), newRow));
+                            window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
+                        } else {
+                            localRow.receivedBarcodes.push(code);
+                            localRow.receiveQty = Math.round(((parseFloat(localRow.receiveQty) || 0) + scanQtyIncrement) * 100) / 100;
+                            localRow.rate = rateName; localRow.receiveDate = dmy; localRow.cardNo = cardNo;
+                            localRow.workerName = wName; localRow.blockNo = bNo; localRow.floor = floor;
+                            localRow.receiveTime = nowTimeStr; localRow.receiveUser = activeUserName;
+                            localRow.receiveUserQty = localRow.receiveUserQty || {};
+                            if(activeUserName) localRow.receiveUserQty[activeUserName] = Math.round(((parseFloat(localRow.receiveUserQty[activeUserName]) || 0) + scanQtyIncrement) * 100) / 100;
+                            window.currentReceiveRowOriginalCard = localRow.cardNo || '';
+
+                            const rowRef = window.doc(window.db, "production", docId);
+                            trackWrite(window.setDoc(rowRef, {
+                                receivedBarcodes: localRow.receivedBarcodes, receiveQty: localRow.receiveQty,
+                                rate: localRow.rate, receiveDate: localRow.receiveDate, cardNo: localRow.cardNo,
+                                workerName: localRow.workerName, blockNo: localRow.blockNo, floor: localRow.floor,
+                                receiveTime: localRow.receiveTime, receiveUser: localRow.receiveUser, receiveUserQty: localRow.receiveUserQty
+                            }, {merge: true}));
+                            window.saveLastBarcodeInfo(currentBook, localRow, docId);
+                        }
                     }
                 }
-            }, 10);
+
+                let countSpan = document.getElementById('bottomBarcodeCount');
+                if(countSpan) countSpan.innerText = parseInt(countSpan.innerText) + 1;
+                renderTable();
+                switchTab('Book');
+                let tr = document.getElementById('row-' + localRow._uid);
+                if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch(e) {
+                console.error(e);
+            } finally {
+                window.isScanningCode = false;
+                if(shouldRefocusBarcode) input.focus();
+            }
         };
 
-        window.addEventListener('DOMContentLoaded', () => { document.getElementById('tableBody').addEventListener('keydown', function(e) { let input = e.target; if(!input.classList.contains('grid-input')) return; let isArrow = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key); if(!isArrow) return; let td = input.closest('td'); let tr = td.closest('tr'); if(!td || !tr) return; let cellIndex = Array.from(tr.children).indexOf(td); let moveAndFocus = (targetTr, cIdx) => { if(!targetTr) return; let targetTd = targetTr.children[cIdx]; if(targetTd) { let targetInput = targetTd.querySelector('.grid-input'); if(targetInput) { e.preventDefault(); targetInput.focus(); if(typeof targetInput.select === 'function') targetInput.select(); } } }; if(e.key === 'ArrowUp') { moveAndFocus(tr.previousElementSibling, cellIndex); } else if(e.key === 'ArrowDown') { moveAndFocus(tr.nextElementSibling, cellIndex); } else if(e.key === 'ArrowLeft' || e.key === 'ArrowRight') { if(input.tagName === 'SELECT') return; let atStart = true, atEnd = true; if(input.type === 'text' || input.type === 'password') { atStart = (input.selectionStart === 0); atEnd = (input.selectionEnd === input.value.length); } if(e.key === 'ArrowLeft' && atStart) { let prevTd = td.previousElementSibling; if(prevTd) moveAndFocus(tr, cellIndex - 1); } else if(e.key === 'ArrowRight' && atEnd) { let nextTd = td.nextElementSibling; if(nextTd) moveAndFocus(tr, cellIndex + 1); } } }); });
+        window.handleBottomBarcodeScan = function(event, input) {
+            if (event && event.key === 'Enter') {
+                event.preventDefault();
+                let code = input.value.trim().toUpperCase();
+                if (code) window.processBottomBarcodeScan(code, input);
+                return;
+            }
+            setTimeout(() => {
+                let code = input.value.trim().toUpperCase();
+                if (code.length === 8) {
+                    window.processBottomBarcodeScan(code, input);
+                }
+            }, 0);
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const tb = document.getElementById('tableBody');
+            tb.addEventListener('focusin', function(e) {
+                let input = e.target;
+                if (input && input.classList && input.classList.contains('grid-input') && !input.readOnly && window.selectedReportRowUid) {
+                    let tr = input.closest('tr');
+                    if (!tr || !tr.classList.contains('locked-row')) {
+                        window.clearSelectedWorkerRow();
+                    }
+                }
+            });
+            tb.addEventListener('keydown', function(e) { let input = e.target; if(!input.classList.contains('grid-input')) return; let isArrow = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key); if(!isArrow) return; let td = input.closest('td'); let tr = td.closest('tr'); if(!td || !tr) return; let cellIndex = Array.from(tr.children).indexOf(td); let moveAndFocus = (targetTr, cIdx) => { if(!targetTr) return; let targetTd = targetTr.children[cIdx]; if(targetTd) { let targetInput = targetTd.querySelector('.grid-input'); if(targetInput) { e.preventDefault(); targetInput.focus(); if(typeof targetInput.select === 'function') targetInput.select(); } } }; if(e.key === 'ArrowUp') { moveAndFocus(tr.previousElementSibling, cellIndex); } else if(e.key === 'ArrowDown') { moveAndFocus(tr.nextElementSibling, cellIndex); } else if(e.key === 'ArrowLeft' || e.key === 'ArrowRight') { if(input.tagName === 'SELECT') return; let atStart = true, atEnd = true; if(input.type === 'text' || input.type === 'password') { atStart = (input.selectionStart === 0); atEnd = (input.selectionEnd === input.value.length); } if(e.key === 'ArrowLeft' && atStart) { let prevTd = td.previousElementSibling; if(prevTd) moveAndFocus(tr, cellIndex - 1); } else if(e.key === 'ArrowRight' && atEnd) { let nextTd = td.nextElementSibling; if(nextTd) moveAndFocus(tr, cellIndex + 1); } } });
+        });
     </script><script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, getDocs, collection, query, where, documentId, deleteDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -2082,6 +2295,7 @@
         window.currentEditingCodeId = null; window.currentUser = null; window.activeStyleName = ""; window.currentProductionBook = ""; window.currentAdminBook = "LINKING"; window.currentEditingStyleIndex = -1; window.editingUser = null; window.selectedReportWorker = null; window.selectedReportRowUid = null; window.currentOpFloor = "";
         window.currentReceiveRow = null;
         window.shakeAndRemove = function(element) { let groupBox = element.closest('.color-group-box'); element.classList.add('btn-shake'); setTimeout(() => { if(element.parentElement) element.parentElement.remove(); if(groupBox && document.body.contains(groupBox)) window.updateColorGroupTotal(groupBox); else window.updateAllColorsTotals(); }, 100); };
+        window.clearSelectedWorkerRow = function() { window.selectedReportWorker = null; window.selectedReportRowUid = null; document.querySelectorAll('#dataTable tr.selected-report-row').forEach(r => r.classList.remove('selected-report-row')); };
         window.selectWorkerRow = function(name, uid, trEl) { window.selectedReportWorker = name; window.selectedReportRowUid = uid; document.querySelectorAll('#dataTable tr').forEach(r => { r.classList.remove('selected-report-row'); }); if(trEl) trEl.classList.add('selected-report-row'); };
         
         window.initApp = async function() {
@@ -2100,6 +2314,7 @@
 
         window.updateModel = async function(uid, field, value) {
             if (uid === 0 || uid === "0") return; 
+            if (window.selectedReportRowUid) window.clearSelectedWorkerRow();
             let row = window.rowsModel.find(r => r._uid === uid);
             if(row) { 
                 row[field] = value; 
@@ -2115,6 +2330,163 @@
                         if(wIdx > -1) window.workers[wIdx] = worker; else window.workers.push(worker); 
                     } 
                 }
+            }
+        };
+
+        window.openReceiveStatusModal = function(e) {
+            if(e) e.stopPropagation();
+            closeAllMenus();
+            let uniqueStyles = [...new Set(window.styles.map(s => s.styleName))].sort();
+            let dl = document.getElementById('rsStyleList');
+            if(dl) dl.innerHTML = uniqueStyles.map(s => `<option value="${s}">`).join('');
+            document.getElementById('rsStyleInput').value = '';
+            document.getElementById('rsIdInput').value = '';
+            document.getElementById('rsCardInput').value = '';
+            document.getElementById('rsDetailTableBody').innerHTML = '';
+            let d = new Date();
+            let dmyToday = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear();
+            document.getElementById('rsSumDate').value = dmyToday;
+            document.getElementById('rsSumFloor').value = 'All';
+            document.getElementById('rsSumSection').value = 'All';
+            document.getElementById('rsSummaryTableBody').innerHTML = '';
+            window.switchReceiveStatusTab('detail');
+            document.getElementById('receiveStatusModal').style.display = 'flex';
+        };
+        window.closeReceiveStatusModal = function(e) { if(e) e.stopPropagation(); document.getElementById('receiveStatusModal').style.display = 'none'; };
+        window.switchReceiveStatusTab = function(tab) {
+            let bDet = document.getElementById('rsTabBtnDetail');
+            let bSum = document.getElementById('rsTabBtnSummary');
+            let pDet = document.getElementById('rsPanelDetail');
+            let pSum = document.getElementById('rsPanelSummary');
+            if(tab === 'summary') {
+                bDet.classList.remove('active'); bSum.classList.add('active');
+                pDet.style.display = 'none'; pSum.style.display = 'flex';
+            } else {
+                bSum.classList.remove('active'); bDet.classList.add('active');
+                pSum.style.display = 'none'; pDet.style.display = 'flex';
+            }
+        };
+        window.resetReceiveStatusDetail = function() {
+            document.getElementById('rsStyleInput').value = '';
+            document.getElementById('rsIdInput').value = '';
+            document.getElementById('rsCardInput').value = '';
+            document.getElementById('rsDetailTableBody').innerHTML = '';
+        };
+        window.resetReceiveStatusSummary = function() {
+            document.getElementById('rsSumDate').value = '';
+            document.getElementById('rsSumFloor').value = 'All';
+            document.getElementById('rsSumSection').value = 'All';
+            document.getElementById('rsSummaryTableBody').innerHTML = '';
+        };
+        window.searchReceiveStatusDetail = async function(event) {
+            let btn = (event && event.target && event.target.tagName === 'BUTTON') ? event.target : null;
+            if(btn) { btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 100); }
+            let styleVal = document.getElementById('rsStyleInput').value.trim();
+            let idVal = document.getElementById('rsIdInput').value.trim();
+            let cardVal = document.getElementById('rsCardInput').value.trim();
+            let tbody = document.getElementById('rsDetailTableBody');
+            tbody.innerHTML = '<tr><td colspan="12" style="padding:15px; color:#0078D7; font-weight:bold;">Loading...</td></tr>';
+            try {
+                let qRef = collection(db, "production");
+                let exactStyle = window.styles.find(s => s.styleName.toLowerCase() === styleVal.toLowerCase());
+                if(cardVal) qRef = query(collection(db, "production"), where("cardNo", "==", cardVal));
+                else if(idVal) qRef = query(collection(db, "production"), where("idNo", "==", parseInt(idVal)));
+                else if(exactStyle) qRef = query(collection(db, "production"), where("styleName", "==", exactStyle.styleName));
+                const snap = await getDocs(qRef);
+                let rows = snap.docs.map(d => d.data()).filter(r => {
+                    let rq = parseFloat(r.receiveQty) || 0;
+                    if(rq <= 0) return false;
+                    if(styleVal && !(r.styleName || '').toLowerCase().includes(styleVal.toLowerCase())) return false;
+                    if(idVal && String(r.idNo) !== String(idVal)) return false;
+                    if(cardVal && (r.cardNo || '').toLowerCase() !== cardVal.toLowerCase()) return false;
+                    return true;
+                });
+                rows.sort((a, b) => (parseInt(a.idNo) || 0) - (parseInt(b.idNo) || 0) || (a.bookName || '').localeCompare(b.bookName || '') || (a.receiveDate || '').localeCompare(b.receiveDate || ''));
+                tbody.innerHTML = '';
+                if(rows.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="12" style="padding:15px; color:red; font-weight:bold;">No receive records found!</td></tr>';
+                    return;
+                }
+                let sl = 1, totalQty = 0;
+                rows.forEach(r => {
+                    let rq = parseFloat(r.receiveQty) || 0;
+                    totalQty = Math.round((totalQty + rq) * 100) / 100;
+                    let tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${sl++}</td><td>${r.issueDate || '-'}</td><td>${r.cardNo || '-'}</td><td style="text-align:left; padding-left:6px;">${r.workerName || '-'}</td><td>${r.blockNo || '-'}</td><td style="font-weight:bold;">${r.idNo || '-'}</td><td style="font-weight:bold; color:#1e7e34;">${rq}</td><td>${r.receiveDate || '-'}</td><td>${r.receiveTime || '-'}</td><td style="font-weight:bold; color:#005A9E;">${r.receiveUser || '-'}</td><td>${r.floor || '-'}</td><td style="font-weight:bold;">${r.bookName || '-'}</td>`;
+                    tbody.appendChild(tr);
+                });
+                let totalTr = document.createElement('tr');
+                totalTr.style.cssText = 'font-weight:bold; background:#EEF4FA;';
+                totalTr.innerHTML = `<td colspan="6" style="text-align:right; padding-right:10px;">TOTAL RECEIVE</td><td style="color:#1e7e34;">${totalQty}</td><td colspan="5"></td>`;
+                tbody.appendChild(totalTr);
+            } catch(err) {
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="12" style="padding:15px; color:red; font-weight:bold;">Failed to load data!</td></tr>';
+            }
+        };
+        window.searchReceiveStatusSummary = async function(event) {
+            let btn = (event && event.target && event.target.tagName === 'BUTTON') ? event.target : null;
+            if(btn) { btn.classList.add('btn-shake'); setTimeout(() => btn.classList.remove('btn-shake'), 100); }
+            let dateVal = document.getElementById('rsSumDate').value.trim();
+            let floorVal = document.getElementById('rsSumFloor').value;
+            let secVal = document.getElementById('rsSumSection').value;
+            let tbody = document.getElementById('rsSummaryTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" style="padding:15px; color:#0078D7; font-weight:bold;">Loading...</td></tr>';
+            try {
+                let qRef = collection(db, "production");
+                if(dateVal) qRef = query(collection(db, "production"), where("receiveDate", "==", dateVal));
+                else if(secVal !== 'All') qRef = query(collection(db, "production"), where("bookName", "==", secVal));
+                const snap = await getDocs(qRef);
+                let summaryMap = {};
+                snap.docs.forEach(dSnap => {
+                    let r = dSnap.data();
+                    let rq = parseFloat(r.receiveQty) || 0;
+                    if(rq <= 0) return;
+                    if(dateVal && (r.receiveDate || '') !== dateVal) return;
+                    if(secVal !== 'All' && (r.bookName || '').toUpperCase() !== secVal.toUpperCase()) return;
+                    if(floorVal !== 'All' && !(r.floor || '').toLowerCase().includes(floorVal.toLowerCase())) return;
+                    let dStr = r.receiveDate || '-';
+                    let fRaw = (r.floor || '').trim();
+                    let fStr = fRaw ? (fRaw.toLowerCase().includes('floor') ? fRaw : fRaw + ' Floor') : '-';
+                    let sStr = r.bookName || '-';
+                    let addSummary = (uName, qtyAmt) => {
+                        if(qtyAmt <= 0) return;
+                        let key = `${dStr}|||${fStr}|||${sStr}|||${uName}`;
+                        if(!summaryMap[key]) summaryMap[key] = { date: dStr, floor: fStr, section: sStr, totalReceive: 0, userName: uName };
+                        summaryMap[key].totalReceive = Math.round((summaryMap[key].totalReceive + qtyAmt) * 100) / 100;
+                    };
+                    if(r.receiveUserQty && typeof r.receiveUserQty === 'object' && Object.keys(r.receiveUserQty).length > 0) {
+                        let loggedSum = 0;
+                        for(let u in r.receiveUserQty) {
+                            let uq = parseFloat(r.receiveUserQty[u]) || 0;
+                            if(uq > 0) { addSummary(u, uq); loggedSum += uq; }
+                        }
+                        let rem = Math.round((rq - loggedSum) * 100) / 100;
+                        if(rem > 0) addSummary(r.receiveUser || '-', rem);
+                    } else {
+                        addSummary(r.receiveUser || '-', rq);
+                    }
+                });
+                let list = Object.values(summaryMap).sort((a, b) => a.date.localeCompare(b.date) || a.floor.localeCompare(b.floor) || a.section.localeCompare(b.section) || a.userName.localeCompare(b.userName));
+                tbody.innerHTML = '';
+                if(list.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="padding:15px; color:red; font-weight:bold;">No receive records found!</td></tr>';
+                    return;
+                }
+                let sl = 1, grandTotal = 0;
+                list.forEach(item => {
+                    grandTotal = Math.round((grandTotal + item.totalReceive) * 100) / 100;
+                    let tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${sl++}</td><td>${item.date}</td><td>${item.floor}</td><td style="font-weight:bold;">${item.section}</td><td style="font-weight:bold; color:#1e7e34;">${item.totalReceive}</td><td style="font-weight:bold; color:#005A9E;">${item.userName}</td>`;
+                    tbody.appendChild(tr);
+                });
+                let totalTr = document.createElement('tr');
+                totalTr.style.cssText = 'font-weight:bold; background:#EEF4FA;';
+                totalTr.innerHTML = `<td colspan="4" style="text-align:right; padding-right:10px;">GRAND TOTAL</td><td style="color:#1e7e34;">${grandTotal}</td><td></td>`;
+                tbody.appendChild(totalTr);
+            } catch(err) {
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="6" style="padding:15px; color:red; font-weight:bold;">Failed to load data!</td></tr>';
             }
         };
 
@@ -2435,9 +2807,9 @@
             }
         };
 
-        window.executeDeleteRows = async function(event) { let btn = (event && event.target) ? event.target : null; let start = parseInt(document.getElementById('delStartId').value); let end = parseInt(document.getElementById('delEndId').value); if(!start || !end || start > end) { alert("Invalid range"); return; } if(!(await window.customConfirm(`Are you sure you want to clear data for rows ${start} to ${end} in style ${window.deleteTargetStyle}?`))) return; if(btn) btn.classList.add('btn-shake'); const batch = writeBatch(db); let batchCount = 0; for(let i=start; i<=end; i++) { let targetRows = window.rowsModel.filter(x => x.idNo === i && x.styleName === window.deleteTargetStyle && x.bookName === window.deleteTargetBook); if (targetRows.length > 0) { targetRows.forEach(r => { let rId = r._docId || `${window.deleteTargetBook}_${window.deleteTargetStyle}_${i}`; const rowRef = window.doc(db, "production", rId); batch.set(rowRef, { issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", color: "", size: "", lot: "", issueQty: "", rate: "", receiveQty: "", receiveDate: "" }, {merge: true}); batchCount++; r.issueDate = ""; r.machineNo = ""; r.workerName = ""; r.cardNo = ""; r.blockNo = ""; r.color = ""; r.size = ""; r.lot = ""; r.issueQty = ""; r.rate = ""; r.receiveQty = ""; r.receiveDate = ""; }); } else { const rowRef = window.doc(db, "production", `${window.deleteTargetBook}_${window.deleteTargetStyle}_${i}`); batch.set(rowRef, { issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", color: "", size: "", lot: "", issueQty: "", rate: "", receiveQty: "", receiveDate: "" }, {merge: true}); batchCount++; } } if (batchCount > 0) await batch.commit(); if(btn) setTimeout(() => btn.classList.remove('btn-shake'), 100); window.closeDeleteRowModal(); if(window.activeStyleName === window.deleteTargetStyle && window.currentProductionBook === window.deleteTargetBook) { renderTable(); } alert("Rows cleared successfully!"); };
+        window.executeDeleteRows = async function(event) { let btn = (event && event.target) ? event.target : null; let start = parseInt(document.getElementById('delStartId').value); let end = parseInt(document.getElementById('delEndId').value); if(!start || !end || start > end) { alert("Invalid range"); return; } if(!(await window.customConfirm(`Are you sure you want to clear data for rows ${start} to ${end} in style ${window.deleteTargetStyle}?`))) return; if(btn) btn.classList.add('btn-shake'); const batch = writeBatch(db); let batchCount = 0; for(let i=start; i<=end; i++) { let targetRows = window.rowsModel.filter(x => x.idNo === i && x.styleName === window.deleteTargetStyle && x.bookName === window.deleteTargetBook); if (targetRows.length > 0) { targetRows.forEach(r => { let rId = r._docId || `${window.deleteTargetBook}_${window.deleteTargetStyle}_${i}`; const rowRef = window.doc(db, "production", rId); batch.set(rowRef, { issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", color: "", size: "", lot: "", issueQty: "", rate: "", receiveQty: "", receiveDate: "", receiveTime: "", receiveUser: "", receiveUserQty: {} }, {merge: true}); batchCount++; r.issueDate = ""; r.machineNo = ""; r.workerName = ""; r.cardNo = ""; r.blockNo = ""; r.color = ""; r.size = ""; r.lot = ""; r.issueQty = ""; r.rate = ""; r.receiveQty = ""; r.receiveDate = ""; r.receiveTime = ""; r.receiveUser = ""; r.receiveUserQty = {}; }); } else { const rowRef = window.doc(db, "production", `${window.deleteTargetBook}_${window.deleteTargetStyle}_${i}`); batch.set(rowRef, { issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", color: "", size: "", lot: "", issueQty: "", rate: "", receiveQty: "", receiveDate: "", receiveTime: "", receiveUser: "", receiveUserQty: {} }, {merge: true}); batchCount++; } } if (batchCount > 0) await batch.commit(); if(btn) setTimeout(() => btn.classList.remove('btn-shake'), 100); window.closeDeleteRowModal(); if(window.activeStyleName === window.deleteTargetStyle && window.currentProductionBook === window.deleteTargetBook) { renderTable(); } alert("Rows cleared successfully!"); };
         
-        window.executeDeleteByDate = async function(event) { let btn = (event && event.target) ? event.target : null; let book = document.getElementById('delDateBook').value; let style = document.getElementById('delDateStyle').value; let targetDate = document.getElementById('delDateInput').value; let floor = document.getElementById('delDateFloor').value; if(!targetDate) { alert("Please select a date!"); return; } if(!(await window.customConfirm(`Are you sure you want to clear entries for Date: ${targetDate}?`))) return; if(btn) btn.classList.add('btn-shake'); let qConstraints = [window.where("bookName", "==", book)]; if (style !== "All") qConstraints.push(window.where("styleName", "==", style)); const q = window.query(window.collection(db, "production"), ...qConstraints); const snap = await window.getDocs(q); const batch = writeBatch(db); let count = 0; for(let docSnap of snap.docs) { let r = docSnap.data(); if (r.issueDate !== targetDate && r.receiveDate !== targetDate) continue; if (floor !== "All" && r.floor !== floor) continue; const rowRef = window.doc(db, "production", docSnap.id); batch.set(rowRef, { issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", color: "", size: "", lot: "", issueQty: "", rate: "", receiveQty: "", receiveDate: "" }, {merge: true}); let localR = window.rowsModel.find(x => x._docId === docSnap.id); if(localR) { localR.issueDate = ""; localR.machineNo = ""; localR.workerName = ""; localR.cardNo = ""; localR.blockNo = ""; localR.color = ""; localR.size = ""; localR.lot = ""; localR.issueQty = ""; localR.rate = ""; localR.receiveQty = ""; localR.receiveDate = ""; } count++; } if(count > 0) await batch.commit(); if(btn)setTimeout(() => btn.classList.remove('btn-shake'), 100); 
+        window.executeDeleteByDate = async function(event) { let btn = (event && event.target) ? event.target : null; let book = document.getElementById('delDateBook').value; let style = document.getElementById('delDateStyle').value; let targetDate = document.getElementById('delDateInput').value; let floor = document.getElementById('delDateFloor').value; if(!targetDate) { alert("Please select a date!"); return; } if(!(await window.customConfirm(`Are you sure you want to clear entries for Date: ${targetDate}?`))) return; if(btn) btn.classList.add('btn-shake'); let qConstraints = [window.where("bookName", "==", book)]; if (style !== "All") qConstraints.push(window.where("styleName", "==", style)); const q = window.query(window.collection(db, "production"), ...qConstraints); const snap = await window.getDocs(q); const batch = writeBatch(db); let count = 0; for(let docSnap of snap.docs) { let r = docSnap.data(); if (r.issueDate !== targetDate && r.receiveDate !== targetDate) continue; if (floor !== "All" && r.floor !== floor) continue; const rowRef = window.doc(db, "production", docSnap.id); batch.set(rowRef, { issueDate: "", machineNo: "", workerName: "", cardNo: "", blockNo: "", color: "", size: "", lot: "", issueQty: "", rate: "", receiveQty: "", receiveDate: "", receiveTime: "", receiveUser: "", receiveUserQty: {} }, {merge: true}); let localR = window.rowsModel.find(x => x._docId === docSnap.id); if(localR) { localR.issueDate = ""; localR.machineNo = ""; localR.workerName = ""; localR.cardNo = ""; localR.blockNo = ""; localR.color = ""; localR.size = ""; localR.lot = ""; localR.issueQty = ""; localR.rate = ""; localR.receiveQty = ""; localR.receiveDate = ""; localR.receiveTime = ""; localR.receiveUser = ""; localR.receiveUserQty = {}; } count++; } if(count > 0) await batch.commit(); if(btn)setTimeout(() => btn.classList.remove('btn-shake'), 100); 
             alert(`Cleared ${count} rows successfully!`); 
             window.closeDeleteDateModal(); 
             if(book === window.currentProductionBook) { window.fetchRowsForStyle(); } 

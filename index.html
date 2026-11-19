@@ -582,43 +582,45 @@
                 <div style="width: 100%; max-width: 1160px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; height: 100%;">
                     
                     <!-- Basic Order ID, Buyer, Style & GG Card -->
-                    <div class="admin-style-card" style="display: grid; grid-template-columns: 0.8fr 1fr 1fr 0.65fr auto; gap: 14px; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
+                    <div class="admin-style-card" style="display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) auto auto; gap: 10px; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 5px;">
                             <label style="font-weight: bold; color: #1e395b; white-space: nowrap;">Order ID:</label>
-                            <input type="text" id="modOrderId" class="admin-input-lg" autocomplete="nope" spellcheck="false" style="flex: 1; min-width: 70px;" placeholder="Order ID...">
+                            <input type="text" id="modOrderId" class="admin-input-lg" autocomplete="nope" spellcheck="false" style="width: 78px;" placeholder="Order ID">
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 6px; min-width: 0;">
                             <label style="font-weight: bold; color: #1e395b; white-space: nowrap;">Buyer:</label>
-                            <input type="text" id="modBuyer" class="admin-input-lg" autocomplete="nope" spellcheck="false" style="flex: 1; min-width: 80px;" placeholder="Enter Buyer Name...">
+                            <input type="text" id="modBuyer" class="admin-input-lg" autocomplete="nope" spellcheck="false" style="flex: 1; min-width: 60px;" placeholder="Enter Buyer Name...">
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 6px; min-width: 0;">
                             <label style="font-weight: bold; color: #1e395b; white-space: nowrap;">Style:</label>
-                            <input type="text" id="modStyle" class="admin-input-lg" autocomplete="nope" spellcheck="false" style="flex: 1; min-width: 80px;" placeholder="Enter Style Name...">
+                            <input type="text" id="modStyle" class="admin-input-lg" autocomplete="nope" spellcheck="false" style="flex: 1; min-width: 60px;" placeholder="Enter Style Name...">
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 5px;">
                             <label style="font-weight: bold; color: #1e395b; white-space: nowrap;">GG:</label>
-                            <input type="text" id="modGG" class="admin-input-lg" autocomplete="nope" spellcheck="false" style="flex: 1; min-width: 60px;" placeholder="GG...">
+                            <input type="text" id="modGG" class="admin-input-lg" autocomplete="nope" spellcheck="false" style="width: 52px;" placeholder="GG">
                         </div>
-                        <div style="display: flex; align-items: center; gap: 12px; border-left: 1px solid #E5E9F0; padding-left: 14px;">
-                            <div style="display: flex; align-items: center; gap: 6px; background: #F4F7FA; padding: 4px 10px; border-radius: 4px; border: 1px solid #D0DCE5;">
+                        <div style="display: flex; align-items: center; gap: 8px; border-left: 1px solid #E5E9F0; padding-left: 10px; flex-shrink: 0;">
+                            <div style="display: flex; align-items: center; gap: 5px; background: #F4F7FA; padding: 4px 7px; border-radius: 4px; border: 1px solid #D0DCE5;">
                                 <label class="toggle-switch">
                                     <input type="checkbox" id="modSssActive" onchange="if(this.checked) document.getElementById('modSmsActive').checked = false;">
                                     <span class="toggle-slider"></span>
                                 </label>
                                 <span style="font-weight: bold; color: #1e395b; cursor: pointer; font-size: 12px;" onclick="document.getElementById('modSssActive').click()">SSS</span>
+                                <input type="number" step="any" min="0" id="modSssMultiplier" autocomplete="nope" value="2" style="width: 40px; height: 22px; text-align: center; font-weight: bold; font-size: 12px; border-radius: 3px;" title="SSS Receive Multiplier">
                             </div>
-                            <div style="display: flex; align-items: center; gap: 6px; background: #F4F7FA; padding: 4px 10px; border-radius: 4px; border: 1px solid #D0DCE5;">
+                            <div style="display: flex; align-items: center; gap: 5px; background: #F4F7FA; padding: 4px 7px; border-radius: 4px; border: 1px solid #D0DCE5;">
                                 <label class="toggle-switch">
                                     <input type="checkbox" id="modSmsActive" onchange="if(this.checked) document.getElementById('modSssActive').checked = false;">
                                     <span class="toggle-slider"></span>
                                 </label>
                                 <span style="font-weight: bold; color: #1e395b; cursor: pointer; font-size: 12px;" onclick="document.getElementById('modSmsActive').click()">SMS</span>
+                                <input type="number" step="any" min="0" id="modSmsMultiplier" autocomplete="nope" value="1.5" style="width: 40px; height: 22px; text-align: center; font-weight: bold; font-size: 12px; border-radius: 3px;" title="SMS Receive Multiplier">
                             </div>
                         </div>
                     </div>
 
                     <!-- Colors & Sizes + Rate & Taka Card -->
-                    <div style="display: grid; grid-template-columns: 1.75fr 1fr; gap: 12px;">
+                    <div style="display: grid; grid-template-columns: 1.55fr 1fr; gap: 12px;">
                         <div class="admin-style-card" style="display: flex; flex-direction: column;">
                             <div class="admin-section-title">
                                 <span>Colors & Sizes Group &nbsp;|&nbsp; Order Qty: <span id="modAllColorsOrderQty" style="color:#1e395b; background:#EEF4FA; border:1px solid #B6D4EE; padding:1px 7px; border-radius:4px;">0</span> &nbsp;|&nbsp; Total Qty: <span id="modAllColorsTotalQty" style="color:#005A9E; background:#EEF4FA; border:1px solid #B6D4EE; padding:1px 7px; border-radius:4px;">0</span></span>
@@ -628,7 +630,7 @@
                         </div>
                         <div class="admin-style-card" style="display: flex; flex-direction: column;">
                             <div class="admin-section-title">
-                                <span>Rate & Taka</span>
+                                <span>Rate, Taka & Qty</span>
                                 <button class="btn-admin-mini" onclick="addRateRow()">+ Add Rate</button>
                             </div>
                             <div class="rate-box" id="rateContainer" style="height: 125px; padding: 6px; background: #F8FAFC; border: 1px solid #CFD8DC; border-radius: 4px; overflow-y: auto;"></div>
@@ -1189,51 +1191,117 @@
         }
         
         function handlePopupQtyKey(e, input) { if(e.key === 'Enter') { e.preventDefault(); window.saveRateQty(); } else if(e.key === 'ArrowDown') { e.preventDefault(); let nextTr = input.closest('tr').nextElementSibling; if(nextTr) { let nextInput = nextTr.querySelector('.popup-qty-input'); if(nextInput) nextInput.focus(); } } else if(e.key === 'ArrowUp') { e.preventDefault(); let prevTr = input.closest('tr').previousElementSibling; if(prevTr) { let prevInput = prevTr.querySelector('.popup-qty-input'); if(prevInput) prevInput.focus(); } } }
-        window.saveRateQty = function(event) {
-            let btn = (event && event.target && event.target.tagName === 'BUTTON') ? event.target : null;
-            let inputs = document.querySelectorAll('.popup-qty-input');
-            let tr = document.getElementById('row-' + activePopupRowUid);
-            let issueQty = parseInt(tr.querySelector('.issue-qty-input').value) || 0;
-            let activeStyleObj = window.styles.find(s => s.styleName === window.activeStyleName && s.bookName === window.currentProductionBook);
-            let hasSaved = false;
-            for(let input of inputs) {
-                let val = input.value.trim();
-                if(val !== '') {
-                    let receiveQty = parseFloat(val) || 0;
-                    if(receiveQty > issueQty) { alert(`Receive Qty (${receiveQty}) cannot be greater than Issue Qty (${issueQty})!`); input.focus(); return; }
-                    if(activeStyleObj && activeStyleObj.limitReceiveTotal === true) {
-                        let styleTotalQty = window.getStyleTotalQty(activeStyleObj);
-                        let otherRowsRec = window.rowsModel.filter(r => r.styleName === window.activeStyleName && r.bookName === window.currentProductionBook && r._uid !== activePopupRowUid).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
-                        if(styleTotalQty > 0 && (otherRowsRec + receiveQty) > styleTotalQty) {
-                            alert(`Total Receive Qty (${otherRowsRec + receiveQty}) cannot be greater than Style Total Qty (${styleTotalQty})!`);
-                            input.focus();
-                            return;
+        window.isSavingRateQty = false;
+        window.saveRateQty = async function(event) {
+            if (window.isSavingRateQty) return;
+            window.isSavingRateQty = true;
+            let scheduledClose = false;
+            try {
+                let btn = (event && event.target && event.target.tagName === 'BUTTON') ? event.target : null;
+                let inputs = document.querySelectorAll('.popup-qty-input');
+                let tr = document.getElementById('row-' + activePopupRowUid);
+                let issueQty = tr ? (parseInt(tr.querySelector('.issue-qty-input').value) || 0) : 0;
+
+                try {
+                    if (window.db && window.doc && window.getDoc && window.activeStyleName && window.currentProductionBook) {
+                        let sRef = window.doc(window.db, "styles", `${window.currentProductionBook}_${window.activeStyleName}`);
+                        let sSnap = await window.getDoc(sRef);
+                        if (sSnap.exists()) {
+                            let sData = sSnap.data();
+                            let sIdx = window.styles.findIndex(s => (s.styleName || '').trim().toLowerCase() === (window.activeStyleName || '').trim().toLowerCase() && s.bookName === window.currentProductionBook);
+                            if (sIdx > -1) window.styles[sIdx] = sData;
+                            else window.styles.push(sData);
                         }
+                        let qProd = window.query(window.collection(window.db, "production"), window.where("bookName", "==", window.currentProductionBook), window.where("styleName", "==", window.activeStyleName));
+                        let prodSnap = await window.getDocs(qProd);
+                        prodSnap.docs.forEach(dSnap => {
+                            let dData = dSnap.data();
+                            dData._docId = dSnap.id;
+                            dData._uid = dSnap.id;
+                            let exIdx = window.rowsModel.findIndex(r => r._docId === dSnap.id || r._uid === dSnap.id);
+                            if (exIdx > -1) {
+                                dData._uid = window.rowsModel[exIdx]._uid || dSnap.id;
+                                window.rowsModel[exIdx] = dData;
+                            } else {
+                                window.rowsModel.push(dData);
+                            }
+                        });
                     }
+                } catch (syncErr) {
+                    console.error("RateQty sync error:", syncErr);
                 }
-            }
-            if(btn) btn.classList.add('btn-shake');
-            setTimeout(() => {
-                if(btn) btn.classList.remove('btn-shake');
-                let nowTimeStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-                let activeUserName = (window.currentUser && window.currentUser.username) ? window.currentUser.username : '';
+
+                let activeStyleNameLower = (window.activeStyleName || '').trim().toLowerCase();
+                let activeStyleObj = window.styles.find(s => (s.styleName || '').trim().toLowerCase() === activeStyleNameLower && s.bookName === window.currentProductionBook);
+                let hasSaved = false;
                 for(let input of inputs) {
                     let val = input.value.trim();
                     if(val !== '') {
                         let receiveQty = parseFloat(val) || 0;
-                        if (receiveQty === 0) { window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'receiveTime', ''); window.updateModel(activePopupRowUid, 'receiveUser', ''); window.updateModel(activePopupRowUid, 'receiveUserQty', {}); }
-                        else { window.updateModel(activePopupRowUid, 'rate', input.getAttribute('data-ratename')); window.updateModel(activePopupRowUid, 'receiveQty', val); window.updateModel(activePopupRowUid, 'receiveTime', nowTimeStr); window.updateModel(activePopupRowUid, 'receiveUser', activeUserName); let uq = {}; if(activeUserName) uq[activeUserName] = receiveQty; window.updateModel(activePopupRowUid, 'receiveUserQty', uq); }
-                        hasSaved = true; break;
+                        if(receiveQty > issueQty) { alert(`Receive Qty (${receiveQty}) cannot be greater than Issue Qty (${issueQty})!`); input.focus(); return; }
+                        if(activeStyleObj && activeStyleObj.rates && receiveQty > 0) {
+                            let rateName = (input.getAttribute('data-ratename') || '').trim();
+                            let rateNameLower = rateName.toLowerCase();
+                            let rateObj = activeStyleObj.rates.find(rt => (rt.name || '').trim().toLowerCase() === rateNameLower);
+                            if(rateObj && rateObj.limitQty === true) {
+                                let maxRateQty = parseFloat(rateObj.qty);
+                                if(!isNaN(maxRateQty)) {
+                                    let otherRowsRateRec = window.rowsModel.filter(r =>
+                                        (r.styleName || '').trim().toLowerCase() === activeStyleNameLower &&
+                                        r.bookName === window.currentProductionBook &&
+                                        (r.rate || '').trim().toLowerCase() === rateNameLower &&
+                                        r._uid !== activePopupRowUid
+                                    ).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
+                                    if((otherRowsRateRec + receiveQty) > maxRateQty) {
+                                        alert(`Over! Total Receive Qty (${otherRowsRateRec + receiveQty}) for Rate "${rateName}" cannot exceed Rate Qty (${maxRateQty})!`);
+                                        input.focus();
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        if(activeStyleObj && activeStyleObj.limitReceiveTotal === true) {
+                            let styleTotalQty = window.getStyleTotalQty(activeStyleObj);
+                            let otherRowsRec = window.rowsModel.filter(r =>
+                                (r.styleName || '').trim().toLowerCase() === activeStyleNameLower &&
+                                r.bookName === window.currentProductionBook &&
+                                r._uid !== activePopupRowUid
+                            ).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
+                            if(styleTotalQty > 0 && (otherRowsRec + receiveQty) > styleTotalQty) {
+                                alert(`Total Receive Qty (${otherRowsRec + receiveQty}) cannot be greater than Style Total Qty (${styleTotalQty})!`);
+                                input.focus();
+                                return;
+                            }
+                        }
                     }
                 }
-                if(!hasSaved) { window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'receiveTime', ''); window.updateModel(activePopupRowUid, 'receiveUser', ''); window.updateModel(activePopupRowUid, 'receiveUserQty', {}); }
-                closeRateQtyPopup(); renderTable();
-                let targetTr = document.getElementById('row-' + activePopupRowUid);
-                if(targetTr) targetTr.querySelector('.receive-date-input').focus();
-            }, 100);
+                scheduledClose = true;
+                if(btn) btn.classList.add('btn-shake');
+                setTimeout(() => {
+                    if(btn) btn.classList.remove('btn-shake');
+                    let nowTimeStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+                    let activeUserName = (window.currentUser && window.currentUser.username) ? window.currentUser.username : '';
+                    for(let input of inputs) {
+                        let val = input.value.trim();
+                        if(val !== '') {
+                            let receiveQty = parseFloat(val) || 0;
+                            if (receiveQty === 0) { window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'receiveTime', ''); window.updateModel(activePopupRowUid, 'receiveUser', ''); window.updateModel(activePopupRowUid, 'receiveUserQty', {}); }
+                            else { window.updateModel(activePopupRowUid, 'rate', input.getAttribute('data-ratename')); window.updateModel(activePopupRowUid, 'receiveQty', val); window.updateModel(activePopupRowUid, 'receiveTime', nowTimeStr); window.updateModel(activePopupRowUid, 'receiveUser', activeUserName); let uq = {}; if(activeUserName) uq[activeUserName] = receiveQty; window.updateModel(activePopupRowUid, 'receiveUserQty', uq); }
+                            hasSaved = true; break;
+                        }
+                    }
+                    if(!hasSaved) { window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'receiveTime', ''); window.updateModel(activePopupRowUid, 'receiveUser', ''); window.updateModel(activePopupRowUid, 'receiveUserQty', {}); }
+                    closeRateQtyPopup(); renderTable();
+                    let targetTr = document.getElementById('row-' + activePopupRowUid);
+                    if(targetTr) targetTr.querySelector('.receive-date-input').focus();
+                    window.isSavingRateQty = false;
+                }, 100);
+            } finally {
+                if (!scheduledClose) window.isSavingRateQty = false;
+            }
         }
         window.deleteRateQty = function(event) { let btn = (event && event.target) ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); window.updateModel(activePopupRowUid, 'receiveQty', ''); window.updateModel(activePopupRowUid, 'rate', ''); window.updateModel(activePopupRowUid, 'receiveTime', ''); window.updateModel(activePopupRowUid, 'receiveUser', ''); window.updateModel(activePopupRowUid, 'receiveUserQty', {}); closeRateQtyPopup(); renderTable(); }, 100); }
-        function closeRateQtyPopup() { document.getElementById('rateQtyPopup').style.display = 'none'; }  let activeColorSizePopupRowUid = null;
+        function closeRateQtyPopup() { document.getElementById('rateQtyPopup').style.display = 'none'; }let activeColorSizePopupRowUid = null;
         function openColorSizePopup(uid, inputField, event) { 
             event.stopPropagation(); 
             if(inputField.closest('tr').classList.contains('locked-row')) return; 
@@ -1359,17 +1427,17 @@
 
         window.addColorGroup = function(color = '', orderQty = '') { let container = document.getElementById('colorSizeContainer'); let groupId = 'group_' + Date.now() + Math.floor(Math.random()*1000); let groupDiv = document.createElement('div'); groupDiv.className = 'color-group-box'; groupDiv.style.cssText = "border: 1px solid #CCC; margin-bottom: 6px; padding: 6px 24px 6px 8px; background: #FFF; box-shadow: 1px 1px 3px rgba(0,0,0,0.06); border-radius: 4px; display: flex; align-items: center; gap: 8px; position: relative;"; groupDiv.innerHTML = `<span class="delete-btn" onclick="window.shakeAndRemove(this.parentElement)" style="position: absolute; top: 3px; right: 6px; font-size: 13px; cursor: pointer; color: red;">✖</span><div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 10px; color: #666; font-weight: bold; text-align: center;">Color</span><input type="text" class="modGroupColor" autocomplete="nope" spellcheck="false" style="width: 75px; font-weight: bold; color: #000; text-align: center; height: 26px; font-size: 12px;" placeholder="Color" value="${color}"></div><div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 10px; color: #666; font-weight: bold; text-align: center;">Order Qty</span><input type="number" class="modGroupOrderQty" autocomplete="nope" style="width: 65px; font-weight: bold; color: #1e395b; text-align: center; height: 26px; font-size: 12px;" placeholder="0" value="${orderQty}" oninput="window.updateAllColorsTotals()"></div><div class="size-list" id="${groupId}" style="display: flex; gap: 4px; flex-wrap: wrap; flex: 1; align-items: center;"></div><button onclick="window.addSizeToGroup('${groupId}')" style="height: 32px; width: 28px; font-size: 16px; font-weight: bold; padding: 0; display: flex; justify-content: center; align-items: center; cursor: pointer; background: #E1E1E1; flex-shrink: 0;">+</button><div style="display: flex; flex-direction: column; gap: 2px; margin-left: 4px;"><span style="font-size: 10px; color: #666; font-weight: bold; text-align: center;">Total</span><input type="text" class="modGroupTotal" readonly style="width: 58px; font-weight: bold; color: #005A9E; background: #EEF4FA; border: 1px solid #B6D4EE; text-align: center; height: 26px; font-size: 12px; border-radius: 3px;" value="0"></div>`; container.appendChild(groupDiv); window.updateAllColorsTotals(); return groupId; };
         window.addSizeToGroup = function(groupId, size = '', qty = '') { let list = document.getElementById(groupId); if(!list) return; let div = document.createElement('div'); div.className = "size-item-col"; div.style.cssText = "display: flex; flex-direction: column; gap: 2px; position: relative;"; div.innerHTML = `<input type="text" class="modGroupSize" autocomplete="nope" spellcheck="false" style="width: 42px; text-align: center; height: 18px; font-size: 11px; padding: 0;" placeholder="Size" value="${size}"><input type="number" class="modGroupQty" autocomplete="nope" style="width: 42px; text-align: center; height: 18px; font-size: 11px; padding: 0;" placeholder="Qty" value="${qty}" oninput="window.updateColorGroupTotal(this.closest('.color-group-box'))">`; let delBtn = document.createElement('span'); delBtn.innerHTML = "✖"; delBtn.style.cssText = "position: absolute; top: -6px; right: -4px; font-size: 9px; color: white; background: red; border-radius: 50%; width: 12px; height: 12px; display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 10;"; delBtn.onclick = function() { window.shakeAndRemove(div); }; div.appendChild(delBtn); div.onmouseenter = () => delBtn.style.display = 'flex'; div.onmouseleave = () => delBtn.style.display = 'none'; list.appendChild(div); window.updateColorGroupTotal(list.closest('.color-group-box')); };
-        function addRateRow() { let div = document.createElement('div'); div.className = 'rate-item'; div.innerHTML = `<input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" placeholder="Tk"><span class="delete-btn" onclick="window.shakeAndRemove(this)">✖</span>`; document.getElementById('rateContainer').appendChild(div); }
+        function addRateRow() { let div = document.createElement('div'); div.className = 'rate-item'; div.innerHTML = `<input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:115px; height:24px;" placeholder="Rate Name"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:55px; height:24px;" placeholder="Tk"><input type="number" class="modRateQty" autocomplete="nope" style="width:65px; height:24px;" placeholder="Qty"><input type="checkbox" class="modRateLimit" title="Limit manual entry to this Qty" checked style="width:14px; height:14px; margin:0; cursor:pointer;"><span class="delete-btn" onclick="window.shakeAndRemove(this)">✖</span>`; document.getElementById('rateContainer').appendChild(div); }
         
         function resetAdminModalForm() { 
-            document.getElementById('modOrderId').value = ""; document.getElementById('modBuyer').value = ""; document.getElementById('modStyle').value = ""; document.getElementById('modGG').value = ""; document.getElementById('modSssActive').checked = false; document.getElementById('modSmsActive').checked = false; document.getElementById('colorSizeContainer').innerHTML = ""; let initialGrp = window.addColorGroup(); window.addSizeToGroup(initialGrp); 
+            document.getElementById('modOrderId').value = ""; document.getElementById('modBuyer').value = ""; document.getElementById('modStyle').value = ""; document.getElementById('modGG').value = ""; document.getElementById('modSssActive').checked = false; document.getElementById('modSmsActive').checked = false; document.getElementById('modSssMultiplier').value = "2"; document.getElementById('modSmsMultiplier').value = "1.5"; document.getElementById('colorSizeContainer').innerHTML = ""; let initialGrp = window.addColorGroup(); window.addSizeToGroup(initialGrp); 
             
             let defaultRate = ""; 
             if(window.currentAdminBook === "LINKING") defaultRate = "COMPLETE"; 
             else if(window.currentAdminBook === "PACKING") defaultRate = "POLY"; 
             else defaultRate = window.currentAdminBook; 
             
-            document.getElementById('rateContainer').innerHTML = `<div class="rate-item"><input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;" value="${defaultRate}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" placeholder="Tk"></div>`; 
+            document.getElementById('rateContainer').innerHTML = `<div class="rate-item"><input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:115px; height:24px;" value="${defaultRate}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:55px; height:24px;" placeholder="Tk"><input type="number" class="modRateQty" autocomplete="nope" style="width:65px; height:24px;" placeholder="Qty"><input type="checkbox" class="modRateLimit" title="Limit manual entry to this Qty" checked style="width:14px; height:14px; margin:0; cursor:pointer;"></div>`; 
             
             document.querySelectorAll('.modFloor').forEach(cb => cb.checked = true); 
             document.querySelectorAll('.modSection').forEach(cb => cb.checked = (cb.value === window.currentAdminBook));
@@ -1433,6 +1501,8 @@
                 document.getElementById('modGG').value = s.gg || '';
                 document.getElementById('modSssActive').checked = s.sssActive === true;
                 document.getElementById('modSmsActive').checked = s.smsActive === true;
+                document.getElementById('modSssMultiplier').value = (s.sssMultiplier !== undefined && s.sssMultiplier !== null && s.sssMultiplier !== '') ? s.sssMultiplier : 2;
+                document.getElementById('modSmsMultiplier').value = (s.smsMultiplier !== undefined && s.smsMultiplier !== null && s.smsMultiplier !== '') ? s.smsMultiplier : 1.5;
                 document.getElementById('colorSizeContainer').innerHTML = "";
                 if (s.colorSizes && s.colorSizes.length > 0) {
                     let colorMap = {};
@@ -1447,7 +1517,7 @@
                 document.getElementById('rateContainer').innerHTML = "";
                 
                 let defaultRate = (window.currentAdminBook === "LINKING") ? "COMPLETE" : ((window.currentAdminBook === "PACKING") ? "POLY" : window.currentAdminBook);
-                document.getElementById('rateContainer').innerHTML = `<div class="rate-item"><input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;" value="${defaultRate}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" placeholder="Tk"></div>`;
+                document.getElementById('rateContainer').innerHTML = `<div class="rate-item"><input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:115px; height:24px;" value="${defaultRate}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:55px; height:24px;" placeholder="Tk"><input type="number" class="modRateQty" autocomplete="nope" style="width:65px; height:24px;" placeholder="Qty"><input type="checkbox" class="modRateLimit" title="Limit manual entry to this Qty" checked style="width:14px; height:14px; margin:0; cursor:pointer;"></div>`;
                 
                 document.querySelectorAll('.modFloor').forEach(cb => { cb.checked = s.allowedFloors && s.allowedFloors.includes(cb.value); });
                 
@@ -1473,7 +1543,7 @@
             }, 100);
         };
         
-        window.editStyle = function(idx, event) { event.stopPropagation(); let btn = event ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); let s = window.styles[idx]; document.getElementById('modOrderId').value = s.orderId || ''; document.getElementById('modBuyer').value = s.buyer || ''; document.getElementById('modStyle').value = s.styleName; document.getElementById('modGG').value = s.gg || ''; document.getElementById('modSssActive').checked = s.sssActive === true; document.getElementById('modSmsActive').checked = s.smsActive === true; document.getElementById('colorSizeContainer').innerHTML = ""; if (s.colorSizes && s.colorSizes.length > 0) { let colorMap = {}; let orderQtyMap = {}; s.colorSizes.forEach(cs => { if(!colorMap[cs.color]) colorMap[cs.color] = []; colorMap[cs.color].push({ size: cs.size, qty: cs.qty }); if(cs.orderQty !== undefined && cs.orderQty !== '' && !orderQtyMap[cs.color]) orderQtyMap[cs.color] = cs.orderQty; }); for(let col in colorMap) { let gId = window.addColorGroup(col, orderQtyMap[col] || ''); colorMap[col].forEach(szItem => { if(szItem.size || szItem.qty) { window.addSizeToGroup(gId, szItem.size, szItem.qty); } }); } } else if ((s.colors && s.colors.length > 0) || (s.sizes && s.sizes.length > 0)) { let cList = s.colors || []; let sList = s.sizes || []; if (cList.length === 0) cList = ['']; if (sList.length === 0) sList = ['']; cList.forEach(col => { let gId = window.addColorGroup(col, ''); sList.forEach(sz => window.addSizeToGroup(gId, sz, '')); }); } else { let fallbackGrp = window.addColorGroup(); window.addSizeToGroup(fallbackGrp); } document.getElementById('rateContainer').innerHTML = ""; if (s.rates && s.rates.length > 0) { s.rates.forEach(r => { let div = document.createElement('div'); div.className = 'rate-item'; div.innerHTML = `<input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;" value="${r.name}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" value="${r.tk}" placeholder="Tk"><span class="delete-btn" onclick="window.shakeAndRemove(this)">✖</span>`; document.getElementById('rateContainer').appendChild(div); }); } else { let defaultRate = (window.currentAdminBook === "LINKING") ? "COMPLETE" : ((window.currentAdminBook === "PACKING") ? "POLY" : window.currentAdminBook); document.getElementById('rateContainer').innerHTML = `<div class="rate-item"><input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:130px; height:24px;" value="${defaultRate}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:65px; height:24px;" placeholder="Tk"></div>`; } document.querySelectorAll('.modFloor').forEach(cb => { cb.checked = s.allowedFloors && s.allowedFloors.includes(cb.value); }); 
+        window.editStyle = function(idx, event) { event.stopPropagation(); let btn = event ? event.target : null; if(btn) btn.classList.add('btn-shake'); setTimeout(() => { if(btn) btn.classList.remove('btn-shake'); let s = window.styles[idx]; document.getElementById('modOrderId').value = s.orderId || ''; document.getElementById('modBuyer').value = s.buyer || ''; document.getElementById('modStyle').value = s.styleName; document.getElementById('modGG').value = s.gg || ''; document.getElementById('modSssActive').checked = s.sssActive === true; document.getElementById('modSmsActive').checked = s.smsActive === true; document.getElementById('modSssMultiplier').value = (s.sssMultiplier !== undefined && s.sssMultiplier !== null && s.sssMultiplier !== '') ? s.sssMultiplier : 2; document.getElementById('modSmsMultiplier').value = (s.smsMultiplier !== undefined && s.smsMultiplier !== null && s.smsMultiplier !== '') ? s.smsMultiplier : 1.5; document.getElementById('colorSizeContainer').innerHTML = ""; if (s.colorSizes && s.colorSizes.length > 0) { let colorMap = {}; let orderQtyMap = {}; s.colorSizes.forEach(cs => { if(!colorMap[cs.color]) colorMap[cs.color] = []; colorMap[cs.color].push({ size: cs.size, qty: cs.qty }); if(cs.orderQty !== undefined && cs.orderQty !== '' && !orderQtyMap[cs.color]) orderQtyMap[cs.color] = cs.orderQty; }); for(let col in colorMap) { let gId = window.addColorGroup(col, orderQtyMap[col] || ''); colorMap[col].forEach(szItem => { if(szItem.size || szItem.qty) { window.addSizeToGroup(gId, szItem.size, szItem.qty); } }); } } else if ((s.colors && s.colors.length > 0) || (s.sizes && s.sizes.length > 0)) { let cList = s.colors || []; let sList = s.sizes || []; if (cList.length === 0) cList = ['']; if (sList.length === 0) sList = ['']; cList.forEach(col => { let gId = window.addColorGroup(col, ''); sList.forEach(sz => window.addSizeToGroup(gId, sz, '')); }); } else { let fallbackGrp = window.addColorGroup(); window.addSizeToGroup(fallbackGrp); } document.getElementById('rateContainer').innerHTML = ""; if (s.rates && s.rates.length > 0) { s.rates.forEach(r => { let div = document.createElement('div'); div.className = 'rate-item'; let rQty = (r.qty !== undefined && r.qty !== null) ? r.qty : ''; let rLim = (r.limitQty !== false) ? 'checked' : ''; div.innerHTML = `<input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:115px; height:24px;" value="${r.name}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:55px; height:24px;" value="${r.tk}" placeholder="Tk"><input type="number" class="modRateQty" autocomplete="nope" style="width:65px; height:24px;" value="${rQty}" placeholder="Qty"><input type="checkbox" class="modRateLimit" title="Limit manual entry to this Qty" ${rLim} style="width:14px; height:14px; margin:0; cursor:pointer;"><span class="delete-btn" onclick="window.shakeAndRemove(this)">✖</span>`; document.getElementById('rateContainer').appendChild(div); }); } else { let defaultRate = (window.currentAdminBook === "LINKING") ? "COMPLETE" : ((window.currentAdminBook === "PACKING") ? "POLY" : window.currentAdminBook); document.getElementById('rateContainer').innerHTML = `<div class="rate-item"><input type="text" class="modRateName" autocomplete="nope" spellcheck="false" style="width:115px; height:24px;" value="${defaultRate}"><input type="text" class="modRateTk" autocomplete="nope" spellcheck="false" style="width:55px; height:24px;" placeholder="Tk"><input type="number" class="modRateQty" autocomplete="nope" style="width:65px; height:24px;" placeholder="Qty"><input type="checkbox" class="modRateLimit" title="Limit manual entry to this Qty" checked style="width:14px; height:14px; margin:0; cursor:pointer;"></div>`; } document.querySelectorAll('.modFloor').forEach(cb => { cb.checked = s.allowedFloors && s.allowedFloors.includes(cb.value); }); 
         
             let existingSections = window.styles.filter(st => st.styleName === s.styleName).map(st => st.bookName);
             document.querySelectorAll('.modSection').forEach(cb => { 
@@ -2064,9 +2134,11 @@ window.generateQuickReport = async function(event) {
 
                 let scanQtyIncrement = 1;
                 if (targetStyleObj.sssActive === true) {
-                    scanQtyIncrement = 2;
+                    let mult = parseFloat(targetStyleObj.sssMultiplier);
+                    scanQtyIncrement = (!isNaN(mult) && mult > 0) ? mult : 2;
                 } else if (targetStyleObj.smsActive === true) {
-                    scanQtyIncrement = 1.5;
+                    let mult = parseFloat(targetStyleObj.smsMultiplier);
+                    scanQtyIncrement = (!isNaN(mult) && mult > 0) ? mult : 1.5;
                 }
 
                 if (!isSameActiveStyle) {
@@ -2081,11 +2153,7 @@ window.generateQuickReport = async function(event) {
                 let activeUserName = (window.currentUser && window.currentUser.username) ? window.currentUser.username : '';
 
                 let localRows = window.rowsModel.filter(r => r.idNo === sourceRow.idNo && r.bookName === currentBook && r.styleName === sourceRow.styleName);
-                let alreadyReceivedRow = localRows.find(r => r.receivedBarcodes && r.receivedBarcodes.includes(code));
-                if (alreadyReceivedRow) {
-                    alert(`This barcode (${code}) is already received on Card No: ${alreadyReceivedRow.cardNo || 'N/A'}!`);
-                    return;
-                }
+                let hasAnyPriorReceive = localRows.some(r => r.receivedBarcodes && r.receivedBarcodes.includes(code));
 
                 let nativeRow = isNative ? (localRows.find(r => r.generatedBarcodes && r.generatedBarcodes.includes(code)) || localRows[0]) : null;
                 let issuedRow = !isNative ? localRows.find(r => r.issuedBarcodes && r.issuedBarcodes.includes(code)) : null;
@@ -2126,11 +2194,15 @@ window.generateQuickReport = async function(event) {
                     }
                 }
 
-                if(!window.currentReceiveRow || window.currentReceiveRow._uid !== localRow._uid) {
+                let isBarcodeTabVisible = (document.getElementById('tab-barcode').style.display !== 'none');
+                let isDifferentTargetId = (!window.currentReceiveRow || window.currentReceiveRow.bookName !== currentBook || window.currentReceiveRow.styleName !== sourceRow.styleName || window.currentReceiveRow.idNo !== sourceRow.idNo);
+                let hasNoCardOrRateFromOtherTab = (!isBarcodeTabVisible && (!cardNoInput || !document.querySelector('input[name="bc_rate_static"]:checked')));
+
+                if (isDifferentTargetId || hasNoCardOrRateFromOtherTab) {
                     window.currentReceiveRow = localRow;
-                    window.currentReceiveRowOriginalCard = localRow.cardNo || '';
+                    window.currentReceiveRowOriginalCard = localRow ? (localRow.cardNo || '') : '';
                     switchTab('Barcode');
-                    window.populateBarcodeTabUI(localRow, sourceRow, targetStyleObj);
+                    window.populateBarcodeTabUI(localRow || sourceRow, sourceRow, targetStyleObj);
                     renderTable();
                     shouldRefocusBarcode = false;
                     setTimeout(() => {
@@ -2140,8 +2212,10 @@ window.generateQuickReport = async function(event) {
                             cardEl.setAttribute('readonly', 'readonly');
                             cardEl.focus();
                         }
-                        let tr = document.getElementById('row-' + localRow._uid);
-                        if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        if(localRow) {
+                            let tr = document.getElementById('row-' + localRow._uid);
+                            if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
                     }, 30);
                     return; 
                 }
@@ -2162,15 +2236,31 @@ window.generateQuickReport = async function(event) {
                     return;
                 }
 
-                let lockedIssuedCard = isNative ? ((nativeRow && nativeRow.cardNo) || window.currentReceiveRowOriginalCard) : ((issuedRow && issuedRow.cardNo) || window.currentReceiveRowOriginalCard);
-                if (lockedIssuedCard && cardNo !== lockedIssuedCard) {
-                    alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard}!`);
-                    shouldRefocusBarcode = true;
-                    return;
-                }
-
                 let rateChecked = document.querySelector('input[name="bc_rate_static"]:checked');
                 let rateName = rateChecked ? rateChecked.value : "";
+
+                if (hasAnyPriorReceive) {
+                    if (!rateName) {
+                        switchTab('Barcode');
+                        alert("Please select a Rate Name!");
+                        shouldRefocusBarcode = true;
+                        return;
+                    }
+                    let alreadyReceivedForRateRow = localRows.find(r => r.receivedBarcodes && r.receivedBarcodes.includes(code) && (r.rate === rateName || !r.rate));
+                    if (alreadyReceivedForRateRow) {
+                        alert(`This barcode (${code}) is already received for Rate (${rateName}) on Card No: ${alreadyReceivedForRateRow.cardNo || 'N/A'}!`);
+                        shouldRefocusBarcode = true;
+                        return;
+                    }
+                } else {
+                    let lockedIssuedCard = isNative ? ((nativeRow && nativeRow.cardNo) || window.currentReceiveRowOriginalCard) : ((issuedRow && issuedRow.cardNo) || window.currentReceiveRowOriginalCard);
+                    if (lockedIssuedCard && cardNo !== lockedIssuedCard) {
+                        alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard}!`);
+                        shouldRefocusBarcode = true;
+                        return;
+                    }
+                }
+
                 let op = window.operators.find(o => o.cardNo === cardNo);
                 let wName = op ? op.name : ""; let bNo = op ? op.block : ""; let floor = op ? op.floor : "";
                 let docId = localRow._docId || `${currentBook}_${localRow.styleName}_${localRow.idNo}`;
@@ -2186,48 +2276,60 @@ window.generateQuickReport = async function(event) {
                     window.pendingBarcodeWrites[idKey] = wrapped;
                 };
 
-                if (isNative) {
-                    if(!rateName) {
-                        switchTab('Barcode');
-                        alert(`This barcode (${code}) is already issued to Card No: ${lockedIssuedCard || cardNo}!\nPlease select a Rate Name to Receive.`);
-                        shouldRefocusBarcode = true;
-                        return;
-                    }
-
+                const receiveIntoRateRow = (baseRow, targetIssueTime) => {
                     if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
                         let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
-                        let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
+                        let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === sourceRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
                         if (styleTotalQty > 0 && (currentStyleRecTotal + scanQtyIncrement) > styleTotalQty) {
                             alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
                             shouldRefocusBarcode = true;
-                            return;
+                            return false;
                         }
                     }
 
-                    if (limitMs > 0) {
-                        let issueTime = (sourceRow.generatedAtMap && sourceRow.generatedAtMap[code]) ? sourceRow.generatedAtMap[code] : (sourceRow.generatedAt || 0);
-                        if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
-                            let remainMs = limitMs - (Date.now() - issueTime);
-                            let remMin = Math.floor(remainMs / 60000);
-                            let remSec = Math.ceil((remainMs % 60000) / 1000);
-                            if (remSec === 60) { remMin += 1; remSec = 0; }
-                            let issuedCard = sourceRow.cardNo || (nativeRow ? nativeRow.cardNo : '') || localRow.cardNo || cardNo || 'N/A';
-                            let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
-                            alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
-                            shouldRefocusBarcode = true;
-                            return;
-                        }
+                    if (limitMs > 0 && targetIssueTime > 0 && (Date.now() - targetIssueTime) < limitMs) {
+                        let remainMs = limitMs - (Date.now() - targetIssueTime);
+                        let remMin = Math.floor(remainMs / 60000);
+                        let remSec = Math.ceil((remainMs % 60000) / 1000);
+                        if (remSec === 60) { remMin += 1; remSec = 0; }
+                        let issuedCard = (baseRow && baseRow.cardNo) || sourceRow.cardNo || cardNo || 'N/A';
+                        let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
+                        alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
+                        shouldRefocusBarcode = true;
+                        return false;
                     }
 
-                    if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseFloat(localRow.receiveQty) || 0) > 0) {
-                        let splitSource = nativeRow || localRow;
-                        let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
+                    let existingSameRateRow = localRows.find(r => r.rate === rateName && r.cardNo === cardNo && r.receiveDate === dmy);
+                    if (existingSameRateRow) {
+                        existingSameRateRow.receivedBarcodes = existingSameRateRow.receivedBarcodes || [];
+                        existingSameRateRow.receivedBarcodes.push(code);
+                        existingSameRateRow.receiveQty = Math.round(((parseFloat(existingSameRateRow.receiveQty) || 0) + scanQtyIncrement) * 100) / 100;
+                        existingSameRateRow.rate = rateName; existingSameRateRow.receiveDate = dmy;
+                        existingSameRateRow.cardNo = cardNo; existingSameRateRow.workerName = wName;
+                        existingSameRateRow.blockNo = bNo; existingSameRateRow.floor = floor;
+                        existingSameRateRow.receiveTime = nowTimeStr; existingSameRateRow.receiveUser = activeUserName;
+                        existingSameRateRow.receiveUserQty = existingSameRateRow.receiveUserQty || {};
+                        if(activeUserName) existingSameRateRow.receiveUserQty[activeUserName] = Math.round(((parseFloat(existingSameRateRow.receiveUserQty[activeUserName]) || 0) + scanQtyIncrement) * 100) / 100;
+                        window.currentReceiveRow = existingSameRateRow;
+                        window.currentReceiveRowOriginalCard = existingSameRateRow.cardNo || '';
+                        localRow = existingSameRateRow;
+                        let targetDocId = existingSameRateRow._docId || `${currentBook}_${existingSameRateRow.styleName}_${existingSameRateRow.idNo}`;
+                        trackWrite(window.setDoc(window.doc(window.db, "production", targetDocId), {
+                            receivedBarcodes: existingSameRateRow.receivedBarcodes, receiveQty: existingSameRateRow.receiveQty,
+                            rate: existingSameRateRow.rate, receiveDate: existingSameRateRow.receiveDate, cardNo: existingSameRateRow.cardNo,
+                            workerName: existingSameRateRow.workerName, blockNo: existingSameRateRow.blockNo, floor: existingSameRateRow.floor,
+                            receiveTime: existingSameRateRow.receiveTime, receiveUser: existingSameRateRow.receiveUser, receiveUserQty: existingSameRateRow.receiveUserQty
+                        }, {merge: true}));
+                        window.saveLastBarcodeInfo(currentBook, localRow, targetDocId);
+                    } else {
+                        let splitSource = baseRow || localRow || sourceRow;
+                        let splitDocId = `${currentBook}_${sourceRow.styleName}_${sourceRow.idNo}_${Date.now()}`;
                         let newUserQty = {}; if(activeUserName) newUserQty[activeUserName] = scanQtyIncrement;
                         let newRow = {
-                            bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
-                            issueDate: splitSource.issueDate || "", machineNo: splitSource.machineNo || "",
+                            bookName: currentBook, idNo: sourceRow.idNo, styleName: sourceRow.styleName,
+                            issueDate: splitSource.issueDate || sourceRow.issueDate || "", machineNo: splitSource.machineNo || "",
                             workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
-                            color: splitSource.color || "", size: splitSource.size || "", lot: splitSource.lot || "",
+                            color: splitSource.color || sourceRow.color || "", size: splitSource.size || sourceRow.size || "", lot: splitSource.lot || sourceRow.lot || "",
                             issueQty: 0, rate: rateName, receiveQty: scanQtyIncrement, receiveDate: dmy,
                             receiveTime: nowTimeStr, receiveUser: activeUserName, receiveUserQty: newUserQty,
                             receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
@@ -2239,7 +2341,53 @@ window.generateQuickReport = async function(event) {
                         localRow = newRow;
                         trackWrite(window.setDoc(window.doc(window.db, "production", splitDocId), newRow));
                         window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
+                    }
+                    return true;
+                };
+
+                if (hasAnyPriorReceive) {
+                    let targetIssueTime = isNative
+                        ? ((sourceRow.generatedAtMap && sourceRow.generatedAtMap[code]) ? sourceRow.generatedAtMap[code] : (sourceRow.generatedAt || 0))
+                        : ((issuedRow && issuedRow.issuedAtMap && issuedRow.issuedAtMap[code]) ? issuedRow.issuedAtMap[code] : 0);
+                    let ok = receiveIntoRateRow(isNative ? (nativeRow || localRows[0]) : (issuedRow || localRows[0]), targetIssueTime);
+                    if (!ok) return;
+                } else if (isNative) {
+                    if(!rateName) {
+                        switchTab('Barcode');
+                        let lockedCardDisplay = (nativeRow && nativeRow.cardNo) || window.currentReceiveRowOriginalCard || cardNo;
+                        alert(`This barcode (${code}) is already issued to Card No: ${lockedCardDisplay}!\nPlease select a Rate Name to Receive.`);
+                        shouldRefocusBarcode = true;
+                        return;
+                    }
+
+                    let issueTime = (sourceRow.generatedAtMap && sourceRow.generatedAtMap[code]) ? sourceRow.generatedAtMap[code] : (sourceRow.generatedAt || 0);
+                    let needSplit = (localRow.receiveDate && localRow.receiveDate !== dmy && (parseFloat(localRow.receiveQty) || 0) > 0) || (localRow.rate && localRow.rate !== rateName && (parseFloat(localRow.receiveQty) || 0) > 0);
+                    if (needSplit) {
+                        let ok = receiveIntoRateRow(nativeRow || localRow, issueTime);
+                        if (!ok) return;
                     } else {
+                        if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
+                            let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
+                            let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
+                            if (styleTotalQty > 0 && (currentStyleRecTotal + scanQtyIncrement) > styleTotalQty) {
+                                alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
+                                shouldRefocusBarcode = true;
+                                return;
+                            }
+                        }
+
+                        if (limitMs > 0 && issueTime > 0 && (Date.now() - issueTime) < limitMs) {
+                            let remainMs = limitMs - (Date.now() - issueTime);
+                            let remMin = Math.floor(remainMs / 60000);
+                            let remSec = Math.ceil((remainMs % 60000) / 1000);
+                            if (remSec === 60) { remMin += 1; remSec = 0; }
+                            let issuedCard = sourceRow.cardNo || (nativeRow ? nativeRow.cardNo : '') || localRow.cardNo || cardNo || 'N/A';
+                            let timeStr = remMin > 0 ? `${remMin} minute(s) ${remSec} second(s)` : `${remSec} second(s)`;
+                            alert(`Issued Card No: ${issuedCard}\nPlease wait! You can receive this barcode after ${timeStr}.`);
+                            shouldRefocusBarcode = true;
+                            return;
+                        }
+
                         localRow.receivedBarcodes = localRow.receivedBarcodes || [];
                         localRow.receivedBarcodes.push(code);
                         localRow.receiveQty = Math.round(((parseFloat(localRow.receiveQty) || 0) + scanQtyIncrement) * 100) / 100;
@@ -2289,19 +2437,23 @@ window.generateQuickReport = async function(event) {
                             return;
                         }
 
-                        if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
-                            let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
-                            let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
-                            if (styleTotalQty > 0 && (currentStyleRecTotal + scanQtyIncrement) > styleTotalQty) {
-                                alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
-                                shouldRefocusBarcode = true;
-                                return;
+                        let issueTime = (issuedRow.issuedAtMap && issuedRow.issuedAtMap[code]) ? issuedRow.issuedAtMap[code] : 0;
+                        let needSplit = (localRow.receiveDate && localRow.receiveDate !== dmy && (parseFloat(localRow.receiveQty) || 0) > 0) || (localRow.rate && localRow.rate !== rateName && (parseFloat(localRow.receiveQty) || 0) > 0);
+                        if (needSplit) {
+                            let ok = receiveIntoRateRow(issuedRow, issueTime);
+                            if (!ok) return;
+                        } else {
+                            if (targetStyleObj && targetStyleObj.limitReceiveTotal === true) {
+                                let styleTotalQty = window.getStyleTotalQty(targetStyleObj);
+                                let currentStyleRecTotal = window.rowsModel.filter(r => r.styleName === localRow.styleName && r.bookName === currentBook).reduce((sum, r) => sum + (parseFloat(r.receiveQty) || 0), 0);
+                                if (styleTotalQty > 0 && (currentStyleRecTotal + scanQtyIncrement) > styleTotalQty) {
+                                    alert(`Total Receive Qty (${currentStyleRecTotal}) has reached Style Total Qty (${styleTotalQty})! Cannot receive more.`);
+                                    shouldRefocusBarcode = true;
+                                    return;
+                                }
                             }
-                        }
 
-                        if (limitMs > 0) {
-                            let issueTime = (issuedRow.issuedAtMap && issuedRow.issuedAtMap[code]) ? issuedRow.issuedAtMap[code] : 0;
-                            if (issueTime > 0 && (Date.now() - issueTime) < limitMs) {
+                            if (limitMs > 0 && issueTime > 0 && (Date.now() - issueTime) < limitMs) {
                                 let remainMs = limitMs - (Date.now() - issueTime);
                                 let remMin = Math.floor(remainMs / 60000);
                                 let remSec = Math.ceil((remainMs % 60000) / 1000);
@@ -2312,28 +2464,7 @@ window.generateQuickReport = async function(event) {
                                 shouldRefocusBarcode = true;
                                 return;
                             }
-                        }
 
-                        if (localRow.receiveDate && localRow.receiveDate !== dmy && (parseFloat(localRow.receiveQty) || 0) > 0) {
-                            let splitDocId = `${currentBook}_${localRow.styleName}_${localRow.idNo}_${Date.now()}`;
-                            let newUserQty = {}; if(activeUserName) newUserQty[activeUserName] = scanQtyIncrement;
-                            let newRow = {
-                                bookName: currentBook, idNo: localRow.idNo, styleName: localRow.styleName,
-                                issueDate: issuedRow.issueDate || "", machineNo: issuedRow.machineNo || "",
-                                workerName: wName, cardNo: cardNo, blockNo: bNo, floor: floor,
-                                color: issuedRow.color || sourceRow.color || "", size: issuedRow.size || sourceRow.size || "", lot: issuedRow.lot || sourceRow.lot || "", issueQty: 0, rate: rateName,
-                                receiveQty: scanQtyIncrement, receiveDate: dmy,
-                                receiveTime: nowTimeStr, receiveUser: activeUserName, receiveUserQty: newUserQty,
-                                receivedBarcodes: [code], _docId: splitDocId, _uid: splitDocId
-                            };
-                            window.rowsModel.push(newRow);
-                            window.rowsModel.sort((a,b) => parseInt(a.idNo) - parseInt(b.idNo) || (a._docId || '').localeCompare(b._docId || ''));
-                            window.currentReceiveRow = newRow;
-                            window.currentReceiveRowOriginalCard = newRow.cardNo || '';
-                            localRow = newRow;
-                            trackWrite(window.setDoc(window.doc(window.db, "production", splitDocId), newRow));
-                            window.saveLastBarcodeInfo(currentBook, localRow, splitDocId);
-                        } else {
                             localRow.receivedBarcodes.push(code);
                             localRow.receiveQty = Math.round(((parseFloat(localRow.receiveQty) || 0) + scanQtyIncrement) * 100) / 100;
                             localRow.rate = rateName; localRow.receiveDate = dmy; localRow.cardNo = cardNo;
@@ -2733,7 +2864,15 @@ window.generateQuickReport = async function(event) {
             
             let colors = [...new Set(colorSizes.map(cs => cs.color).filter(Boolean))]; let sizes = [...new Set(colorSizes.map(cs => cs.size).filter(Boolean))]; 
             let rates = []; 
-            document.querySelectorAll('#rateContainer .rate-item').forEach(el => { let name = el.querySelector('.modRateName').value.trim(); let tk = el.querySelector('.modRateTk').value.trim(); if(name) rates.push({name, tk}); }); 
+            document.querySelectorAll('#rateContainer .rate-item').forEach(el => { 
+                let name = el.querySelector('.modRateName').value.trim(); 
+                let tk = el.querySelector('.modRateTk').value.trim(); 
+                let qtyEl = el.querySelector('.modRateQty');
+                let limitEl = el.querySelector('.modRateLimit');
+                let qty = qtyEl ? qtyEl.value.trim() : '';
+                let limitQty = limitEl ? limitEl.checked : true;
+                if(name) rates.push({name, tk, qty, limitQty}); 
+            }); 
             
             let selectedSections = [];
             document.querySelectorAll('.modSection:checked').forEach(cb => selectedSections.push(cb.value));
@@ -2744,7 +2883,7 @@ window.generateQuickReport = async function(event) {
 
             let oldSecStylesByBook = {};
             let lookupStyleName = (oldStyle && oldStyle.styleName) ? oldStyle.styleName : styleName;
-            window.styles.filter(s => s.styleName === lookupStyleName).forEach(os => {
+            window.styles.filter(s => (s.styleName || '').trim().toLowerCase() === lookupStyleName.toLowerCase()).forEach(os => {
                 oldSecStylesByBook[os.bookName] = os;
             });
 
@@ -2754,7 +2893,7 @@ window.generateQuickReport = async function(event) {
                 await Promise.all(delPromises);
                 window.styles = window.styles.filter(s => s.styleName !== oldStyle.styleName);
             } else {
-                window.styles = window.styles.filter(s => !(s.styleName === styleName && selectedSections.includes(s.bookName)));
+                window.styles = window.styles.filter(s => !((s.styleName || '').trim().toLowerCase() === styleName.toLowerCase() && selectedSections.includes(s.bookName)));
             }
 
             let blankRowsActive = document.getElementById('modBlankRowsActive').checked;
@@ -2766,6 +2905,10 @@ window.generateQuickReport = async function(event) {
             let uiIsHidden = document.getElementById('modIsHidden').checked;
             let uiSssActive = document.getElementById('modSssActive').checked;
             let uiSmsActive = document.getElementById('modSmsActive').checked;
+            let rawSssMult = document.getElementById('modSssMultiplier').value.trim();
+            let uiSssMultiplier = (rawSssMult !== '' && !isNaN(parseFloat(rawSssMult))) ? parseFloat(rawSssMult) : 2;
+            let rawSmsMult = document.getElementById('modSmsMultiplier').value.trim();
+            let uiSmsMultiplier = (rawSmsMult !== '' && !isNaN(parseFloat(rawSmsMult))) ? parseFloat(rawSmsMult) : 1.5;
             if (uiSssActive && uiSmsActive) uiSmsActive = false;
 
             let stylePromises = [];
@@ -2784,7 +2927,7 @@ window.generateQuickReport = async function(event) {
                         else if(sec === "KNITTING") defaultRateName = "KNIT";
                         else if(sec === "PACKING") defaultRateName = "POLY";
                         else defaultRateName = sec;
-                        sectionRates = [{name: defaultRateName, tk: ""}];
+                        sectionRates = [{name: defaultRateName, tk: "", qty: "", limitQty: true}];
                     }
                 }
                 
@@ -2792,16 +2935,22 @@ window.generateQuickReport = async function(event) {
                 let isHidden = uiIsHidden;
                 let sssActive = uiSssActive;
                 let smsActive = uiSmsActive;
+                let sssMultiplier = uiSssMultiplier;
+                let smsMultiplier = uiSmsMultiplier;
                 if (sec === window.currentAdminBook) {
                     barcodeActive = uiBarcodeActive;
                     isHidden = uiIsHidden;
                     sssActive = uiSssActive;
                     smsActive = uiSmsActive;
+                    sssMultiplier = uiSssMultiplier;
+                    smsMultiplier = uiSmsMultiplier;
                 } else if (prevSecStyle) {
                     barcodeActive = prevSecStyle.barcodeActive === true;
                     isHidden = prevSecStyle.isHidden === true;
                     sssActive = prevSecStyle.sssActive === true;
                     smsActive = prevSecStyle.smsActive === true;
+                    sssMultiplier = (prevSecStyle.sssMultiplier !== undefined && prevSecStyle.sssMultiplier !== null && prevSecStyle.sssMultiplier !== '') ? prevSecStyle.sssMultiplier : 2;
+                    smsMultiplier = (prevSecStyle.smsMultiplier !== undefined && prevSecStyle.smsMultiplier !== null && prevSecStyle.smsMultiplier !== '') ? prevSecStyle.smsMultiplier : 1.5;
                 }
 
                 const styleObj = { 
@@ -2809,9 +2958,11 @@ window.generateQuickReport = async function(event) {
                     totalOrderQty, totalQty, limitReceiveTotal,
                     rates: sectionRates, allowedFloors, createDate: (prevSecStyle && prevSecStyle.createDate) ? prevSecStyle.createDate : today, 
                     barcodeActive: barcodeActive, isHidden: isHidden, receiveTimeLimit: receiveTimeLimit,
-                    sssActive: sssActive, smsActive: smsActive
+                    sssActive: sssActive, smsActive: smsActive,
+                    sssMultiplier: sssMultiplier, smsMultiplier: smsMultiplier
                 }; 
                 stylePromises.push(window.setDoc(window.doc(db, "styles", `${sec}_${styleName}`), styleObj)); 
+                window.styles = window.styles.filter(s => !(s.bookName === sec && (s.styleName || '').trim().toLowerCase() === styleName.toLowerCase()));
                 window.styles.push(styleObj);
                 
                 if (blankRowsActive && sec === window.currentAdminBook && start && end && start <= end) { 
